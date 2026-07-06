@@ -1,0 +1,218 @@
+<div class="static-banner">
+    <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1200&q=80" alt="Mi Rol">
+    <div class="static-banner-caption">
+        <h1>Mi Rol</h1>
+        <p>Gestión de tiempos, cambios de programación y habilitación de visas y PBS.</p>
+    </div>
+</div>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar-panel">
+
+        <div class="sidebar-section-title">Gestión de Tiempos</div>
+        <ul class="sidebar-menu">
+            <li>
+                <button class="tab-btn active" onclick="switchTab('tab-tiempos', this)">
+                    <span class="material-icons">schedule</span>
+                    <span>Programación</span>
+                </button>
+            </li>
+        </ul>
+
+        <div class="sidebar-section-title">PBS, Visas y Habilitación</div>
+        <ul class="sidebar-menu">
+            <li>
+                <button class="tab-btn" onclick="switchTab('tab-pbs', this)">
+                    <span class="material-icons">assignment_ind</span>
+                    <span>Visas y Habilitación</span>
+                </button>
+            </li>
+        </ul>
+
+    </aside>
+
+    <main class="content-panel">
+
+        <div id="tab-tiempos" class="tab-content-block active">
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #1a73e8;">assignment</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Solicitud Mes Subsiguiente FORM</h4>
+                        <p>
+                            <span class="format-badge badge-form">Formulario</span>
+                            Solicitud de preferencias de programación para el mes subsiguiente.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Formulario de Solicitud Mensual...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #137333;">swap_horiz</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Cambios Voluntarios SITE CORPORATIVO</h4>
+                        <p>
+                            <span class="format-badge badge-app">Portal</span>
+                            Plataforma de intercambio voluntario de vuelos entre tripulantes.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Site Corporativo de Cambios Voluntarios...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #fbbc05;">layers</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Registro previo Cambios LINK JIRA</h4>
+                        <p>
+                            <span class="format-badge badge-app">Jira</span>
+                            Registro previo obligatorio antes de solicitar un cambio de rol.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Jira de Registro de Cambios...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="tab-pbs" class="tab-content-block">
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #d93025;">assignment_ind</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Procedimiento Visa / Pasaporte FORM</h4>
+                        <p>
+                            <span class="format-badge badge-pdf">Guía</span>
+                            Renovación y protección por rol de Visa Crew y Pasaporte.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" data-route="visa">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #d93025;">picture_as_pdf</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Grupos PBS 2026 DOCUMENTO PDF</h4>
+                        <p>
+                            <span class="format-badge badge-pdf">PDF</span>
+                            Cronograma oficial de grupos de bidding para el año en curso.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Documento de Grupos PBS...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #fbbc05;">cloud_queue</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Lista 50 TC's Trihabilitarán DRIVE</h4>
+                        <p>
+                            <span class="format-badge badge-app">Drive</span>
+                            Listado de tripulantes programados para la trihabilitación.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Drive de Trihabilitación...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #fbbc05;">play_circle_filled</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Taller PBS VIDEO TUTORIAL YOUTUBE</h4>
+                        <p>
+                            <span class="format-badge badge-app">Video</span>
+                            Tutorial paso a paso para armar tus preferencias de bidding.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Video Tutorial de PBS...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #fbbc05;">smart_toy</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Consulta en Clara BOT</h4>
+                        <p>
+                            <span class="format-badge badge-app">Bot</span>
+                            Asistente virtual para consultas rápidas sobre tu programación.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Simulación: Abriendo conversación con Clara Bot...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #d93025;">analytics</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Cambios Web SAB LP DOCUMENTO PDF</h4>
+                        <p>
+                            <span class="format-badge badge-pdf">PDF</span>
+                            Bitácora de cambios recientes en la plataforma SAB LP.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Documento de Cambios Web...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

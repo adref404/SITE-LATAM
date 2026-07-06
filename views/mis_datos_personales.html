@@ -1,0 +1,180 @@
+<div class="static-banner">
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80" alt="Datos Personales">
+    <div class="static-banner-caption">
+        <h1>Datos Personales</h1>
+        <p>Gestiona tu expediente interno y tus trámites regulatorios ante entidades y organismos legales.</p>
+    </div>
+</div>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar-panel">
+
+        <div class="sidebar-section-title">Expediente Personal</div>
+        <ul class="sidebar-menu">
+            <li>
+                <button class="tab-btn active" onclick="switchTab('tab-expediente', this)">
+                    <span class="material-icons">folder_shared</span>
+                    <span>Ficha Interna</span>
+                </button>
+            </li>
+        </ul>
+
+        <div class="sidebar-section-title">Entidades y Legal</div>
+        <ul class="sidebar-menu">
+            <li>
+                <button class="tab-btn" onclick="switchTab('tab-legal', this)">
+                    <span class="material-icons">gavel</span>
+                    <span>Regulaciones Oficiales</span>
+                </button>
+            </li>
+        </ul>
+
+    </aside>
+
+    <main class="content-panel">
+
+        <div id="tab-expediente" class="tab-content-block active">
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #1a73e8;">edit_note</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Actualización de Datos FORM</h4>
+                        <p>
+                            <span class="format-badge badge-form">Formulario</span>
+                            Actualización general de la ficha informativa interna.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Formulario Principal...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #137333;">sync</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Actualización en RH Connect</h4>
+                        <p>
+                            <span class="format-badge badge-app">Portal</span>
+                            Sincronización obligatoria de datos de recursos humanos.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Conectando con RH Connect...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #137333;">badge</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Renovación de Fotocheck APPSHEET</h4>
+                        <p>
+                            <span class="format-badge badge-app">AppSheet</span>
+                            Solicitud digital de renovación de credenciales aeroportuarias.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo AppSheet Fotocheck...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #1a73e8;">date_range</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Intercambio o Cesión de Vacaciones FORM</h4>
+                        <p>
+                            <span class="format-badge badge-form">Formulario</span>
+                            Trámite para permutas o cesión de periodos vacacionales.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Formulario de Vacaciones...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="tab-legal" class="tab-content-block">
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #d93025;">local_airport</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Domicilio DGAC CONTENIDO PDF</h4>
+                        <p>
+                            <span class="format-badge badge-pdf">PDF</span>
+                            Guía paso a paso para la actualización domiciliaria (RAP 63.085).
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" data-route="domicilio">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #d93025;">vaccine</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Vacuna Fiebre Amarilla CONTENIDO PDF</h4>
+                        <p>
+                            <span class="format-badge badge-pdf">PDF</span>
+                            Disposiciones operativas y registro de la cartilla internacional de vacunación.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Instructivo de Vacuna...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="item-row-card">
+                <div class="item-left-info">
+                    <div class="item-icon-wrapper">
+                        <span class="material-icons" style="color: #1a73e8;">gavel</span>
+                    </div>
+                    <div class="item-text-details">
+                        <h4>Registro de Equipos SUNAT FORM</h4>
+                        <p>
+                            <span class="format-badge badge-form">Formulario</span>
+                            Declaración obligatoria de dispositivos tecnológicos personales ante aduanas.
+                        </p>
+                    </div>
+                </div>
+                <button class="action-status-btn" onclick="alert('Abriendo Formulario SUNAT...');">
+                    <span>Ingresar</span>
+                    <span class="material-icons" style="font-size: 14px;">arrow_forward</span>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

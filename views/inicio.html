@@ -1,0 +1,319 @@
+<section class="carousel-banner">
+
+    <div class="carousel-slide active">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="Avión en vuelo">
+        <div class="carousel-caption" onclick="openBannerModal(0)">
+            <h2>Ampliación del Piloto: Sanguchito de Pollo</h2>
+            <p>Implementación confirmada en el servicio de las rutas internacionales de Punta Cana (PUJ) y Cancún (CUN).</p>
+            <span class="caption-hint">Ver detalle</span>
+        </div>
+    </div>
+
+    <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80" alt="Tripulación en Briefing">
+        <div class="carousel-caption" onclick="openBannerModal(1)">
+            <h2>Reembolso Multas Elecciones 2026</h2>
+            <p>Revisa los plazos y carga tus comprobantes oficiales de exoneración en el portal de Datos Personales.</p>
+            <span class="caption-hint">Ver detalle</span>
+        </div>
+    </div>
+
+    <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1200&q=80" alt="Tripulantes en Aeropuerto">
+        <div class="carousel-caption" onclick="openBannerModal(2)">
+            <h2>Autogestión: Contacto a Movilización</h2>
+            <p>Fomentamos el uso directo de Google Chat desde tus dispositivos móviles para coordinar contingencias operativas.</p>
+            <span class="caption-hint">Ver detalle</span>
+        </div>
+    </div>
+
+    <div class="carousel-dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+    </div>
+</section>
+
+<div class="banner-modal-overlay" id="banner-modal-overlay" onclick="if(event.target === this) closeBannerModal()">
+    <div class="banner-modal">
+        <button class="banner-modal-close" onclick="closeBannerModal()">&times;</button>
+
+        <div class="banner-modal-content active" data-modal="0">
+            <span class="modal-tag">Extensión de Plazo</span>
+            <h2>¡Continúa el sándwich a bordo!</h2>
+            <p class="modal-subtitle">Regional YC (PUJ + CUN)</p>
+
+            <p>Gracias a sus sugerencias y buenas ideas, se dio inicio con este piloto en nuestro servicio de catering, que <strong>busca elevar la experiencia de nuestros pasajeros a un nivel superior</strong>. El éxito del mismo va de la mano con el toque de hospitalidad que nos caracteriza en cada vuelo, durante la entrega del servicio.</p>
+            <p><strong>Cambio de producto:</strong> El sándwich de jamón y queso será sustituido por un sándwich de pollo a la brasa con queso.</p>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">flight</span> Alcance Obligatorio</h3>
+                <p>Aplica únicamente en los números de vuelos detallados para la ruta LIMPUJ y LIMCUN (solo one way):</p>
+                <table class="modal-flight-table">
+                    <tr><td>LIM - CUN</td><td>2456</td><td>13:05</td></tr>
+                    <tr><td>LIM - PUJ</td><td>2450</td><td>12:30</td></tr>
+                </table>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">calendar_month</span> Vigencia de la Medida</h3>
+                <p>Se inició el 01 de junio, y ahora <strong>se extiende la vigencia todo el mes de julio</strong>.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">fact_check</span> Medición de Avance (NIMBUS)</h3>
+                <p>Se activa campaña en NIMBUS para que JSB y HR de manera obligatoria respondan la breve encuesta que necesitamos para medir el avance del piloto.</p>
+            </div>
+
+            <div class="modal-footer">Juntos seguiremos ofreciendo una experiencia más cálida y eficiente • Somos LATAM</div>
+        </div>
+
+        <div class="banner-modal-content" data-modal="1">
+            <span class="modal-tag">Plazo de Reembolso</span>
+            <h2>Recupera tu dinero de las Elecciones 2026</h2>
+            <p class="modal-subtitle">Proceso de exoneración electoral</p>
+
+            <p>Si fuiste multado por no acudir a votar durante una asignación de vuelo, la compañía te respalda con el <strong>reembolso íntegro de la multa</strong> siempre que sustentes tu rol de esa fecha.</p>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">description</span> Documentos Requeridos</h3>
+                <p>Constancia de multa emitida por la ONPE/JNE y captura de tu rol asignado el día de la elección.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">event</span> Plazo de Carga</h3>
+                <p>Tienes hasta <strong>60 días calendario</strong> después de la fecha de la elección para cargar tus comprobantes en el portal de Datos Personales.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">timelapse</span> Estado de tu Solicitud</h3>
+                <p>El seguimiento del reembolso se refleja directamente en tu recibo de haberes del mes subsiguiente a la aprobación.</p>
+            </div>
+
+            <div class="modal-footer">Simulación: contenido informativo de referencia • Somos LATAM</div>
+        </div>
+
+        <div class="banner-modal-content" data-modal="2">
+            <span class="modal-tag">Canal Directo</span>
+            <h2>Contáctanos por Google Chat</h2>
+            <p class="modal-subtitle">Coordinación operativa 24/7</p>
+
+            <p>Ante cualquier contingencia que afecte tu asignación de vuelo, el canal más rápido de coordinación con Movilización es <strong>Google Chat desde tu dispositivo móvil</strong>, sin necesidad de llamada telefónica.</p>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">contact_support</span> Cuándo Usarlo</h3>
+                <p>Retrasos de transporte, imprevistos de salud de último momento o cualquier situación que ponga en riesgo tu presentación a tiempo.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">timer</span> Tiempo de Respuesta</h3>
+                <p>El equipo de Movilización responde en un <strong>máximo de 10 minutos</strong> durante operación activa.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3><span class="material-icons">support_agent</span> Canales Alternos</h3>
+                <p>Si no tienes conexión a internet, comunícate a la central telefónica de Movilización disponible en tu credencial corporativa.</p>
+            </div>
+
+            <div class="modal-footer">Simulación: contenido informativo de referencia • Somos LATAM</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <section class="main-grid">
+        <article class="visual-card" data-route="mis-datos">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Datos Personales">
+            <div class="card-badge">
+                <div class="badge-icon-container">
+                    <span class="material-icons">badge</span>
+                </div>
+                <h2>Datos Personales</h2>
+            </div>
+        </article>
+        <article class="visual-card" data-route="mi-rol">
+            <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=600&q=80" alt="Mi Rol">
+            <div class="card-badge">
+                <div class="badge-icon-container">
+                    <span class="material-icons">calendar_today</span>
+                </div>
+                <h2>Mi Rol</h2>
+            </div>
+        </article>
+        <article class="visual-card" data-route="gestion-operativa">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Gestión Operativa">
+            <div class="card-badge">
+                <div class="badge-icon-container">
+                    <span class="material-icons">construction</span>
+                </div>
+                <h2>Gestión Operativa</h2>
+            </div>
+        </article>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title"><span class="material-icons">help_outline</span> Preguntas Frecuentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Qué debo hacer si mis vales de alimentación no se han cargado?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Ingresa al Centro de Ayuda abajo en la opción de "Soporte Vales" o reporta directamente en el formulario de AppSheet adjuntando tu ID. El tiempo de resolución estimado es menor a 24 horas.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Cómo registro un descanso médico de última hora?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Los descansos médicos deben subirse escaneados a través del módulo de 'Absentismos' en el Centro de Ayuda. Asegúrate de que el documento cuente con el sello legible del médico colegiado.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>¿Cuál es la fecha límite para solicitar cambios en el rol de programación?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Las solicitudes para el mes subsiguiente se reciben únicamente hasta el día 31 del mes en curso anterior.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-center-section" id="centro-ayuda">
+        <h2 class="section-title"><span class="material-icons">support_agent</span> Centro de Ayuda y Reportes</h2>
+        <div class="help-grid">
+            <div class="help-box">
+                <span class="material-icons">assignment_late</span>
+                <h3>Reportes Diario</h3>
+                <p>Formulario de movimiento diario y Zero Claims.</p>
+                <button class="btn-help" onclick="openHelpModal('reportes')">Reportar</button>
+            </div>
+            <div class="help-box">
+                <span class="material-icons">school</span>
+                <h3>Cursos y Licencias</h3>
+                <p>Soporte sobre entrenamientos, simuladores y vigencia.</p>
+                <button class="btn-help" onclick="openHelpModal('cursos')">Ir a Soporte</button>
+            </div>
+            <div class="help-box">
+                <span class="material-icons">event_busy</span>
+                <h3>Absentismos</h3>
+                <p>Carga aquí tus descansos médicos y licencias.</p>
+                <button class="btn-help" onclick="openHelpModal('absentismos')">Registrar</button>
+            </div>
+            <div class="help-box">
+                <span class="material-icons">restaurant</span>
+                <h3>Menú DOM</h3>
+                <p>Consulta el menú de comidas oficial para Tripulación.</p>
+                <button class="btn-help" onclick="openHelpModal('menu')">Ver PDF</button>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="banner-modal-overlay" id="help-modal-overlay" onclick="if(event.target === this) closeHelpModal()">
+    <div class="banner-modal help-modal">
+        <button class="banner-modal-close" onclick="closeHelpModal()">&times;</button>
+
+        <div class="help-modal-content active" data-help-modal="reportes">
+            <span class="modal-tag">Reportes Diario</span>
+            <h2>Formulario de Movimiento Diario</h2>
+            <p class="modal-subtitle">Reporte de operación y Zero Claims</p>
+
+            <form onsubmit="event.preventDefault(); alert('Simulación: Reporte enviado correctamente.'); closeHelpModal();">
+                <div class="form-group">
+                    <label for="rep-tipo">Tipo de reporte *</label>
+                    <select id="rep-tipo" class="form-control" required>
+                        <option value="" disabled selected>Elegir tipo...</option>
+                        <option value="movimiento">Movimiento Diario</option>
+                        <option value="zero-claims">Zero Claims</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rep-vuelo">Número de vuelo *</label>
+                    <input type="text" id="rep-vuelo" class="form-control" placeholder="Ej. LA2456" required>
+                </div>
+                <div class="form-group">
+                    <label for="rep-detalle">Detalle del reporte *</label>
+                    <input type="text" id="rep-detalle" class="form-control" placeholder="Describe brevemente la novedad" required>
+                </div>
+                <div class="form-submit-bar">
+                    <button type="button" class="latam-btn btn-cancel" onclick="closeHelpModal()">Cancelar</button>
+                    <button type="submit" class="latam-btn">Enviar Reporte</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="help-modal-content" data-help-modal="cursos">
+            <span class="modal-tag">Cursos y Licencias</span>
+            <h2>Soporte de Entrenamientos</h2>
+            <p class="modal-subtitle">Consultas sobre simuladores y vigencia</p>
+
+            <form onsubmit="event.preventDefault(); alert('Simulación: Consulta enviada a Soporte de Entrenamientos.'); closeHelpModal();">
+                <div class="form-group">
+                    <label for="cur-curso">Curso o licencia *</label>
+                    <input type="text" id="cur-curso" class="form-control" placeholder="Ej. Recurrente Anual, Simulador A320..." required>
+                </div>
+                <div class="form-group">
+                    <label for="cur-consulta">Tu consulta *</label>
+                    <input type="text" id="cur-consulta" class="form-control" placeholder="Describe tu duda o solicitud" required>
+                </div>
+                <div class="form-submit-bar">
+                    <button type="button" class="latam-btn btn-cancel" onclick="closeHelpModal()">Cancelar</button>
+                    <button type="submit" class="latam-btn">Enviar Consulta</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="help-modal-content" data-help-modal="absentismos">
+            <span class="modal-tag">Absentismos</span>
+            <h2>Registro de Descanso Médico</h2>
+            <p class="modal-subtitle">Carga de licencias y descansos</p>
+
+            <form onsubmit="event.preventDefault(); alert('Simulación: Descanso médico registrado correctamente.'); closeHelpModal();">
+                <div class="form-group">
+                    <label for="abs-tipo">Tipo de descanso *</label>
+                    <select id="abs-tipo" class="form-control" required>
+                        <option value="" disabled selected>Elegir tipo...</option>
+                        <option value="medico">Descanso Médico</option>
+                        <option value="licencia">Licencia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="abs-fecha">Fecha de inicio *</label>
+                    <input type="date" id="abs-fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Adjuntar constancia médica *</label>
+                    <div class="file-upload-mock" onclick="alert('Simulación: Selector de archivos abierto.');">
+                        <span class="material-icons">cloud_upload</span>
+                        <p><strong>Haz clic aquí</strong> para subir el documento escaneado</p>
+                        <span style="font-size: 0.75rem; color:#888;">Formatos: PDF, PNG, JPG (Máx. 10MB)</span>
+                    </div>
+                </div>
+                <div class="form-submit-bar">
+                    <button type="button" class="latam-btn btn-cancel" onclick="closeHelpModal()">Cancelar</button>
+                    <button type="submit" class="latam-btn">Registrar Descanso</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="help-modal-content" data-help-modal="menu">
+            <span class="modal-tag">Menú DOM</span>
+            <h2>Menú Oficial de Comidas</h2>
+            <p class="modal-subtitle">Vigencia del mes en curso</p>
+            <p>Consulta el menú oficial de comidas dispuesto para Tripulación durante sus jornadas operativas.</p>
+            <div class="form-submit-bar">
+                <button type="button" class="latam-btn btn-cancel" onclick="closeHelpModal()">Cerrar</button>
+                <button type="button" class="latam-btn" onclick="alert('Simulación: Descargando Menú DOM en PDF...');">Descargar PDF</button>
+            </div>
+        </div>
+
+    </div>
+</div>

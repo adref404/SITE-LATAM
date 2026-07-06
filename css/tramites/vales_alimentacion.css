@@ -1,0 +1,397 @@
+:root {
+    --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+    --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+    --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+    --latam-text: #333333;      /* Texto principal */
+    --latam-border: #ccccde;    /* Bordes sutiles */
+    --step-orange: #ff5722;     /* Conector lúdico del flujo */
+    --white: #ffffff;
+    --briefing-color: #fff1f8; /* Fondo de alerta destacada */
+}
+
+body {
+    background-color: var(--latam-gray-bg);
+    color: var(--latam-text);
+}
+
+.latam-page-container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+    padding: 40px;
+}
+
+/* ENCABEZADO CORPORATIVO */
+.latam-header {
+    border-bottom: 3px solid var(--latam-main);
+    padding-bottom: 24px;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.latam-header .brand-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.latam-header .icon-wrap {
+    background-color: rgba(27, 0, 74, 0.06);
+    color: var(--latam-main);
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.latam-header h1 {
+    font-size: 1.7rem;
+    color: var(--latam-main);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.latam-header p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 3px;
+}
+
+.latam-logo-txt {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--latam-main);
+    letter-spacing: 1px;
+}
+.latam-logo-txt span {
+    color: var(--latam-coral);
+}
+
+/* ALERTA ESPECIAL RESERVAS DE AEROPUERTO */
+.latam-alert {
+    background-color: rgba(232, 17, 127, 0.04);
+    border-left: 5px solid var(--latam-coral);
+    padding: 18px 22px;
+    border-radius: 4px;
+    margin-bottom: 45px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.latam-alert .material-icons {
+    color: var(--latam-coral);
+    font-size: 1.6rem;
+}
+
+.latam-alert p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* LINEA DE TIEMPO CONECTORA */
+.latam-timeline {
+    position: relative;
+    padding-left: 55px;
+    margin-bottom: 45px;
+}
+
+.latam-timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 22px;
+    width: 4px;
+    height: calc(100% - 45px);
+    background: var(--step-orange);
+    z-index: 1;
+}
+
+/* COMPONENTE PASOS */
+.latam-step {
+    position: relative;
+    margin-bottom: 25px;
+    border: 1px solid var(--latam-border);
+    border-radius: 10px;
+    background: var(--white);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.latam-step:hover {
+    border-color: var(--step-orange);
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.08);
+}
+
+.latam-step-num {
+    position: absolute;
+    left: -55px;
+    top: 14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--step-orange);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.latam-step-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 20px 24px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--latam-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.latam-step-trigger .title-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.arrow-icon {
+    color: var(--step-orange);
+    transition: transform 0.3s ease;
+}
+
+.latam-step-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: #fafbfe;
+    border-radius: 0 0 10px 10px;
+}
+
+.latam-step-inner {
+    padding: 24px;
+    border-top: 1px solid #eaeaea;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #484848;
+}
+
+.latam-step.active {
+    border-color: var(--latam-main);
+    box-shadow: 0 4px 20px rgba(27, 0, 74, 0.05);
+}
+
+.latam-step.active .latam-step-trigger {
+    color: var(--latam-coral);
+}
+
+.latam-step.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* DISPOSITIVOS BOX DE DESCARGA */
+.device-box-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.device-card {
+    background: var(--white);
+    border: 1px solid var(--latam-border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.device-card .icon-device {
+    font-size: 2.5rem;
+    color: var(--latam-main);
+}
+
+.device-card h4 {
+    color: var(--latam-main);
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.device-card p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.latam-btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--latam-main);
+    color: var(--white);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.latam-btn-sm:hover {
+    background-color: var(--latam-coral);
+}
+
+/* INTERFAZ QR LÚDICA SIMULADA */
+.qr-mock-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: var(--white);
+    border: 1px solid var(--latam-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+    max-width: 500px;
+}
+
+.qr-graphics {
+    background: #333;
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.qr-code-txt {
+    background: #f1f0f7;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--latam-main);
+    letter-spacing: 1px;
+    border: 1px dashed var(--latam-main);
+}
+
+/* ==========================================================================
+   SECCIÓN DE CONSIDERACIONES (CARDS INTEGRADAS)
+   ========================================================================== */
+.section-sub-title {
+    font-size: 1.3rem;
+    color: var(--latam-main);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--latam-main);
+    padding-bottom: 8px;
+}
+
+.considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 45px;
+}
+
+.consideration-card {
+    background: var(--white);
+    border: 1px solid var(--latam-border);
+    border-top: 4px solid var(--latam-main);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.consideration-card.alert-card {
+    border-top-color: var(--latam-coral);
+    background-color: var(--briefing-color);
+}
+
+.consideration-card h4 {
+    color: var(--latam-main);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.consideration-card p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESTAURANTES AUTORIZADOS (GRID DE LOGOS MINIMALISTAS)
+   ========================================================================== */
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.restaurant-logo-box {
+    background: var(--white);
+    border: 1px solid var(--latam-border);
+    border-radius: 8px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--latam-main);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.restaurant-logo-box:hover {
+    transform: translateY(-2px);
+    border-color: var(--latam-coral);
+    color: var(--latam-coral);
+}
+
+/* FOOTER */
+.latam-footer {
+    margin-top: 45px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #7c7c93;
+    border-top: 1px solid #e0e0ec;
+    padding-top: 25px;
+}
+
+@media (max-width: 768px) {
+    .latam-page-container { padding: 25px 15px; }
+    .latam-timeline { padding-left: 45px; }
+    .latam-timeline::before { left: 17px; }
+    .latam-step-num { left: -45px; width: 32px; height: 32px; font-size: 0.95rem; top: 16px; }
+    .latam-step-trigger { padding: 16px; font-size: 1rem; }
+    .device-box-grid { grid-template-columns: 1fr; }
+    .qr-mock-container { flex-direction: column; text-align: center; gap: 15px; }
+}
