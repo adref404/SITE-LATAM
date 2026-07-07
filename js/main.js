@@ -12,6 +12,29 @@ function hideMenu(id) {
 }
 
 // ==========================================================================
+// HEADER: MENÚ MÓVIL (hamburguesa + sidebar deslizable)
+// ==========================================================================
+function toggleMobileMenu() {
+    document.getElementById('mobile-nav-overlay').classList.add('active');
+}
+
+function closeMobileMenu() {
+    document.getElementById('mobile-nav-overlay').classList.remove('active');
+    document.querySelectorAll('.mobile-nav-group.open').forEach(group => group.classList.remove('open'));
+}
+
+function toggleMobileSubmenu(button) {
+    const group = button.parentElement;
+    const wasOpen = group.classList.contains('open');
+
+    document.querySelectorAll('.mobile-nav-group.open').forEach(g => g.classList.remove('open'));
+
+    if (!wasOpen) {
+        group.classList.add('open');
+    }
+}
+
+// ==========================================================================
 // DISPATCHER: se ejecuta cada vez que router.js inyecta una vista nueva
 // ==========================================================================
 function initViewScripts(routeKey) {
@@ -127,6 +150,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeBannerModal();
         closeHelpModal();
+        closeMobileMenu();
     }
 });
 
