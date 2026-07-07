@@ -58,6 +58,7 @@ function initViewScripts(routeKey) {
             break;
         case 'mis-datos':
             ensureCardCarousel('mis-datos');
+            initDatosFormLogic();
             break;
         case 'mi-rol':
             ensureCardCarousel('mi-rol');
@@ -393,6 +394,38 @@ function showGoDetail(index) {
     });
 
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ==========================================================================
+// VISTA: DATOS PERSONALES (formulario de Actualización de Datos)
+// ==========================================================================
+function initDatosFormLogic() {
+    const mainRadios = document.querySelectorAll('input[name="update-type-datos"]');
+    if (!mainRadios.length) return;
+
+    const telefonoField = document.getElementById('gform-telefono-fijo-field');
+    const genericField = document.getElementById('gform-generic-field');
+
+    function updateMainField() {
+        const selected = document.querySelector('input[name="update-type-datos"]:checked');
+        const isTelefonoFijo = !!selected && selected.value === 'telefono-fijo';
+        if (telefonoField) telefonoField.style.display = isTelefonoFijo ? 'block' : 'none';
+        if (genericField) genericField.style.display = isTelefonoFijo ? 'none' : 'block';
+    }
+
+    mainRadios.forEach(r => r.addEventListener('change', updateMainField));
+    updateMainField();
+
+    const subRadios = document.querySelectorAll('input[name="telefono-fijo-choice"]');
+    const otrosInput = document.getElementById('gform-telefono-fijo-otros');
+
+    function updateSubField() {
+        const selected = document.querySelector('input[name="telefono-fijo-choice"]:checked');
+        if (otrosInput) otrosInput.style.display = (!!selected && selected.value === 'otros') ? 'block' : 'none';
+    }
+
+    subRadios.forEach(r => r.addEventListener('change', updateSubField));
+    updateSubField();
 }
 
 // ==========================================================================

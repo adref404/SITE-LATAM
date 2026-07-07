@@ -118,10 +118,87 @@
         <p class="go-detail-placeholder">Selecciona una opción del carrusel para ver más detalles aquí.</p>
 
         <div class="go-detail-content" data-detail="0">
-            <h3><span class="material-icons">edit_note</span> Actualización de Datos</h3>
-            <p>Contenido detallado próximamente.</p>
-            <div class="go-detail-actions">
-                <button class="go-detail-btn" onclick="alert('Abriendo Formulario Principal...');">Abrir Formulario</button>
+            <div class="gform-mockup">
+                <div class="gform-header">
+                    <h3>Actualización Datos Personales Tripulante de Cabina LP</h3>
+                    <p>El siguiente formulario tiene como objetivo mantener los datos personales actualizados en las bases de datos e iFlightNeo. Antes de completarlo, te recomendamos tener a la mano tus documentos e ingresarlos correctamente en el formulario.</p>
+                    <p>Recuerda que debes ingresar tu solicitud con <strong>4 días hábiles de anticipación</strong> para que pueda ser procesada con las áreas respectivas. Adicionalmente, considera que Soporte tiene como máximo 4 días hábiles para gestionar una respuesta.</p>
+                </div>
+
+                <form id="gform-actualizacion-datos" onsubmit="event.preventDefault(); alert('Simulación: Formulario de Actualización de Datos enviado correctamente.');">
+
+                    <div class="gform-account-box">
+                        <span class="material-icons">account_circle</span>
+                        <span>mario.fernandez@latam.com</span>
+                        <a href="#" onclick="event.preventDefault();">Cambiar cuenta</a>
+                    </div>
+                    <p class="gform-hint">Se registrarán el nombre, la foto y el correo electrónico asociados con tu Cuenta de Google cuando subas archivos y envíes este formulario.</p>
+                    <p class="gform-required-hint">* Indica que la pregunta es obligatoria</p>
+
+                    <div class="form-group">
+                        <label>Correo electrónico <span>*</span></label>
+                        <input type="email" class="form-control" value="mario.fernandez@latam.com" required>
+                        <label class="gform-checkbox">
+                            <input type="checkbox" checked>
+                            <span>Registrar mario.fernandez@latam.com como el correo electrónico que se incluirá en mi respuesta</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gform-bp">Ingresa tu BP <span>*</span></label>
+                        <input type="text" id="gform-bp" class="form-control" placeholder="Ej. 6014982" value="6014982" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gform-nombre">Ingresa tus nombres y apellidos completos <span>*</span> <em>(No colocar tildes)</em></label>
+                        <input type="text" id="gform-nombre" class="form-control" placeholder="Ej. Mario Fernandez" value="Mario Fernandez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Selecciona qué actualización deseas realizar <span>*</span></label>
+                        <div class="radio-container">
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="emergencia"><span>Actualización Contacto Emergencia</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="direccion"><span>Actualización Dirección</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="dni"><span>Actualización DNI</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="pasaporte"><span>Actualización Pasaporte</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="telefono-fijo" checked><span>Actualización Teléfono Fijo</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="telefono-celular"><span>Actualización Teléfono Celular</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="vacuna"><span>Vacuna Fiebre Amarilla</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="visa-tripulante"><span>Actualización VISA tripulante</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="visa-turista"><span>Actualización VISA turista</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="licencia-peruana"><span>Actualización Licencia peruana</span></label>
+                            <label class="radio-option"><input type="radio" name="update-type-datos" value="visa-rechazada"><span>Notificación de Visa Rechazada</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="gform-telefono-fijo-field">
+                        <label>Indícanos qué número de teléfono fijo deseas que consideremos ahora <span>*</span></label>
+                        <div class="radio-container">
+                            <label class="radio-option"><input type="radio" name="telefono-fijo-choice" value="no-aplica" checked><span>No aplica</span></label>
+                            <label class="radio-option"><input type="radio" name="telefono-fijo-choice" value="otros"><span>Otros: (espacio para escribir)</span></label>
+                        </div>
+                        <input type="text" id="gform-telefono-fijo-otros" class="form-control" style="display:none; margin-top:10px;" placeholder="Ingresa el número de teléfono fijo">
+                    </div>
+
+                    <div class="form-group" id="gform-generic-field" style="display:none;">
+                        <label>Indícanos el nuevo dato a actualizar <span>*</span></label>
+                        <input type="text" class="form-control" placeholder="Escribe aquí el dato solicitado">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adjuntar documento de sustento <span>*</span> <em>(Formato JPG, PNG o PDF)</em></label>
+                        <div class="file-upload-mock" onclick="alert('Simulación: Selector de archivos abierto.');">
+                            <span class="material-icons">cloud_upload</span>
+                            <p><strong>Haz clic aquí</strong> para subir el archivo o arrastra la imagen</p>
+                            <span style="font-size: 0.75rem; color:#888;">Formatos permitidos: PDF, PNG, JPG (Máx. 10MB)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-submit-bar">
+                        <button type="button" class="latam-btn btn-cancel" onclick="document.getElementById('gform-actualizacion-datos').reset();">Cancelar</button>
+                        <button type="submit" class="latam-btn">Enviar</button>
+                    </div>
+                </form>
             </div>
         </div>
 
