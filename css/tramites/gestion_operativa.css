@@ -1,0 +1,181 @@
+/* ==========================================================================
+   INSTRUCTIVO DE VALES DE ALIMENTACIÓN (embebido en el panel de detalle)
+   El acordeón de pasos (.latam-header/.latam-alert/.latam-timeline/.latam-step*)
+   vive en global.css porque también lo usa Datos Personales.
+   ========================================================================== */
+.device-box-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.device-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.device-card .icon-device {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.device-card h4 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.device-card p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.latam-btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.latam-btn-sm:hover {
+    background-color: var(--accent-color);
+}
+
+.qr-mock-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+    max-width: 500px;
+}
+
+.qr-graphics {
+    background: #333;
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.qr-code-txt {
+    background: #f1f0f7;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    border: 1px dashed var(--primary-color);
+}
+
+.section-sub-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+}
+
+.considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 45px;
+}
+
+.consideration-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.consideration-card.alert-card {
+    border-top-color: var(--accent-color);
+    background-color: #fff1f8;
+}
+
+.consideration-card h4 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.consideration-card p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.restaurant-logo-box {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.restaurant-logo-box:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .device-box-grid {
+        grid-template-columns: 1fr;
+    }
+    .qr-mock-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}

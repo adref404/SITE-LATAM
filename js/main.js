@@ -55,13 +55,17 @@ function initViewScripts(routeKey) {
             break;
         case 'gestion-operativa':
             ensureCardCarousel('gestion-operativa');
+            initAccordionView();
             break;
         case 'mis-datos':
             ensureCardCarousel('mis-datos');
             initDatosFormLogic();
+            initAccordionView();
             break;
         case 'mi-rol':
             ensureCardCarousel('mi-rol');
+            initAccordionView();
+            initVisaFormLogic();
             break;
         case 'domicilio':
         case 'vales':
@@ -392,6 +396,13 @@ function showGoDetail(index) {
     document.querySelectorAll('.go-detail-content').forEach(content => {
         content.classList.toggle('active', content.getAttribute('data-detail') === String(index));
     });
+
+    // Si el detalle recién mostrado trae un acordeón de pasos, su paso activo
+    // estaba oculto al calcular su altura inicial (scrollHeight era 0): se recalcula aquí.
+    const activeStepBody = panel.querySelector('.go-detail-content.active .latam-step.active .latam-step-body');
+    if (activeStepBody) {
+        activeStepBody.style.maxHeight = activeStepBody.scrollHeight + 'px';
+    }
 
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }

@@ -76,7 +76,13 @@ document.addEventListener('click', (e) => {
     const target = e.target.closest('[data-route]');
     if (!target) return;
     e.preventDefault();
-    navigateTo(target.getAttribute('data-route'));
+
+    const detailIndex = target.getAttribute('data-goto-detail');
+    navigateTo(target.getAttribute('data-route')).then(() => {
+        if (detailIndex !== null && typeof showGoDetail === 'function') {
+            showGoDetail(detailIndex);
+        }
+    });
 });
 
 // Cargar la página de inicio por defecto al abrir el proyecto

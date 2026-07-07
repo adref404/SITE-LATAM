@@ -1,0 +1,15 @@
+/* ==========================================================================
+   PROCEDIMIENTO DE VISA CREW Y PASAPORTE (embebido en el panel de detalle)
+   ========================================================================== */
+.badge-info-purple {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f1f0f7;
+    color: var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
