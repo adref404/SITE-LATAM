@@ -6,13 +6,13 @@
     </div>
 </div>
 
-<div class="go-carousel-wrapper">
-    <button class="go-carousel-arrow go-carousel-prev" onclick="goCarouselMove(-1)" aria-label="Anterior">
+<div class="go-carousel-wrapper" data-carousel="gestion-operativa">
+    <button class="go-carousel-arrow go-carousel-prev" onclick="moveCardCarousel('gestion-operativa', -1)" aria-label="Anterior">
         <span class="material-icons">chevron_left</span>
     </button>
 
     <div class="go-carousel-viewport">
-        <div class="go-carousel-track" id="go-carousel-track">
+        <div class="go-carousel-track">
 
             <div class="go-card">
                 <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80" alt="Vales Alimentación">
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <button class="go-carousel-arrow go-carousel-next" onclick="goCarouselMove(1)" aria-label="Siguiente">
+    <button class="go-carousel-arrow go-carousel-next" onclick="moveCardCarousel('gestion-operativa', 1)" aria-label="Siguiente">
         <span class="material-icons">chevron_right</span>
     </button>
 </div>

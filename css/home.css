@@ -1,4 +1,25 @@
 /* ==========================================================================
+   VIDEO DESTACADO
+   ========================================================================== */
+.video-embed-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* proporción 16:9 */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.video-embed-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ==========================================================================
    3 CAJITAS VISUALES
    ========================================================================== */
 .main-grid {

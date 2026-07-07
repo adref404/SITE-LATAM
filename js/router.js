@@ -54,6 +54,10 @@ async function navigateTo(routeKey) {
         // 5. Reflejar la ruta activa en el header
         updateActiveNav(routeKey);
 
+        // 6. Marcar si estamos en Inicio (hero a pantalla completa + header transparente) y refrescar su estado
+        document.body.classList.toggle('is-home', routeKey === 'inicio');
+        updateHeaderOnScroll();
+
     } catch (error) {
         console.error("Error cargando la navegación:", error);
     }

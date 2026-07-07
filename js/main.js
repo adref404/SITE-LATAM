@@ -1,4 +1,15 @@
 // ==========================================================================
+// HEADER: transparente sobre el hero, sólido al hacer scroll
+// ==========================================================================
+function updateHeaderOnScroll() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    header.classList.toggle('scrolled', window.scrollY > 40);
+}
+
+window.addEventListener('scroll', updateHeaderOnScroll);
+
+// ==========================================================================
 // HEADER: MEGA-MENÚ (persistente, no se reinicia entre vistas)
 // ==========================================================================
 function showMenu(id) {
@@ -43,7 +54,13 @@ function initViewScripts(routeKey) {
             initHomeView();
             break;
         case 'gestion-operativa':
-            initGoCarousel();
+            ensureCardCarousel('gestion-operativa');
+            break;
+        case 'mis-datos':
+            ensureCardCarousel('mis-datos-expediente');
+            break;
+        case 'mi-rol':
+            ensureCardCarousel('mi-rol-tiempos');
             break;
         case 'domicilio':
         case 'vales':
@@ -61,6 +78,7 @@ function initViewScripts(routeKey) {
 // Se llama antes de reemplazar el contenido de #app para liberar timers/listeners de la vista anterior
 function cleanupView() {
     stopAutoplay();
+    Object.keys(cardCarousels).forEach(key => delete cardCarousels[key]);
 }
 
 // ==========================================================================
@@ -248,25 +266,56 @@ function handleVisaFormSubmit() {
 }
 
 // ==========================================================================
-// VISTA: GESTIÓN OPERATIVA (carrusel de tarjetas con flechas)
+// COMPONENTE: CARRUSEL DE TARJETAS (multi-instancia, cíclico infinito, con swipe)
+// Se usa en Gestión Operativa, Datos Personales y Mi Rol.
 // ==========================================================================
-let goCarouselCards = [];
-let goCarouselIndex = 0;
+const cardCarousels = {};
 
-function initGoCarousel() {
-    goCarouselCards = document.querySelectorAll('#go-carousel-track .go-card');
-    goCarouselIndex = 0;
-    updateGoCarousel();
+function initCardCarousel(key) {
+    const wrapper = document.querySelector(`.go-carousel-wrapper[data-carousel="${key}"]`);
+    if (!wrapper) return;
+
+    const track = wrapper.querySelector('.go-carousel-track');
+    const originalCards = Array.from(track.children);
+    const n = originalCards.length;
+    if (n === 0) return;
+
+    // Triplicamos las tarjetas para poder girar en un solo sentido sin
+    // que se note el salto al pasar de la última a la primera.
+    track.innerHTML = '';
+    for (let copy = 0; copy < 3; copy++) {
+        originalCards.forEach(card => track.appendChild(card.cloneNode(true)));
+    }
+
+    cardCarousels[key] = {
+        track,
+        wrapper,
+        cards: track.querySelectorAll('.go-card'),
+        n,
+        index: n, // arranca en la copia del medio
+        snapTimeout: null
+    };
+
+    positionCardCarousel(key, false);
+    enableCarouselSwipe(key);
 }
 
-function updateGoCarousel() {
-    if (!goCarouselCards.length) return;
+function ensureCardCarousel(key) {
+    if (cardCarousels[key]) {
+        positionCardCarousel(key, false);
+    } else {
+        initCardCarousel(key);
+    }
+}
 
-    const n = goCarouselCards.length;
-    goCarouselCards.forEach((card, i) => {
+function positionCardCarousel(key, animate) {
+    const state = cardCarousels[key];
+    if (!state) return;
+    const { cards, index, track } = state;
+
+    cards.forEach((card, i) => {
         card.classList.remove('is-active', 'is-near');
-        const rawDistance = Math.abs(i - goCarouselIndex);
-        const distance = Math.min(rawDistance, n - rawDistance);
+        const distance = Math.abs(i - index);
         if (distance === 0) {
             card.classList.add('is-active');
         } else if (distance === 1) {
@@ -274,19 +323,65 @@ function updateGoCarousel() {
         }
     });
 
-    const track = document.getElementById('go-carousel-track');
-    const activeCard = goCarouselCards[goCarouselIndex];
+    if (!animate) track.style.transition = 'none';
+
+    const activeCard = cards[index];
     const viewport = track.parentElement;
     const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
     const offset = viewport.offsetWidth / 2 - cardCenter;
     track.style.transform = `translateX(${offset}px)`;
+
+    if (!animate) {
+        void track.offsetWidth; // fuerza reflow antes de restaurar la transición
+        track.style.transition = '';
+    }
 }
 
-function goCarouselMove(delta) {
-    if (!goCarouselCards.length) return;
-    const n = goCarouselCards.length;
-    goCarouselIndex = (goCarouselIndex + delta + n) % n;
-    updateGoCarousel();
+function moveCardCarousel(key, delta) {
+    const state = cardCarousels[key];
+    if (!state) return;
+
+    state.index += delta;
+    positionCardCarousel(key, true);
+
+    // Tras la animación, si salimos del tercio central del listado triplicado,
+    // saltamos sin transición al tercio equivalente (mismo contenido, sin salto visible).
+    clearTimeout(state.snapTimeout);
+    state.snapTimeout = setTimeout(() => {
+        const { n } = state;
+        if (state.index < n) {
+            state.index += n;
+            positionCardCarousel(key, false);
+        } else if (state.index >= n * 2) {
+            state.index -= n;
+            positionCardCarousel(key, false);
+        }
+    }, 480);
+}
+
+function enableCarouselSwipe(key) {
+    const state = cardCarousels[key];
+    if (!state) return;
+
+    const viewport = state.wrapper.querySelector('.go-carousel-viewport');
+    if (!viewport) return;
+
+    let startX = null;
+
+    viewport.addEventListener('pointerdown', (e) => {
+        startX = e.clientX;
+    });
+    viewport.addEventListener('pointerup', (e) => {
+        if (startX === null) return;
+        const deltaX = e.clientX - startX;
+        startX = null;
+        if (Math.abs(deltaX) > 40) {
+            moveCardCarousel(key, deltaX < 0 ? 1 : -1);
+        }
+    });
+    viewport.addEventListener('pointerleave', () => {
+        startX = null;
+    });
 }
 
 function showGoDetail(index) {
@@ -303,7 +398,7 @@ function showGoDetail(index) {
 // ==========================================================================
 // VISTA: MIS DATOS PERSONALES (pestañas laterales)
 // ==========================================================================
-function switchTab(tabId, element) {
+function switchTab(tabId, element, carouselKey) {
     document.querySelectorAll('.tab-content-block').forEach(content => {
         content.classList.remove('active');
     });
@@ -314,4 +409,8 @@ function switchTab(tabId, element) {
 
     document.getElementById(tabId).classList.add('active');
     element.classList.add('active');
+
+    if (carouselKey) {
+        ensureCardCarousel(carouselKey);
+    }
 }
