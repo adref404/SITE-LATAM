@@ -228,7 +228,11 @@
     text-decoration: none;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s ease;
+}
+
+.btn-help:active {
+    transform: scale(0.95);
 }
 
 .btn-help:hover {
@@ -321,16 +325,61 @@
     font-weight: 600;
     border: none;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s ease;
 }
 
 .help-modal .latam-btn:hover {
     background-color: #ffffff33;
 }
 
+.help-modal .latam-btn:active {
+    transform: scale(0.96);
+}
+
 .help-modal .btn-cancel {
     background: none;
     border: 1px solid rgba(255,255,255,0.3);
     color: var(--white);
+}
+
+/* ==========================================================================
+   RESPONSIVO
+   ========================================================================== */
+@media (max-width: 768px) {
+    .video-embed-wrapper {
+        border-radius: 8px;
+    }
+    .visual-card {
+        height: 220px;
+    }
+    .card-badge {
+        padding: 18px;
+    }
+    .card-badge h2 {
+        font-size: 1.15rem;
+    }
+    .faq-section {
+        padding: 22px;
+    }
+    .section-title {
+        font-size: 1.3rem;
+    }
+    .help-center-section {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-section,
+    .help-center-section {
+        padding: 18px;
+        border-radius: 10px;
+    }
+    .visual-card {
+        height: 190px;
+    }
+    .faq-question {
+        font-size: 0.95rem;
+    }
 }
 
