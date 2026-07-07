@@ -109,17 +109,29 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
     position: absolute;
     top: 70px;
     left: 50%;
-    transform: translateX(-50%);
     width: 95vw;
-    max-width: 1180px;
+    max-width: 760px;
     background-color: var(--white);
     box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     padding: 25px 30px;
-    display: none;
-    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     border-top: 3px solid var(--accent-color);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(8px) scale(0.98);
+    transform-origin: top center;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.megamenu.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
 }
 
 .megamenu-column h3 {
@@ -928,4 +940,77 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
         flex-basis: 220px;
         margin: 0 10px;
     }
+}
+
+/* ==========================================================================
+   PANEL DE DETALLE DEL CARRUSEL (componente compartido: Gestión Operativa,
+   Datos Personales y Mi Rol)
+   ========================================================================== */
+.go-detail-panel {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    padding: 35px;
+    min-height: 100px;
+    margin-bottom: 40px;
+}
+
+.go-detail-placeholder {
+    color: #888;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.go-detail-panel:has(.go-detail-content.active) .go-detail-placeholder {
+    display: none;
+}
+
+.go-detail-content {
+    display: none;
+}
+
+.go-detail-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.go-detail-content h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.go-detail-content h3 .material-icons {
+    color: var(--accent-color);
+}
+
+.go-detail-content p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.go-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.go-detail-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.go-detail-btn:hover {
+    background-color: var(--accent-color);
 }

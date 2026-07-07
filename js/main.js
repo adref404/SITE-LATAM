@@ -13,12 +13,12 @@ window.addEventListener('scroll', updateHeaderOnScroll);
 // HEADER: MEGA-MENÚ (persistente, no se reinicia entre vistas)
 // ==========================================================================
 function showMenu(id) {
-    document.getElementById(id).style.display = 'grid';
+    document.getElementById(id).classList.add('open');
     document.getElementById(id).parentElement.classList.add('active');
 }
 
 function hideMenu(id) {
-    document.getElementById(id).style.display = 'none';
+    document.getElementById(id).classList.remove('open');
     document.getElementById(id).parentElement.classList.remove('active');
 }
 
@@ -57,10 +57,10 @@ function initViewScripts(routeKey) {
             ensureCardCarousel('gestion-operativa');
             break;
         case 'mis-datos':
-            ensureCardCarousel('mis-datos-expediente');
+            ensureCardCarousel('mis-datos');
             break;
         case 'mi-rol':
-            ensureCardCarousel('mi-rol-tiempos');
+            ensureCardCarousel('mi-rol');
             break;
         case 'domicilio':
         case 'vales':
