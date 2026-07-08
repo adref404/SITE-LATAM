@@ -26,10 +26,6 @@
         <div class="nav-container">
             <a class="logo" data-route="inicio">SAB Perú</a>
 
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
-                <span class="material-icons">menu</span>
-            </button>
-
             <ul class="nav-menu">
 
                 <li class="nav-item">
@@ -111,11 +107,15 @@
         </div>
     </header>
 
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+    </button>
+
     <div class="mobile-nav-overlay" id="mobile-nav-overlay" onclick="if(event.target === this) closeMobileMenu()">
         <div class="mobile-nav-drawer">
-            <button class="mobile-nav-close" onclick="closeMobileMenu()" aria-label="Cerrar menú">
-                <span class="material-icons">close</span>
-            </button>
+            <img src="img/logos/logolatam.png" alt="LATAM Airlines" class="mobile-nav-logo">
 
             <ul class="mobile-nav-list">
 
@@ -130,7 +130,6 @@
                     <ul class="mobile-nav-submenu">
                         <li><a data-route="mis-datos" onclick="closeMobileMenu()">Ir a Datos Personales</a></li>
                         <li><a data-route="mis-datos" onclick="closeMobileMenu()">Actualización de Datos</a></li>
-                        <li><a href="#">Actualización en RH Connect</a></li>
                         <li><a href="#">Renovación de Fotocheck</a></li>
                         <li><a href="#">Intercambio o Cesión de Vacaciones</a></li>
                         <li><a data-route="mis-datos" data-goto-detail="4" onclick="closeMobileMenu()">Domicilio DGAC</a></li>

@@ -15,7 +15,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Lato';
+    /* font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 html {
@@ -248,29 +249,59 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
    ========================================================================== */
 .mobile-menu-toggle {
     display: none;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 3100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
     color: var(--primary-color);
-    align-items: center;
-    justify-content: center;
     padding: 6px;
     cursor: pointer;
 }
 
-.mobile-menu-toggle .material-icons {
-    font-size: 1.8rem;
+.hamburger-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.25s ease;
+}
+
+.mobile-menu-toggle.open .hamburger-bar:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.mobile-menu-toggle.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.open .hamburger-bar:nth-child(3) {
+    transform: rotate(-45deg);
 }
 
 .mobile-nav-overlay {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .mobile-nav-overlay.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 
 .mobile-nav-drawer {
@@ -292,17 +323,11 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
     transform: translateX(0);
 }
 
-.mobile-nav-close {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    cursor: pointer;
-    margin-bottom: 10px;
-    padding: 6px;
-}
-
-.mobile-nav-close .material-icons {
-    font-size: 1.6rem;
+.mobile-nav-logo {
+    display: block;
+    height: 28px;
+    width: auto;
+    margin-bottom: 20px;
 }
 
 .mobile-nav-list {

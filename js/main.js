@@ -9,6 +9,15 @@ function updateHeaderOnScroll() {
 
 window.addEventListener('scroll', updateHeaderOnScroll);
 
+// El arrastre nativo de <img> (drag-and-drop del navegador) interrumpe la
+// secuencia pointerdown/pointermove/pointerup a mitad de camino, rompiendo el
+// swipe de los carruseles. Se bloquea en los contenedores que usan swipe.
+document.addEventListener('dragstart', (e) => {
+    if (e.target.closest('.carousel-banner, .go-carousel-viewport')) {
+        e.preventDefault();
+    }
+});
+
 // ==========================================================================
 // HEADER: MEGA-MENÚ (persistente, no se reinicia entre vistas)
 // ==========================================================================
@@ -26,12 +35,27 @@ function hideMenu(id) {
 // HEADER: MENÚ MÓVIL (hamburguesa + sidebar deslizable)
 // ==========================================================================
 function toggleMobileMenu() {
+    if (document.getElementById('mobile-nav-overlay').classList.contains('active')) {
+        closeMobileMenu();
+        return;
+    }
+
     document.getElementById('mobile-nav-overlay').classList.add('active');
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    if (toggleBtn) {
+        toggleBtn.classList.add('open');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+    }
 }
 
 function closeMobileMenu() {
     document.getElementById('mobile-nav-overlay').classList.remove('active');
     document.querySelectorAll('.mobile-nav-group.open').forEach(group => group.classList.remove('open'));
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    if (toggleBtn) {
+        toggleBtn.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+    }
 }
 
 function toggleMobileSubmenu(button) {
@@ -118,6 +142,7 @@ function initCarousel() {
     dots = document.querySelectorAll('.dot');
     currentSlideIndex = 0;
     startAutoplay();
+    enableHeroCarouselSwipe();
 }
 
 function updateCarouselDisplay(index) {
@@ -134,6 +159,11 @@ function nextSlide() {
     updateCarouselDisplay(targetIndex);
 }
 
+function prevSlide() {
+    const targetIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    updateCarouselDisplay(targetIndex);
+}
+
 function goToSlide(index) {
     updateCarouselDisplay(index);
     stopAutoplay();
@@ -147,6 +177,36 @@ function startAutoplay() {
 
 function stopAutoplay() {
     clearInterval(carouselInterval);
+}
+
+// Deslizar con el dedo en mobile: arrastrar de derecha a izquierda avanza
+// al siguiente slide (entra desde la derecha); de izquierda a derecha retrocede.
+function enableHeroCarouselSwipe() {
+    const banner = document.querySelector('.carousel-banner');
+    if (!banner) return;
+
+    let startX = null;
+
+    banner.addEventListener('pointerdown', (e) => {
+        startX = e.clientX;
+    });
+    banner.addEventListener('pointerup', (e) => {
+        if (startX === null || slides.length === 0) return;
+        const deltaX = e.clientX - startX;
+        startX = null;
+        if (Math.abs(deltaX) > 40) {
+            stopAutoplay();
+            if (deltaX < 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            startAutoplay();
+        }
+    });
+    banner.addEventListener('pointerleave', () => {
+        startX = null;
+    });
 }
 
 function openBannerModal(index) {
