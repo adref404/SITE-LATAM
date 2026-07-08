@@ -546,16 +546,78 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
 
 @media (max-width: 768px) {
     .carousel-caption {
-        bottom: 15px;
+        bottom: 100px;
         right: 15px;
         left: 15px;
         max-width: calc(100% - 30px);
         padding: 12px;
     }
     .carousel-dots {
-        bottom: auto;
-        top: 15px;
-        left: 15px;
+        margin-top: auto;
+        bottom: 15px;
+        left: 60px;
+        transform: translateX(-50%);
+    }
+}
+
+/* Contenedor principal alineado al centro */
+.icono-mouse-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espacio entre el mouse y el texto */
+    color: rgba(255, 255, 255, 0.7); /* Blanco con opacidad similar a tu proyecto */
+    pointer-events: none;
+}
+
+/* El cuerpo físico del mouse */
+.mouse-body {
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* La ruedita interna que se desplaza */
+.mouse-wheel {
+    width: 4px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    /* Aplicamos la animación de scroll */
+    animation: scrollAnimation 1.6s infinite ease-in-out;
+}
+
+/* Texto inferior de guía */
+.scroll-text {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Efecto de animación: la rueda baja, se desvanece y vuelve a empezar */
+@keyframes scrollAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(14px);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
