@@ -1,164 +1,153 @@
 <div class="latam-page-container">
 
-    <div class="latam-header">
-        <div class="brand-title">
-            <div class="icon-wrap">
-                <span class="material-icons">restaurant</span>
+    <div class="vales-hero">
+        <span class="vales-hero-badge">Actualizado</span>
+        <h1 class="vales-hero-title">Instructivo: App Vales de Alimentación</h1>
+        <p class="vales-hero-text">Sigue la guía interactiva para descargar, generar y canjear tus vales de alimentación diarios, paso a paso.</p>
+
+        <div class="vales-role-grid">
+            <div class="vales-role-card">
+                <div class="vales-role-icon"><span class="material-icons">flight_takeoff</span></div>
+                <h3>Tripulación de Cabina</h3>
+                <p>Accede de forma directa a la app de vales precargada en tu <strong>One Device</strong> corporativo.</p>
             </div>
-            <div>
-                <h1>Instructivo: App Vales de Alimentación</h1>
-                <p>Guía digital de autogestión y uso de la plataforma de vales para tripulantes</p>
+            <div class="vales-role-card">
+                <div class="vales-role-icon"><span class="material-icons">engineering</span></div>
+                <h3>Tripulación de Mando</h3>
+                <p>Descarga la app escaneando el código QR oficial desde tu celular personal.</p>
+                <div class="app-qr-row">
+                    <img src="img/instructivo_vales/codigo QR de la app.png" alt="Código QR de descarga de la app" class="app-qr-thumb">
+                    <button type="button" class="vales-qr-btn" data-step-jump="1"><span class="material-icons" style="font-size:14px">qr_code_2</span> Ver QR de Descarga</button>
+                </div>
             </div>
         </div>
-        <div class="latam-logo-txt">LATAM<span>•</span></div>
     </div>
 
     <div class="latam-alert">
         <span class="material-icons">stars</span>
         <p>
-            <strong>Tripulante en Reserva de Aeropuerto:</strong> Si te encuentras bajo asignación de reserva en el aeropuerto, hasta próximo aviso, el procedimiento digital varía: <strong>deberás recoger tu vale en formato físico en la Oficina de Ventas</strong> para ser canjeado exclusivamente en el restaurante <strong>PeruSuyo Mercado Peruano</strong>[cite: 167, 168].
+            <strong>Tripulante en Reserva de Aeropuerto:</strong> Si te encuentras bajo asignación de reserva en el aeropuerto, hasta próximo aviso, el procedimiento digital varía: <strong>deberás recoger tu vale en formato físico en la Oficina de Ventas</strong> para ser canjeado exclusivamente en el restaurante <strong>PeruSuyo Mercado Peruano</strong>.
         </p>
     </div>
 
-    <div class="latam-timeline">
+    <h2 class="section-sub-title"><span class="material-icons">explore</span> Guía Interactiva de Uso</h2>
+    <p class="vales-flow-hint">Haz clic en los pasos de la izquierda o navega con las flechas del celular para ver el proceso.</p>
 
-        <div class="latam-step">
-            <div class="latam-step-num">1</div>
-            <button class="latam-step-trigger">
-                <span class="title-content">
-                    <span class="material-icons">phone_android</span>
-                    Acceso a la Plataforma de Vales
-                </span>
-                <span class="material-icons arrow-icon">expand_more</span>
+    <div class="vales-flow" id="vales-flow">
+
+        <div class="vales-steps-col">
+
+            <div class="vflow-step active" data-step="1" data-img="img/instructivo_vales/paso1.png" data-alt="Pantalla de bienvenida de la app Vales LATAM">
+                <div class="vflow-num">1</div>
+                <div class="vflow-content">
+                    <h4><span class="material-icons">phone_android</span> Acceso y Descarga de la App</h4>
+                    <p><strong>Tripulación de Cabina:</strong> ingresa desde tu One Device. <strong>Tripulación de Mando:</strong> descarga la app escaneando el código QR de arriba.</p>
+                </div>
+            </div>
+
+            <div class="vflow-step" data-step="2" data-img="img/instructivo_vales/paso2.png" data-alt="Menú de la app resaltando la opción Generar Vale">
+                <div class="vflow-num">2</div>
+                <div class="vflow-content">
+                    <h4><span class="material-icons">vpn_key</span> Visualiza tu Vale</h4>
+                    <p>Ingresa a la sección <strong>"Generar Vale"</strong>. Allí podrás encontrar el vale asignado y disponible del día de manera inmediata.</p>
+                </div>
+            </div>
+
+            <div class="vflow-step" data-step="3" data-img="img/instructivo_vales/paso3.png" data-alt="Pantalla Generar Vale QR con el botón Generar Vale">
+                <div class="vflow-num">3</div>
+                <div class="vflow-content">
+                    <h4><span class="material-icons">touch_app</span> Genera el Código QR</h4>
+                    <p>Haz clic en la opción <strong>"Generar Vale"</strong>. Se procesará la solicitud interna para emitir el código correspondiente para tu consumo.</p>
+                </div>
+            </div>
+
+            <div class="vflow-step" data-step="4" data-img="img/instructivo_vales/paso4.png" data-alt="Código QR generado listo para ser escaneado">
+                <div class="vflow-num">4</div>
+                <div class="vflow-content">
+                    <h4><span class="material-icons">qr_code_2</span> Presenta y Canjea</h4>
+                    <p>Muestra el código QR generado en caja para que sea escaneado por el restaurante. También tienes la opción de dictar el código alfanumérico en pantalla.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="vales-phone-col">
+            <button type="button" class="vflow-arrow vflow-prev" aria-label="Paso anterior">
+                <span class="material-icons">chevron_left</span>
             </button>
-            <div class="latam-step-body">
-                <div class="latam-step-inner">
-                    <p>Ingresa al ecosistema digital corporativo según el rol de tu asignación técnica de vuelo[cite: 126, 130]:</p>
-                    <div class="device-box-grid">
-                        <div class="device-card">
-                            <span class="material-icons icon-device">flight_takeoff</span>
-                            <div>
-                                <h4>Tripulación de Cabina</h4>
-                                <p>Accede directamente a la aplicación preinstalada en tu dispositivo asignado <strong>One Device</strong>.</p>
-                            </div>
-                        </div>
-                        <div class="device-card">
-                            <span class="material-icons icon-device">engineering</span>
-                            <div>
-                                <h4>Tripulación de Mando</h4>
-                                <p>Puedes descargar la aplicación móvil de manera directa haciendo clic en el enlace del SITE [cite: 130, 131] o escaneando el código QR provisto[cite: 132].</p>
-                                <a href="#" class="latam-btn-sm"><span class="material-icons" style="font-size:12px">download</span> Descargar App</a>
-                            </div>
-                        </div>
+
+            <div class="vflow-phone">
+                <div class="vflow-phone-notch"></div>
+                <div class="vflow-phone-screen">
+                    <div class="vflow-status-bar">
+                        <span>14:40</span>
+                        <span class="vflow-status-icons">
+                            <span class="material-icons">wifi</span>
+                            <span class="material-icons">battery_full</span>
+                        </span>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="latam-step">
-            <div class="latam-step-num">2</div>
-            <button class="latam-step-trigger">
-                <span class="title-content">
-                    <span class="material-icons">vpn_key</span>
-                    Localizar el Vale del Día
-                </span>
-                <span class="material-icons arrow-icon">expand_more</span>
-            </button>
-            <div class="latam-step-body">
-                <div class="latam-step-inner">
-                    <p>Una vez dentro de la app corporativa, dirígete al menú principal y selecciona la sección denominada de forma exacta como <strong>"Generar Vale"</strong>[cite: 133]. En este apartado visualizarás el saldo y el vale que tienes completamente asignado y disponible para la jornada del día actual[cite: 133].</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="latam-step">
-            <div class="latam-step-num">3</div>
-            <button class="latam-step-trigger">
-                <span class="title-content">
-                    <span class="material-icons">touch_app</span>
-                    Activar y Procesar la Generación
-                </span>
-                <span class="material-icons arrow-icon">expand_more</span>
-            </button>
-            <div class="latam-step-body">
-                <div class="latam-step-inner">
-                    <p>Cuando estés listo para consumir en el establecimiento, presiona firmemente el botón de acción digital interactivo que indica <strong>"Generar Vale"</strong>[cite: 140]. Esta operación desencadenará la creación inmediata del código de seguridad dinámico para tu consumo[cite: 140].</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="latam-step">
-            <div class="latam-step-num">4</div>
-            <button class="latam-step-trigger">
-                <span class="title-content">
-                    <span class="material-icons">qr_code_2</span>
-                    Canje Efectivo en el Establecimiento
-                </span>
-                <span class="material-icons arrow-icon">expand_more</span>
-            </button>
-            <div class="latam-step-body">
-                <div class="latam-step-inner">
-                    <p>Para concluir la transacción de tu almuerzo o cena de forma conforme, presenta tu teléfono al personal del local para que procedan de la siguiente manera[cite: 143]:</p>
-                    <ul style="margin-left: 24px; margin-top: 8px; display:flex; flex-direction:column; gap:6px;">
-                        <li>Muestra el **Código QR** generado en tu pantalla para ser escaneado directamente por la lectora del comercio[cite: 143].</li>
-                        <li>En caso el escáner presente fallas, puedes **dictar verbalmente el código alfanumérico** de seguridad que figura visible en la interfaz[cite: 143].</li>
-                    </ul>
-
-                    <div class="qr-mock-container">
-                        <div class="qr-graphics">
-                            <span class="material-icons" style="font-size:3rem;">qr_code_2</span>
-                        </div>
-                        <div>
-                            <span style="font-size:0.8rem; color:#666; display:block; margin-bottom:2px;">Código de Respaldo Canje:</span>
-                            <div class="qr-code-txt">LATAM-734001703</div>
-                        </div>
+                    <div class="vflow-img-wrap">
+                        <img id="vflow-img" src="img/instructivo_vales/paso1.png" alt="Pantalla de bienvenida de la app Vales LATAM">
                     </div>
+                    <div class="vflow-phone-footer">Plataforma de Vales LATAM</div>
                 </div>
+            </div>
+
+            <button type="button" class="vflow-arrow vflow-next" aria-label="Paso siguiente">
+                <span class="material-icons">chevron_right</span>
+            </button>
+
+            <div class="vflow-dots">
+                <span class="vflow-dot active" data-step="1"></span>
+                <span class="vflow-dot" data-step="2"></span>
+                <span class="vflow-dot" data-step="3"></span>
+                <span class="vflow-dot" data-step="4"></span>
             </div>
         </div>
 
     </div>
 
-    <h2 class="section-sub-title"><span class="material-icons">info</span> Consideraciones Críticas de Canje</h2>
+    <h2 class="section-sub-title"><span class="material-icons">info</span> Consideraciones de Uso</h2>
     <div class="considerations-grid">
         <div class="consideration-card">
-            <h4><span class="material-icons" style="color:#4285f4">folder</span> Vales Generados</h4>
-            <p>En el módulo de <strong>"Vales generados"</strong> se almacenarán de forma automática todos los códigos solicitados que aún no hayan sido canjeados en caja[cite: 148].</p>
+            <h4><span class="material-icons" style="color:#4285f4">folder</span> Historial de Pendientes</h4>
+            <p>En la sección <strong>"Vales generados"</strong> podrás encontrar todos los vales que emitiste pero que aún no han sido canjeados en restaurantes.</p>
         </div>
         <div class="consideration-card alert-card">
             <h4><span class="material-icons" style="color:var(--latam-coral)">history_toggle_off</span> Vencimiento Diario</h4>
-            <p>Una vez que generas el vale, este posee un uso único y **expira estrictamente al finalizar el día actual**[cite: 149]. Pasado este plazo, el vale vencerá sin derecho a reclamo[cite: 150].</p>
+            <p>Una vez generado el vale, este puede ser usado <strong>una sola vez y hasta finalizar el día</strong>. Pasado este lapso, el vale vencerá automáticamente.</p>
         </div>
         <div class="consideration-card">
-            <h4><span class="material-icons" style="color:#34a853">task_alt</span> Historial Usado</h4>
-            <p>En el apartado de <strong>"Vales usados"</strong> podrás revisar el listado histórico de tus canjes y el desglose de lo consumido[cite: 151].</p>
+            <h4><span class="material-icons" style="color:#34a853">task_alt</span> Control de Consumo</h4>
+            <p>En la sección <strong>"Vales usados"</strong> podrás validar el detalle histórico del vale que canjeaste y la información desglosada de lo consumido.</p>
         </div>
         <div class="consideration-card">
-            <h4><span class="material-icons" style="color:#fbbc05">wifi</span> Conexión Estable</h4>
-            <p>Para asegurar un óptimo rendimiento técnico de la app y evitar bloqueos en caja, **busca conectarte a una red de internet móvil estable**[cite: 152].</p>
+            <h4><span class="material-icons" style="color:#fbbc05">wifi</span> Conexión Recomendada</h4>
+            <p>Busca contar con una <strong>conexión a internet estable</strong> en tu dispositivo móvil al momento de generar el QR para un rendimiento óptimo.</p>
         </div>
     </div>
 
     <h2 class="section-sub-title"><span class="material-icons">storefront</span> Red de Restaurantes Autorizados</h2>
-    <p style="font-size: 0.95rem; color:#555; margin-bottom: 20px;">Presentamos la lista oficial de comercios afiliados donde puedes efectuar la liquidación de tus vales digitales:</p>
+    <p style="font-size: 0.95rem; color:#555; margin-bottom: 20px;">Puedes utilizar tus vales activos generados en los siguientes locales autorizados:</p>
 
     <div class="restaurants-grid">
-        <div class="restaurant-logo-box">LA BONBONNIERE [cite: 156]</div>
-        <div class="restaurant-logo-box">TORI POLLERIA [cite: 157]</div>
-        <div class="restaurant-logo-box">BURGERBOY [cite: 158]</div>
-        <div class="restaurant-logo-box">WOK TO GATE [cite: 160, 161]</div>
-        <div class="restaurant-logo-box">NATOO HEALTHY [cite: 160, 162]</div>
-        <div class="restaurant-logo-box">LOS REVES [cite: 160]</div>
-        <div class="restaurant-logo-box">PANSALAIRE [cite: 160]</div>
-        <div class="restaurant-logo-box">LA BAGUETTE [cite: 164]</div>
-        <div class="restaurant-logo-box">PUKU PUKU [cite: 163, 164]</div>
-        <div class="restaurant-logo-box">TRAVEL MARKET [cite: 164]</div>
-        <div class="restaurant-logo-box">TGI FRIDAYS [cite: 166]</div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#f59e0b">B</span><h5>La Bonbonniere</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#facc15; color:#1e293b">TORI</span><h5>Tori Pollería</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#111827">KO</span><h5>KO Asian</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#2563eb">BB</span><h5>Burgerboy</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#dc2626">WOK</span><h5>Wok to Gate</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#15803d">NAT</span><h5>Natoo Healthy</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#64748b">LR</span><h5>Los Reyes</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#7dd3fc; color:#1e293b">PAN</span><h5>PansalAire</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#a8a29e; color:#1e293b">BAG</span><h5>La Baguette</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#3b2314">PK</span><h5>Puku Puku</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#27272a">MKT</span><h5>Travel Market</h5></div>
+        <div class="restaurant-card"><span class="restaurant-badge" style="background:#b91c1c">FRI</span><h5>TGI Fridays</h5></div>
     </div>
 
     <div class="latam-footer">
         <p>Gerencia de Servicio a Bordo Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
-        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Sostenibilidad • Operación Conforme • SOMOS LATAM [cite: 169]</p>
+        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Sostenibilidad • Operación Conforme • SOMOS LATAM</p>
     </div>
 
 </div>

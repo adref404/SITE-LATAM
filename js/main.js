@@ -68,8 +68,10 @@ function initViewScripts(routeKey) {
             initVisaFormLogic();
             break;
         case 'domicilio':
-        case 'vales':
             initAccordionView();
+            break;
+        case 'vales':
+            initValesFlow();
             break;
         case 'visa':
             initAccordionView();
@@ -225,6 +227,50 @@ function initAccordionView() {
         const body = initialStep.querySelector('.latam-step-body');
         body.style.maxHeight = body.scrollHeight + "px";
     }
+}
+
+// ==========================================================================
+// VISTA: VALES DE ALIMENTACIÓN (lista de pasos + preview de teléfono dinámico)
+// ==========================================================================
+function initValesFlow() {
+    const flow = document.getElementById('vales-flow');
+    if (!flow) return;
+
+    const steps = Array.from(flow.querySelectorAll('.vflow-step'));
+    const dots = Array.from(flow.querySelectorAll('.vflow-dot'));
+    const img = document.getElementById('vflow-img');
+    const prevBtn = flow.querySelector('.vflow-prev');
+    const nextBtn = flow.querySelector('.vflow-next');
+    if (steps.length === 0 || !img) return;
+
+    let activeIndex = steps.findIndex(s => s.classList.contains('active'));
+    if (activeIndex === -1) activeIndex = 0;
+
+    function setActive(index) {
+        activeIndex = (index + steps.length) % steps.length;
+
+        steps.forEach((step, i) => step.classList.toggle('active', i === activeIndex));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+
+        const target = steps[activeIndex];
+        img.src = target.getAttribute('data-img');
+        img.alt = target.getAttribute('data-alt') || `Paso ${activeIndex + 1}`;
+    }
+
+    steps.forEach((step, i) => step.addEventListener('click', () => setActive(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => setActive(i)));
+    if (prevBtn) prevBtn.addEventListener('click', () => setActive(activeIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => setActive(activeIndex + 1));
+
+    document.querySelectorAll('[data-step-jump]').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetStep = Number(button.getAttribute('data-step-jump')) - 1;
+            setActive(targetStep);
+            flow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    setActive(activeIndex);
 }
 
 // ==========================================================================
