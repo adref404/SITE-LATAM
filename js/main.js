@@ -56,6 +56,7 @@ function initViewScripts(routeKey) {
         case 'gestion-operativa':
             ensureCardCarousel('gestion-operativa');
             initAccordionView();
+            initValesFlow();
             break;
         case 'mis-datos':
             ensureCardCarousel('mis-datos');
@@ -69,9 +70,6 @@ function initViewScripts(routeKey) {
             break;
         case 'domicilio':
             initAccordionView();
-            break;
-        case 'vales':
-            initValesFlow();
             break;
         case 'visa':
             initAccordionView();

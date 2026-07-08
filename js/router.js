@@ -22,10 +22,6 @@ const routes = {
     "visa": {
         html: "views/procedimiento_visa_crewcare.html",
         css: "css/tramites/visa_crewcare.css"
-    },
-    "vales": {
-        html: "views/vales_alimentacion.html",
-        css: "css/tramites/vales_alimentacion.css"
     }
 };
 
