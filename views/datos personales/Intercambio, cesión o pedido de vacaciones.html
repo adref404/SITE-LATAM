@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Gestión de Vacaciones SAB</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --blue-info: #e8f0fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* ENCABEZADO ESTILO HOME SITE (REF: IMAGEN 1) */
+        .header-banner {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.5) 0%, rgba(27,0,74,0.1) 100%), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: #00bcd4; /* Color cyan veraniego fiel a la cabecera original */
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1rem; opacity: 0.9; }
+
+        .description-area { padding: 30px 40px 10px 40px; }
+        .description-area p { font-size: 1.05rem; line-height: 1.5; color: #444; }
+
+        /* LÍNEA DE TIEMPO CONECTORA */
+        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline::before {
+            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
+            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+        }
+
+        .latam-step { position: relative; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step-num {
+            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-title { padding: 20px 25px; font-size: 1.15rem; font-weight: 700; color: var(--latam-main); border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; }
+        .step-body { padding: 25px; }
+
+        /* ELEMENTOS FORM */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.95rem; color: var(--latam-main); margin-bottom: 8px; }
+        .form-control { width: 100%; padding: 12px 16px; font-size: 0.95rem; border: 1px solid var(--latam-border); border-radius: 8px; color: var(--latam-text); background-color: #fcfcfd; }
+        .form-control:focus { outline: none; border-color: var(--latam-main); box-shadow: 0 0 0 3px rgba(27, 0, 74, 0.08); }
+
+        .form-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+
+        /* GRILLA LÚDICA DE BOTONES PARA TIPOS DE SOLICITUD */
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+        .grid-option-card { border: 1px solid var(--latam-border); border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; background-color: #fcfcfd; transition: all 0.2s; }
+        .grid-option-card:hover { border-color: var(--latam-main); background-color: rgba(27, 0, 74, 0.02); }
+        .grid-option-card.active { border-color: var(--latam-coral); background-color: #fff1f8; box-shadow: 0 4px 12px rgba(232, 17, 127, 0.05); }
+        
+        .dot-radio { width: 16px; height: 16px; border: 2px solid var(--latam-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .grid-option-card.active .dot-radio { border-color: var(--latam-main); background: var(--white); }
+        .grid-option-card.active .dot-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--latam-coral); }
+        .option-text { font-size: 0.9rem; font-weight: 600; color: #444; }
+        .grid-option-card.active .option-text { color: var(--latam-main); }
+
+        /* ==========================================================================
+           CONTENEDORES CONDICIONALES ACORDEÓN DESPLEGABLES (SIMPLE Y SEPARADO)
+           ========================================================================== */
+        .conditional-accordion-wrapper { display: none; margin-top: 15px; border-top: 3px solid var(--latam-main); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); overflow: hidden; }
+        .conditional-accordion-wrapper.open { display: block; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .accordion-banner-header { background-color: var(--latam-main); color: var(--white); padding: 14px 22px; font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+        .accordion-form-inner { padding: 22px; background-color: var(--white); }
+
+        /* TARJETAS DE DISCLAIMER EXCLUSIVAS DE PLAZOS */
+        .deadline-badge-box {
+            background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 12px 16px; border-radius: 4px; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-start;
+        }
+        .deadline-badge-box .material-icons { color: #ffb300; font-size: 1.3rem; }
+        .deadline-badge-box p { font-size: 0.88rem; line-height: 1.4; color: #555; margin: 0; }
+
+        .action-bar { display: flex; justify-content: flex-end; padding: 20px 40px 40px 0; }
+        .btn-submit { background-color: var(--latam-main); color: var(--white); border: none; padding: 12px 35px; font-size: 0.95rem; font-weight: 700; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-submit:hover { background-color: var(--latam-coral); }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 130px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .form-grid-3 { grid-template-columns: 1fr; gap: 0; }
+            .action-bar { padding: 20px; }
+            .btn-submit { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">beach_access</span>
+                    <div>
+                        <h1>Intercambio, cesión o pedido</h1>
+                        <p>adicional de vacaciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-area">
+            <p>Gestiona de forma simple tus solicitudes relativas al periodo vacacional. Selecciona el tipo de trámite a realizar para visualizar los requisitos y plazos reglamentarios específicos sin enredos.</p>
+        </div>
+
+        <div class="latam-timeline">
+            
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <div class="step-title"><span class="material-icons">badge</span> Datos de Identificación</div>
+                <div class="step-body">
+                    
+                    <div class="form-group">
+                        <label>Correo electrónico *</label>
+                        <input type="email" class="form-control" value="mario.fernandez@latam.com" readonly>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group">
+                            <label>Ingresa tu BP *</label>
+                            <input type="text" class="form-control" value="6014982">
+                        </div>
+                        <div class="form-group">
+                            <label>Ingresa tus apellidos y nombres *</label>
+                            <input type="text" class="form-control" value="Mario Fernandez">
+                        </div>
+                        <div class="form-group">
+                            <label>Selecciona tu categoría *</label>
+                            <select class="form-control">
+                                <option>JSB (Jefe de Servicio a Bordo)</option>
+                                <option>TC (Tripulante de Cabina)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="latam-step">
+                <div class="latam-step-num">2</div>
+                <div class="step-title"><span class="material-icons">touch_app</span> Selecciona el tipo de solicitud que deseas realizar *</div>
+                <div class="step-body">
+                    <div class="options-grid">
+                        <div class="grid-option-card" data-target="flow-adicionales" onclick="toggleVacationFlow(this)">
+                            <div class="dot-radio"></div><span class="option-text">Solicitud de vacaciones adicionales</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-cambio" onclick="toggleVacationFlow(this)">
+                            <div class="dot-radio"></div><span class="option-text">Solicitud de cambio de vacaciones con un compañero</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-cesion" onclick="toggleVacationFlow(this)">
+                            <div class="dot-radio"></div><span class="option-text">Solicitud de cesión de vacaciones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flow-adicionales" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">add_circle</span> Formulario: Vacaciones Adicionales</div>
+                <div class="accordion-form-inner">
+                    
+                    <div class="deadline-badge-box">
+                        <span class="material-icons">alarm</span>
+                        <div>
+                            <p><strong>Regla de Plazo y Cupo:</strong> Estas solicitudes están estrictamente sujetas a disponibilidad de cupos en el mes requerido. Se dará respuesta formal en el <strong>mes previo al goce de vacaciones</strong> con un plazo mínimo de 15 días de anticipación.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group"><label>Mes Solicitado de Adicionales *</label><input type="month" class="form-control"></div>
+                        <div class="form-group"><label>Cantidad de Días Solicitados *</label><input type="number" class="form-control" min="1" max="30" placeholder="Ej. 7"></div>
+                        <div class="form-group"><label>Sustento de la Solicitud (Opcional)</label><input type="text" class="form-control" placeholder="Detalle breve"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flow-cambio" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">swap_horiz</span> Formulario: Intercambio de Vacaciones con Compañero</div>
+                <div class="accordion-form-inner">
+                    
+                    <div class="deadline-badge-box">
+                        <span class="material-icons">people</span>
+                        <div>
+                            <p><strong>Regla de Validación Doble:</strong> Para proceder con el intercambio de periodos, <strong>tanto tú como tu compañero</strong> deberán ingresar de forma individual su respectiva solicitud cruzada en este sitio. Tiempo de respuesta máximo: 10 días hábiles.</p>
+                            <p style="margin-top:5px;">⚠️ <strong>Plazo Anticipación:</strong> Ingresar hasta el <strong>último día de 2 meses previos</strong> al mes deseado (Ej: si el cambio es para marzo, registrar máximo el 31 de enero). Para la primera semana del mes, registrar máximo el 31 de diciembre.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group"><label>BP del Compañero de Permuta *</label><input type="text" class="form-control" placeholder="Ej. 6012233"></div>
+                        <div class="form-group"><label>Nombres Completos del Compañero *</label><input type="text" class="form-control" placeholder="Sin tildes"></div>
+                        <div class="form-group"><label>Mes Original del Cambio *</label><input type="month" class="form-control"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flow-cesion" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">assignment_return</span> Formulario: Cesión de Vacaciones</div>
+                <div class="accordion-form-inner">
+                    
+                    <div class="deadline-badge-box">
+                        <span class="material-icons">gavel</span>
+                        <div>
+                            <p><strong>Regla de Cesión Legal:</strong> Al igual que el intercambio, ambos colaboradores involucrados en el traspaso reglamentario del bloque de descanso deben registrar su formulario de forma independiente en un plazo no menor a 2 meses antes del goce.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group"><label>BP del Colaborador Beneficiario *</label><input type="text" class="form-control" placeholder="Ej. 6015566"></div>
+                        <div class="form-group"><label>Nombres Completos del Beneficiario *</label><input type="text" class="form-control" placeholder="Sin tildes"></div>
+                        <div class="form-group"><label>Bloque de Días a Ceder *</label><input type="text" class="form-control" placeholder="Ej: Del 05 al 12 de Octubre"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="action-bar">
+            <button class="btn-submit" onclick="alert('Simulación: Solicitud de vacaciones registrada de forma exitosa en las bases de datos de Operación y Roles SAB.');">
+                <span>Enviar Solicitud</span>
+                <span class="material-icons">flight_takeoff</span>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleVacationFlow(element) {
+            // Desactivar selecciones previas de botones
+            document.querySelectorAll('.grid-option-card').forEach(card => {
+                card.classList.remove('selected', 'active');
+            });
+
+            // Ocultar todos los sub-formularios condicionales
+            document.querySelectorAll('.conditional-accordion-wrapper').forEach(wrapper => {
+                wrapper.classList.remove('open');
+            });
+
+            // Activar la opción seleccionada actual
+            element.classList.add('active');
+            
+            // Mostrar de forma dirigida el formulario correspondiente
+            const targetId = element.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Notificación de Descanso Médico</title>
+    <!-- Iconos de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --route-bg: #f1f0f7;       /* Fondo para rutas guiadas */
+            --ua-blue: #004baf;         /* Azul Universal Assistance */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO */
+        .header-banner {
+            position: relative;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.6) 0%, rgba(27,0,74,0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: #d93025; /* Color rojo de alerta médica corporativa */
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1rem; opacity: 0.9; }
+
+        .intro-text { padding: 30px 40px 10px 40px; font-size: 1.05rem; line-height: 1.5; color: #444; }
+
+        /* LÍNEA DE TIEMPO CONECTORA */
+        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline::before {
+            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
+            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+        }
+
+        .latam-step { position: relative; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); transition: all 0.3s ease; }
+        .latam-step-num {
+            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .latam-step-trigger { width: 100%; background: none; border: none; text-align: left; padding: 20px 24px; font-size: 1.2rem; font-weight: 700; color: var(--latam-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .latam-step-trigger .title-content { display: flex; align-items: center; gap: 14px; }
+        .arrow-icon { color: var(--step-orange); transition: transform 0.3s ease; }
+        
+        .latam-step-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); background-color: #fafbfe; border-radius: 0 0 12px 12px; }
+        .latam-step-inner { padding: 25px; border-top: 1px solid #eaeaea; font-size: 1rem; line-height: 1.6; color: #484848; }
+
+        .latam-step.active { border-color: var(--latam-main); box-shadow: 0 4px 20px rgba(27, 0, 74, 0.05); }
+        .latam-step.active .latam-step-trigger { color: var(--latam-coral); }
+        .latam-step.active .arrow-icon { transform: rotate(180deg); }
+
+        /* CONTACT CHANNELS */
+        .contact-channel-box { background-color: #f7f6fb; border: 1px solid var(--latam-border); border-radius: 8px; padding: 18px; margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .channel-card { background: var(--white); padding: 14px; border-radius: 6px; border-left: 4px solid var(--latam-main); display: flex; align-items: center; gap: 12px; }
+        .channel-card .material-icons { color: var(--latam-coral); font-size: 1.5rem; }
+        .channel-card h4 { font-size: 0.95rem; color: var(--latam-main); font-weight: 700; }
+        .channel-card p { font-size: 0.88rem; color: #555; margin: 0; }
+
+        /* REPLICA FORMULARIO DIGITAL (PASO 2) */
+        .lp-form-box { border: 1px solid var(--latam-border); border-radius: 8px; padding: 20px; background-color: var(--white); }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.95rem; color: var(--latam-main); margin-bottom: 6px; }
+        .form-group label span { color: var(--latam-coral); }
+        .form-control { width: 100%; padding: 11px 14px; font-size: 0.95rem; border: 1px solid var(--latam-border); border-radius: 8px; color: var(--latam-text); background-color: #fcfcfd; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .file-upload-mock { border: 2px dashed var(--latam-border); border-radius: 8px; padding: 20px; text-align: center; background: #fafbfc; cursor: pointer; }
+        .file-upload-mock .material-icons { font-size: 2.2rem; color: var(--latam-main); }
+        .warning-label-desc { font-size: 0.85rem; color: #444; font-weight: 700; margin-bottom: 6px; background-color: #fff8e1; padding: 8px 12px; border-left: 3px solid #ffb300; border-radius: 4px; }
+
+        /* RUTA INTERNA (PASO 3) */
+        .route-path-container { background-color: var(--route-bg); padding: 14px 20px; border-radius: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 0.85rem; color: var(--latam-main); border: 1px solid rgba(27, 0, 74, 0.05); margin-top: 10px; }
+        .route-path-container .arrow-sep { color: var(--latam-coral); font-weight: normal; }
+
+        /* SEGURO INTEGRADO UNIVERSAL ASSISTANCE (PASO 4) */
+        .ua-container-box { background-color: #f0f4fa; border: 1px solid #b9cfe7; border-radius: 8px; padding: 20px; margin-top: 10px; }
+        .ua-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #d0dae9; padding-bottom: 12px; margin-bottom: 15px; }
+        .ua-header img { height: 28px; object-fit: contain; }
+        .ua-header h4 { font-size: 1.05rem; color: var(--ua-blue); font-weight: 700; }
+        .ua-grid-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .ua-card-item { background: var(--white); padding: 14px; border-radius: 6px; border-top: 3px solid var(--ua-blue); }
+        .ua-card-item h5 { font-size: 0.9rem; color: var(--latam-main); font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .ua-card-item h5 .material-icons { font-size: 1.1rem; color: var(--ua-blue); }
+        .ua-card-item p { font-size: 0.85rem; color: #555; line-height: 1.4; margin: 0; }
+        .ua-btn-link { display: inline-flex; align-items: center; gap: 6px; background-color: var(--ua-blue); color: var(--white); padding: 8px 16px; font-size: 0.85rem; border-radius: 4px; text-decoration: none; font-weight: 700; margin-top: 15px; }
+        .ua-btn-link:hover { background-color: var(--latam-main); }
+
+        .latam-footer { margin-top: 45px; text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; background-color: #fafbfc; }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 120px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .latam-step-trigger { padding: 16px; font-size: 1.05rem; }
+            .contact-channel-box { grid-template-columns: 1fr; }
+            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .ua-grid-info { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- CABECERA -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">medical_services</span>
+                    <div>
+                        <h1>Registro médico</h1>
+                        <p>Notificación de Descanso / Incapacidad Médica</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>En caso detectes síntomas de alguna incapacidad en tu salud que te impida realizar tus labores programadas (inclusive en condición de reserva), sigue estrictamente los pasos del flujo regulatorio de la compañía.</p>
+        </div>
+
+        <!-- LINEA DE TIEMPO CONECTADA -->
+        <div class="latam-timeline">
+
+            <!-- PASO 1: REPORTAR INMEDIATAMENTE -->
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">phone_forwarded</span>
+                        Paso 1: Reportar de inmediato a Movilización Diaria
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Si el tiempo hasta el inicio de la actividad o el STD de tu vuelo es <strong>mayor o igual a 05 horas</strong>, debes comunicarte prioritariamente para dar aviso formal a la operación:</p>
+                        
+                        <div class="contact-channel-box">
+                            <div class="channel-card">
+                                <span class="material-icons">phone</span>
+                                <div>
+                                    <h4>Central Telefónica MD</h4>
+                                    <p>Llamar al <strong>01-411-8347 (Opción 2)</strong></p>
+                                </div>
+                            </div>
+                            <div class="channel-card">
+                                <span class="material-icons">mail_outline</span>
+                                <div>
+                                    <h4>Vía Correo Electrónico</h4>
+                                    <p><strong>movimiento.trip@lan.com</strong> (Esperar acuse)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2: FORMULARIO INTEGRADO (REPLICA FIEL FORM DE IMAGENES 2 Y 3) -->
+            <div class="latam-step">
+                <div class="latam-step-num">2</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">description</span>
+                        Paso 2: Completar Formulario de Descanso Médico
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Completa las casillas mandatorias adjuntando el documento sustentatorio de los días asignados de descanso médico:</p>
+                        
+                        <div class="lp-form-box">
+                            <div class="form-group">
+                                <label>Correo electrónico <span>*</span></label>
+                                <input type="email" class="form-control" value="mario.fernandez@latam.com">
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>BP <span>*</span></label>
+                                    <input type="text" class="form-control" value="6014982">
+                                </div>
+                                <div class="form-group">
+                                    <label>Filial <span>*</span></label>
+                                    <select class="form-control"><option>PE (LATAM Perú)</option><option>CL</option><option>AR</option></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Rank <span>*</span></label>
+                                <select class="form-control"><option>JSB (Jefe de Servicio a Bordo)</option><option>TC (Tripulante de Cabina)</option></select>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Fecha de inicio DM <span>*</span></label>
+                                    <div class="warning-label-desc">La fecha de inicio no puede ser anterior al día de hoy. Por favor corroborar que sea correcta.</div>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de Término DM <span>*</span></label>
+                                    <div class="warning-label-desc">Por favor tener cuidado y corroborar que las fechas ingresadas sean las correctas.</div>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Sube el documento de Descanso Médico (Ambas Caras) <span>*</span></label>
+                                <div class="file-upload-mock" onclick="alert('Explorador de archivos abierto.');">
+                                    <span class="material-icons">cloud_upload</span>
+                                    <p>Sube archivo compatible: PDF o imagen (Máx 10 MB)</p>
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <button type="button" class="latam-btn" style="background-color:var(--latam-main); color:var(--white); padding:10px 24px; border:none; border-radius:6px; font-weight:700; cursor:pointer;" onclick="alert('Notificación enviada a soporte operacional.');">Enviar Notificación</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3: POLÍTICAS DE EMPRESA -->
+            <div class="latam-step">
+                <div class="latam-step-num">3</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">gavel</span>
+                        Paso 3: Cumplir con la Política de Descansos Médicos LATAM
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Es responsabilidad del colaborador conocer y cumplir a cabalidad las directrices normativas de regularización de licencias médicas. Revisa la documentación oficial siguiendo esta ruta jerárquica en intranet:</p>
+                        <div class="route-path-container">
+                            Portal <span class="arrow-sep">➔</span> RH Connect <span class="arrow-sep">➔</span> Home <span class="arrow-sep">➔</span> Yo en LATAM <span class="arrow-sep">➔</span> Reglamentos y Políticas LATAM Perú <span class="arrow-sep">➔</span> Política Descansos Médicos
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 4: SEGURO INTEGRADO DE ASISTENCIA EN VIAJES (REF: COMUNICADO ADJUNTO PDF) -->
+            <div class="latam-step">
+                <div class="latam-step-num">4</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">flight_land</span>
+                        Paso 4: Seguro de Asistencia Médica en Viajes (Vuelos Internacionales)
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Si la emergencia de salud, malestar o accidente ocurre mientras te encuentras cumpliendo funciones asignadas por rol en el <strong>extranjero o fuera de tu país base</strong>, cuentas con la cobertura activa del seguro médico de la compañía[cite: 4]:</p>
+                        
+                        <div class="ua-container-box">
+                            <div class="ua-header">
+                                <span class="material-icons" style="color:var(--ua-blue); font-size:24px;">security</span>
+                                <h4>Nuevo Proveedor Oficial: Universal Assistance[cite: 4]</h4>
+                            </div>
+                            
+                            <div class="ua-grid-info">
+                                <div class="ua-card-item">
+                                    <h5><span class="material-icons">phone_android</span>Activación por APP[cite: 4]</h5>
+                                    <p>Utiliza de forma prioritaria la APP oficial de Universal Assistance desde tu <strong>One Device</strong> para la activación inmediata del servicio[cite: 4].</p>
+                                </div>
+                                <div class="ua-card-item">
+                                    <h5><span class="material-icons">wifi</span>Llamadas Gratis por Wifi[cite: 4]</h5>
+                                    <p>Realiza llamadas por Wifi sin costo directo a través de la misma plataforma digital o de su sitio web oficial[cite: 4].</p>
+                                </div>
+                                <div class="ua-card-item">
+                                    <h5><span class="material-icons">call</span>Línea Internacional[cite: 4]</h5>
+                                    <p>Teléfono único con cobro revertido: <strong>+54 11 2206 0706</strong> (si registras cobros, podrás solicitar reembolso posterior)[cite: 4].</p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 15px; font-size: 0.88rem; color:#444;">
+                                <strong>Flujo de Atención Extranjero:</strong> Contacta al seguro indicando tu nombre, BP, síntomas y ciudad de ubicación[cite: 4]. La asistencia evaluará si se asiste por Telemedicina, atención médica en el lugar o derivación clínica, finalizando al decretarse tu alta médica[cite: 4]. Puedes autogestionar tus certificados de cobertura en la sección Coberturas del sitio web[cite: 4].
+                            </div>
+
+                            <a href="https://www.universal-assistance.com" target="_blank" class="ua-btn-link">
+                                <span class="material-icons">launch</span> Ir al Sitio de Universal Assistance[cite: 4]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Gerencia de Soporte Operacional & Roles SAB • Cuidamos que tus sueños lleguen a su destino[cite: 4]</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM[cite: 4]</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE DESPLIEGUE -->
+    <script>
+        document.querySelectorAll('.latam-step-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                const stepElement = button.parentElement;
+                const bodyElement = button.nextElementSibling;
+                stepElement.classList.toggle('active');
+                if (stepElement.classList.contains('active')) {
+                    bodyElement.style.maxHeight = bodyElement.scrollHeight + "px";
+                } else {
+                    bodyElement.style.maxHeight = null;
+                }
+            });
+        });
+
+        // Cargar el paso interactivo número 1 abierto por defecto
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialStep = document.querySelector('.latam-step');
+            if(initialStep) {
+                initialStep.classList.add('active');
+                const body = initialStep.querySelector('.latam-step-body');
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        });
+    </script>
+</body>
+</html>

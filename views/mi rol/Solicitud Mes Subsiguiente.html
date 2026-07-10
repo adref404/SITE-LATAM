@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Solicitudes Rol para Mes Subsiguiente Completo</title>
+    <!-- Iconos de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --alert-purple-light: #f6f4fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO (REPLICA EXACTA DE LA IMAGEN) */
+        .header-banner {
+            position: relative;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.4) 0%, rgba(27,0,74,0.1) 100%), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: #9b59b6; /* Morado exacto del botón Solicitudes Rol */
+            color: var(--white);
+            padding: 14px 28px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* DESCRIPCIÓN Y CUADRO DE PLAZO MÁXIMO IMPRORROGABLE */
+        .description-area { padding: 30px 40px 10px 40px; }
+        .description-area p { font-size: 1rem; line-height: 1.6; color: #444; }
+
+        .deadline-rule-card {
+            background-color: var(--alert-purple-light);
+            border-left: 4px solid var(--latam-main);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rule-title {
+            color: var(--latam-main);
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .empalme-alert {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 6px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: #5d4037;
+            margin-top: 12px;
+        }
+
+        .empalme-alert .material-icons { color: #f57f17; font-size: 1.4rem; flex-shrink: 0; }
+
+        /* LÍNEA DE TIEMPO CONECTORA */
+        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline::before {
+            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
+            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+        }
+
+        .latam-step { position: relative; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step-num {
+            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-title { padding: 20px 25px; font-size: 1.15rem; font-weight: 700; color: var(--latam-main); border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; }
+        .step-body { padding: 25px; }
+
+        /* GRUPO DE FORMULARIOS */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.95rem; color: var(--latam-main); margin-bottom: 8px; }
+        .form-group label span { color: var(--latam-coral); font-weight: bold; }
+        .form-control { width: 100%; padding: 12px 16px; font-size: 0.95rem; border: 1px solid var(--latam-border); border-radius: 8px; color: var(--latam-text); background-color: #fcfcfd; }
+        .form-control:focus { outline: none; border-color: var(--latam-main); box-shadow: 0 0 0 3px rgba(27, 0, 74, 0.08); }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* GRILLA TÁCTIL DE CATEGORÍAS */
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .grid-option-card { border: 1px solid var(--latam-border); border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; background-color: #fcfcfd; transition: all 0.2s; }
+        .grid-option-card:hover { border-color: var(--latam-main); background-color: rgba(27, 0, 74, 0.02); }
+        .grid-option-card.active { border-color: var(--latam-coral); background-color: #fff1f8; box-shadow: 0 4px 12px rgba(232, 17, 127, 0.05); }
+        
+        .dot-radio { width: 16px; height: 16px; border: 2px solid var(--latam-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .grid-option-card.active .dot-radio { border-color: var(--latam-main); background: var(--white); }
+        .grid-option-card.active .dot-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--latam-coral); }
+        .option-text { font-size: 0.9rem; font-weight: 600; color: #444; }
+        .grid-option-card.active .option-text { color: var(--latam-main); }
+
+        /* ==========================================================================
+           BLOQUES CONDICIONALES ACORDEÓN DESPLEGABLES (PASO 3)
+           ========================================================================== */
+        .conditional-accordion-wrapper { display: none; margin-top: 15px; border-top: 3px solid var(--latam-main); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); overflow: hidden; }
+        .conditional-accordion-wrapper.open { display: block; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .accordion-banner-header { background-color: var(--latam-main); color: var(--white); padding: 14px 22px; font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+        .accordion-form-inner { padding: 22px; background-color: var(--white); }
+
+        .op-alert-box {
+            background-color: #fff1f8; border-left: 4px solid var(--latam-coral);
+            padding: 14px 18px; border-radius: 4px; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-start;
+        }
+        .op-alert-box .material-icons { color: var(--latam-coral); font-size: 1.3rem; }
+        .op-alert-box p { font-size: 0.9rem; line-height: 1.4; color: #555; margin: 0; }
+
+        /* RECUADRO RECHAZADO AL INSTANTE */
+        .rejection-disclaimer-box {
+            background-color: #fce8e6; border: 1px solid #f5c2c2; border-radius: 8px; padding: 18px; margin-top: 15px; display: flex; align-items: flex-start; gap: 12px;
+        }
+        .rejection-disclaimer-box .material-icons { color: #d93025; font-size: 1.6rem; }
+        .rejection-disclaimer-box p { font-size: 0.92rem; color: #a51d24; font-weight: 600; margin: 0; line-height: 1.5; }
+
+        .action-bar { display: flex; justify-content: flex-end; padding: 20px 40px 40px 0; }
+        .btn-submit { background-color: var(--latam-main); color: var(--white); border: none; padding: 12px 35px; font-size: 0.95rem; font-weight: 700; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-submit:hover { background-color: var(--latam-coral); }
+
+        .latam-footer { text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 140px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .action-bar { padding: 20px; }
+            .btn-submit { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO MASTER (NOTICIAS ROL) -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">mail</span>
+                    <div>
+                        <h1>Solicitudes rol</h1>
+                        <p>para mes subsiguiente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECUADRO INFORMATIVO FIEL A LA CAPTURA -->
+        <div class="description-area">
+            <p>Este portal te permite postular de forma anticipada tus requerimientos, restricciones y preferencias operacionales para la conformación del rol de vuelos.</p>
+            
+            <div class="deadline-rule-card">
+                <div class="rule-title">
+                    <span class="material-icons">gavel</span>
+                    <span>Plazo Máximo Improrrogable:</span>
+                </div>
+                <p style="font-size:1rem; color:#444; line-height:1.5;">
+                    Las solicitudes deben ingresarse con **un mínimo de 2 meses de anticipación**. Por ejemplo, si requieres una solicitud para el rol de **julio**, la fecha límite máxima de ingreso en el sistema es el **31 de mayo**.
+                </p>
+                
+                <div class="empalme-alert">
+                    <span class="material-icons">warning</span>
+                    <span>Por favor, tomar en cuenta el empalme en las solicitudes para evitar impacto en las actividades ya programadas por rol.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLUJO SECUENCIAL INTERACTIVO CONECTADO -->
+        <div class="latam-timeline">
+            
+            <!-- PASO 1: AUTENTICACIÓN Y VALIDACIÓN DE PERIODO -->
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <div class="step-title"><span class="material-icons">account_box</span> Identificación del Tripulante</div>
+                <div class="step-body">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label>Ingresa tu BP *</label>
+                            <input type="text" class="form-control" value="6014982">
+                        </div>
+                        <div class="form-group">
+                            <label>Apellidos y Nombres *</label>
+                            <input type="text" class="form-control" value="Mario Fernandez">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Selecciona el Mes del Rol a Postular *</label>
+                        <select class="form-control" id="target-month-select" onchange="evaluateDeadline()">
+                            <option value="" disabled selected>Elegir mes objetivo...</option>
+                            <option value="valido">Agosto 2026 (Dentro de plazo reglamentario)</option>
+                            <option value="valido">Septiembre 2026 (Dentro de plazo reglamentario)</option>
+                            <option value="bloqueado">Julio 2026 (FUERA DE PLAZO - Solicitud Rechazada)</option>
+                        </select>
+                    </div>
+
+                    <!-- RECUADRO DE RECHAZO EN VIVO -->
+                    <div id="live-rejection-card" class="rejection-disclaimer-box" style="display:none;">
+                        <span class="material-icons">cancel</span>
+                        <div>
+                            <p>¡SOLICITUD RECHAZADA AL INSTANTE!</p>
+                            <p style="font-size:0.85rem; font-weight:normal; color:#555; margin-top:3px;">
+                                En caso no cumpla con lo anterior, será una solicitud rechazada de forma inmediata por el sistema de asignación de roles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2: GRILLA INTEGRAL DE TODAS LAS OPCIONES REALES -->
+            <div class="latam-step" id="step-categories-container" style="opacity:0.5; pointer-events:none;">
+                <div class="latam-step-num">2</div>
+                <div class="step-title"><span class="material-icons">touch_app</span> Selecciona la novedad o excepción que deseas reportar</div>
+                <div class="step-body">
+                    <div class="options-grid">
+                        <div class="grid-option-card" data-target="flow-afectacion" onclick="triggerSubForm(this)">
+                            <div class="dot-radio"></div><span class="option-text">Libre compensado por afectación (> 06:00 hrs)</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-adicionales" onclick="triggerSubForm(this)">
+                            <div class="dot-radio"></div><span class="option-text">Libre compensado por vuelos adicionales</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-jefatura" onclick="triggerSubForm(this)">
+                            <div class="dot-radio"></div><span class="option-text">Libre aprobado por jefatura directa</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-docs-tecnicos" onclick="triggerSubForm(this)">
+                            <div class="dot-radio"></div><span class="option-text">Trámites de Documentación Técnica (Visa/Pasaporte)</span>
+                        </div>
+                        <div class="grid-option-card" data-target="flow-permisos-master" onclick="triggerSubForm(this)" style="border-left: 3px solid var(--latam-coral)">
+                            <div class="dot-radio"></div><span class="option-text" style="color:var(--latam-main); font-weight:700;">Solicitud de Permisos Especiales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               PASO 3: FORMULARIOS INTERACTIVOS DESPLEGABLES CONSOLIDADOS
+               ========================================================================== -->
+            
+            <!-- A. LIBRE POR AFECTACIÓN -->
+            <div id="flow-afectacion" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">alarm_off</span> Libre compensado por afectación de día libre > 06:00 hrs</div>
+                <div class="accordion-form-inner">
+                    <div class="form-grid-2">
+                        <div class="form-group"><label>Fecha de afectación de libre *</label><input type="date" class="form-control"></div>
+                        <div class="form-group"><label>Número de vuelo *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label>Ruta *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                        <div class="form-group"><label>Hora de llegada de vuelo *</label><input type="time" class="form-control"></div>
+                    </div>
+                    <div class="form-group"><label>Comentario adicional *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                </div>
+            </div>
+
+            <!-- B. LIBRE POR VUELOS ADICIONALES -->
+            <div id="flow-adicionales" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">more_time</span> Libre compensado por asignación de vuelos adicionales</div>
+                <div class="accordion-form-inner">
+                    <div class="form-grid-2">
+                        <div class="form-group"><label>Fecha de afectación de vuelos adicionales *</label><input type="date" class="form-control"></div>
+                        <div class="form-group"><label>Número de vuelo *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label>Ruta *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                        <div class="form-group"><label>Fecha que deseo mi libre (mes subsiguiente) *</label><input type="date" class="form-control"></div>
+                    </div>
+                    <div class="form-group"><label>Comentario adicional *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                </div>
+            </div>
+
+            <!-- C. LIBRE POR JEFATURA -->
+            <div id="flow-jefatura" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">thumb_up</span> Libre aprobado por jefatura directa</div>
+                <div class="accordion-form-inner">
+                    <div class="form-group"><label>Fecha de libre *</label><input type="date" class="form-control"></div>
+                    <div class="form-group"><label>Motivo de la otorgación del libre *</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                </div>
+            </div>
+
+            <!-- D. CONSOLIDADO TRÁMITES TÉCNICOS -->
+            <div id="flow-docs-tecnicos" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">assignment_ind</span> Trámites de Documentación Técnica</div>
+                <div class="accordion-form-inner">
+                    <div class="op-alert-box">
+                        <span class="material-icons">error_outline</span>
+                        <p><strong>Recordatorio de Restricción Operativa:</strong> No se aceptan citas en fechas de empalme (del 01 al 05 de cada mes). Se realizará la debida protección de Rol en el mes que coloque su fecha de cita desde el día 06.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Selecciona el documento técnico a tramitar *</label>
+                        <select class="form-control">
+                            <option>Gestión Visa Crew y/o Turista</option>
+                            <option>Gestión pasaporte</option>
+                        </select>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label>Fecha Cita / Fecha de entrega por renovación *</label><input type="date" class="form-control"></div>
+                        <div class="form-group"><label>Hora Cita / Hora entrega por renovación *</label><input type="time" class="form-control"></div>
+                    </div>
+                    <div class="form-group"><label>Comentario adicional</label><input type="text" class="form-control" placeholder="Tu respuesta"></div>
+                </div>
+            </div>
+
+            <!-- E. CONSOLIDADO MAESTRO DE PERMISOS -->
+            <div id="flow-permisos-master" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header" style="background-color: var(--latam-coral);"><span class="material-icons">badge</span> Formulario Unificado: Permisos Especiales</div>
+                <div class="accordion-form-inner">
+                    <div class="form-group">
+                        <label>Selecciona el tipo de permiso legal que requieres solicitar *</label>
+                        <select class="form-control" id="permiso-type-selector" onchange="adjustPermisoRules()">
+                            <option value="matrimonio">Permiso por matrimonio</option>
+                            <option value="mudanza">Permiso por mudanza</option>
+                            <option value="paternidad">Permiso por paternidad</option>
+                            <option value="boda">Permiso por boda de familiar directo</option>
+                        </select>
+                    </div>
+
+                    <div class="op-alert-box" id="p-alert-card" style="background-color: #fcf8e3; border-left-color: #f0ad4e;">
+                        <span class="material-icons" style="color: #f0ad4e;">info</span>
+                        <p id="p-alert-text">Recuerda que la fecha de matrimonio debe estar incluida dentro de los 5 días solicitados.</p>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group" id="permiso-start-grp"><label id="permiso-start-label">Fecha de inicio *</label><input type="date" class="form-control"></div>
+                        <div class="form-group" id="permiso-end-grp"><label>Fecha de fin *</label><input type="date" class="form-control"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ACCIONES FINALES -->
+        <div class="action-bar">
+            <button id="master-submit-btn" class="btn-submit" style="opacity:0.5; cursor:not-allowed;" disabled>
+                <span>Enviar Requerimiento a Roles</span>
+                <span class="material-icons">send</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- CONTROL INTERACTIVO CONDICIONAL -->
+    <script>
+        function evaluateDeadline() {
+            const status = document.getElementById('target-month-select').value;
+            const rejectionCard = document.getElementById('live-rejection-card');
+            const stepCategories = document.getElementById('step-categories-container');
+            const submitBtn = document.getElementById('master-submit-btn');
+
+            if (status === 'bloqueado') {
+                rejectionCard.style.display = 'flex';
+                stepCategories.style.opacity = '0.5';
+                stepCategories.style.pointerEvents = 'none';
+                submitBtn.style.opacity = '0.5';
+                submitBtn.disabled = true;
+                submitBtn.style.cursor = 'not-allowed';
+                document.querySelectorAll('.conditional-accordion-wrapper').forEach(acc => acc.classList.remove('open'));
+            } else {
+                rejectionCard.style.display = 'none';
+                stepCategories.style.opacity = '1';
+                stepCategories.style.pointerEvents = 'auto';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+                submitBtn.style.cursor = 'pointer';
+            }
+        }
+
+        function triggerSubForm(cardElement) {
+            document.querySelectorAll('.grid-option-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.conditional-accordion-wrapper').forEach(acc => acc.classList.remove('open'));
+
+            cardElement.classList.add('active');
+            const targetId = cardElement.getAttribute('data-target');
+            const targetAccordion = document.getElementById(targetId);
+            
+            if (targetAccordion) {
+                targetAccordion.classList.add('open');
+                targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function adjustPermisoRules() {
+            const val = document.getElementById('permiso-type-selector').value;
+            const txt = document.getElementById('p-alert-text');
+            const endGrp = document.getElementById('permiso-end-grp');
+            const startLbl = document.getElementById('permiso-start-label');
+
+            endGrp.style.display = 'block';
+            startLbl.innerText = "Fecha de inicio *";
+
+            if (val === 'matrimonio') {
+                txt.innerText = "Recuerda que la fecha de matrimonio debe estar incluida dentro de los 5 días solicitados.";
+            } else if (val === 'mudanza') {
+                txt.innerText = "Sujeto a la presentación posterior de la constancia/contrato de mudanza de manera conforme.";
+                endGrp.style.display = 'none';
+                startLbl.innerText = "Fecha *";
+            } else if (val === 'paternidad') {
+                txt.innerText = "Recuerda que la fecha de paternidad debe estar incluida dentro de los 10 días solicitados de descanso por ley.";
+            } else if (val === 'boda') {
+                txt.innerText = "Un día libre por cada familiar directo (padre, madre, hermanos e hijos).";
+                endGrp.style.display = 'none';
+                startLbl.innerText = "Fecha *";
+            }
+            
+            const masterAccordion = document.getElementById('flow-permisos-master');
+            masterAccordion.style.maxHeight = masterAccordion.scrollHeight + "px";
+        }
+    </script>
+</body>
+</html>

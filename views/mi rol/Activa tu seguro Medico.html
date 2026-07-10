@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Activación Seguro Médico de Viaje</title>
+    <!-- Iconos oficiales de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --ua-blue: #004baf;         /* Azul Universal Assistance */
+            --alert-yellow: #fffde7;    /* Fondo de advertencias importantes */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* ENCABEZADO DE SECCIÓN COHERENTE CON EL HUB */
+        .pdf-header-hero {
+            background: linear-gradient(135deg, #1b004a 0%, #004baf 100%);
+            padding: 45px;
+            color: var(--white);
+            border-bottom: 4px solid var(--latam-coral);
+        }
+
+        .pdf-header-hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .pdf-header-hero h1 span {
+            color: var(--latam-coral);
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        /* CONTENEDOR DE LA LÍNEA DE TIEMPO VISUAL */
+        .visual-flow-section {
+            padding: 40px;
+        }
+
+        .visual-flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            position: relative;
+        }
+
+        /* Línea conectora naranja */
+        .visual-flow-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 4px;
+            height: calc(100% - 40px);
+            background: var(--step-orange);
+            z-index: 1;
+        }
+
+        .flow-step-block {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-badge-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--latam-main);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(27,0,74,0.15);
+            border: 3px solid var(--white);
+        }
+
+        .step-body-content h3 {
+            font-size: 1.2rem;
+            color: var(--latam-main);
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .step-body-content p {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        /* TARJETA DE RECOMENDACIÓN / BOTÓN DIRECTO */
+        .app-download-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #f1f5fd;
+            border: 1px solid #c2dbf2;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-top: 12px;
+        }
+        
+        .app-download-box .material-icons { color: var(--ua-blue); }
+        .app-download-box span { font-weight: 600; color: var(--ua-blue); font-size: 0.9rem; }
+
+        /* BARRAS DE RUTA INTERNA */
+        .app-route-badge {
+            background-color: #f3f2f7;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--latam-main);
+            font-size: 0.88rem;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* ==========================================================================
+           COMPONENTE DE ADVERTENCIAS Y REEMBOLSOS CRÍTICOS (REF: PIE DE IMAGEN)
+           ========================================================================== */
+        .critical-alert-panel {
+            margin-top: 40px;
+            background-color: var(--alert-yellow);
+            border: 1px solid #fbc02d;
+            border-left: 5px solid #f57f17;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .alert-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e65100;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .alert-panel-body {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #4e342e;
+        }
+
+        .alert-panel-body ul {
+            margin-left: 20px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .latam-footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7c7c93;
+            border-top: 1px solid #e0e0ec;
+            padding: 25px 40px;
+            background-color: #fafbfc;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-header-hero { padding: 25px; }
+            .pdf-header-hero h1 { font-size: 1.6rem; }
+            .visual-flow-section { padding: 20px; }
+            .visual-flow-container::before { left: 15px; }
+            .flow-step-block { grid-template-columns: 32px 1fr; gap: 15px; }
+            .step-badge-circle { width: 32px; height: 32px; font-size: 0.95rem; }
+            .critical-alert-panel { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO PRINCIPAL -->
+        <div class="pdf-header-hero">
+            <h1>Pasos para activar tu seguro médico <span>de viaje (Asistencia Internacional)</span></h1>
+            <p>Guía de contingencia y autogestión de salud para Tripulaciones de Mando y Cabina en funciones fuera de su país base.</p>
+        </div>
+
+        <!-- SECCIÓN DEL FLUJO DIRECTO -->
+        <div class="visual-flow-section">
+            <div class="visual-flow-container">
+                
+                <!-- Paso 1 -->
+                <div class="flow-step-block">
+                    <div class="step-badge-circle">1</div>
+                    <div class="step-body-content">
+                        <h3>Descarga la Aplicación</h3>
+                        <p>Descarga desde Play Store o App Store la aplicación oficial <strong>"Universal Assistance"</strong>[cite: 3]. Es recomendable tenerla instalada preventivamente en tu celular corporativo (One Device)[cite: 3].</p>
+                        <div class="app-download-box">
+                            <span class="material-icons">phone_android</span>
+                            <span>Disponible en Google Play & Apple App Store[cite: 3]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="flow-step-block">
+                    <div class="step-badge-circle">2</div>
+                    <div class="step-body-content">
+                        <h3>Conecta con la Asistencia Médica</h3>
+                        <p>Ingresa a la app de Universal Assistance, dirígete al menú principal y selecciona el icono <strong>'Líneas de asistencia'</strong>. Presiona el botón <strong>'WIFI CALL'</strong> para conectarte de forma gratuita con un operador de la aseguradora. Asegúrate de estar conectado a una red WiFi estable o disponer de datos móviles de internet.</p>
+                        <div class="app-route-badge">Menú ➔ Líneas de asistencia ➔ WIFI CALL</div>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flow-step-block">
+                    <div class="step-badge-circle">3</div>
+                    <div class="step-body-content">
+                        <h3>Brinda Información Importante</h3>
+                        <p>Una vez que atiendan tu llamada, identifícate formalmente como <strong>Tripulante de LATAM</strong>[cite: 3] y proporciona los siguientes datos obligatorios:</p>
+                        <p style="margin-top: 6px; font-weight: 600; padding-left: 15px; border-left: 2px solid var(--latam-coral);">
+                            • Nombre completo y número de BP[cite: 3]<br>
+                            • País y ciudad exacta donde te encuentras ubicado[cite: 3]<br>
+                            • Síntomas detallados del malestar o accidente[cite: 3]
+                        </p>
+                        <p style="margin-top: 10px;">Espera que el operador evalúe tu caso[cite: 3]. Él te indicará si recibirás atención por <strong>telemedicina</strong>, asistencia asistida en tu ubicación actual o si serás derivado a un centro de salud[cite: 3]. <strong>Anota siempre el número de asistencia proporcionado</strong>[cite: 3].</p>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="flow-step-block">
+                    <div class="step-badge-circle">4</div>
+                    <div class="step-body-content">
+                        <h3>Centro Médico</h3>
+                        <p>Al acudir al centro asignado, informa que cuentas con cobertura internacional vigente con <strong>Universal Assistance</strong>[cite: 3] y muestra tu documento de identidad. Sigue las indicaciones del personal para recibir atención sin demoras. Todos los exámenes clínicos y medicamentos indicados estarán cubiertos hasta que recibas el **alta médica definitiva**[cite: 3].</p>
+                        <p style="margin-top: 8px; font-weight: 600; color: var(--latam-coral);">
+                            ⚠️ Recuerda: La asistencia médica finaliza formalmente cuando el profesional de la salud dictamina que estás apto para retomar tus funciones asignadas o si regresas de inmediato a tu país de origen[cite: 3].
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NOTA DE REEMBOLSOS Y LOGÍSTICA (REF: DETALLE PIE DE PÁGINA) -->
+            <div class="critical-alert-panel">
+                <div class="alert-panel-header">
+                    <span class="material-icons">info</span>
+                    <span>Información de Control Operativo:</span>
+                </div>
+                <div class="alert-panel-body">
+                    En ciertos casos excepcionales, la clínica médica puede requerir una confirmación directa de la aseguradora antes de proceder con exámenes clínicos complejos. Ante esta situación, comunícate de inmediato con el operador con tu número de asistencia para agilizar la cobertura.
+                    <ul>
+                        <li><strong>Gestión de Reembolsos:</strong> Los reembolsos autorizados por gastos de traslados logísticos o medicamentos adquiridos fuera de la clínica deben gestionarse de forma autónoma a través de la misma aplicación de Universal Assistance.</li>
+                        <li><strong>Consejo Práctico:</strong> Te recomendamos tomar fotografías nítidas a todos tus recibos físicos, recetas y comprobantes de pago para facilitar y asegurar el proceso de validación.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Gerencia de Soporte Operacional & Seguridad del Tripulante SAB • Cuidamos que tus sueños lleguen a su destino[cite: 3]</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Cultura JETS • Prevención y Salud • SOMOS LATAM</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

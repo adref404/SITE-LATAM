@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Registro de Equipos SUNAT</title>
+    <!-- Iconos de Google Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --white: #ffffff;
+            --alert-bg: #fff1f8;        /* Fondo sutil para advertencias */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO (INSPIRADO EN LA IMAGEN 1) */
+        .header-banner {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.6) 0%, rgba(27,0,74,0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: var(--latam-coral);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* AREA INFORMATIVA */
+        .info-area {
+            padding: 30px 40px 10px 40px;
+        }
+
+        .info-area h2 {
+            font-size: 1.3rem;
+            color: var(--latam-main);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .info-area p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* TARJETAS DE CONSIDERACIONES (UX MEJORADA) */
+        .considerations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .cons-card {
+            background: #fafafc;
+            border: 1px solid var(--latam-border);
+            border-top: 4px solid var(--latam-main);
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .cons-card.highlight {
+            border-top-color: var(--latam-coral);
+            background-color: var(--alert-bg);
+        }
+
+        .cons-card h4 {
+            font-size: 0.95rem;
+            color: var(--latam-main);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .cons-card p {
+            font-size: 0.88rem;
+            line-height: 1.4;
+            color: #555;
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           FORMULARIO MAQUETA INTERACTIVA (REF: IMAGEN 2 Y 3)
+           ========================================================================== */
+        .form-section {
+            padding: 0 40px 40px 40px;
+        }
+
+        .lp-form-box {
+            border: 1px solid var(--latam-border);
+            border-radius: 12px;
+            padding: 30px;
+            background-color: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .lp-form-title {
+            font-size: 1.2rem;
+            color: var(--latam-main);
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--latam-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--latam-main);
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: var(--latam-coral);
+            font-weight: bold;
+            margin-left: 2px;
+        }
+
+        .form-group .label-desc {
+            display: block;
+            font-size: 0.82rem;
+            color: #666;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            border: 1px solid var(--latam-border);
+            border-radius: 8px;
+            color: var(--latam-text);
+            background-color: #fcfcfd;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--latam-main);
+            box-shadow: 0 0 0 3px rgba(27, 0, 74, 0.08);
+            background-color: var(--white);
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Botonera de Enviar */
+        .form-submit-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 25px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .latam-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--latam-main);
+            color: var(--white);
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .latam-btn:hover {
+            background-color: var(--latam-coral);
+        }
+
+        .btn-clear {
+            background: none;
+            border: 1px solid var(--latam-border);
+            color: #666;
+            font-weight: 600;
+        }
+
+        .btn-clear:hover {
+            background: #f4f4f6;
+            color: #333;
+        }
+
+        /* FOOTER */
+        .latam-footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7c7c93;
+            border-top: 1px solid #e0e0ec;
+            padding: 25px 40px;
+            background-color: #fafbfc;
+        }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 130px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .header-badge h1 { font-size: 1.3rem; }
+            .info-area { padding: 20px; }
+            .considerations-grid { grid-template-columns: 1fr; }
+            .form-section { padding: 0 20px 30px 20px; }
+            .lp-form-box { padding: 20px 15px; }
+            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .form-submit-bar { flex-direction: column-reverse; gap: 10px; }
+            .latam-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO (REF: IMAGEN 1) -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">laptop_mac</span>
+                    <div>
+                        <h1>Registro de</h1>
+                        <p>Equipos SUNAT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN INFORMATIVA -->
+        <div class="info-area">
+            <h2>Procedimiento de inscripción para laptops y/o tablets</h2>
+            <p>Completa el formulario integrado abajo para registrar tus herramientas de trabajo tecnológicas corporativas y personales. Una vez enviado, deberás esperar el correo de Sala con la confirmación oficial.</p>
+            
+            <!-- CONSIDERACIONES EN TARJETAS (REF: IMAGEN 1 Y 2) -->
+            <div class="considerations-grid">
+                <div class="cons-card">
+                    <h4><span class="material-icons" style="color:var(--latam-coral)">person</span> Límite de Registro</h4>
+                    <p>Se puede registrar un solo artículo por persona de forma activa.</p>
+                </div>
+                <div class="cons-card">
+                    <h4><span class="material-icons" style="color:#137333">published_with_changes</span> Vigencia</h4>
+                    <p>No es necesario actualizar o volver a realizar este proceso si no se cambia el artículo.</p>
+                </div>
+                <div class="cons-card highlight">
+                    <h4><span class="material-icons" style="color:var(--latam-main)">history_toggle_off</span> Restricción por Cambio</h4>
+                    <p>En caso que cambie el artículo, debe esperar un año para volver a registrarlo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DEL FORMULARIO (REF: IMAGEN 2 Y 3) -->
+        <div class="form-section">
+            <div class="lp-form-box">
+                <div class="lp-form-title">
+                    <span class="material-icons">edit_note</span>
+                    <span>Formulario Digital de Inscripción</span>
+                </div>
+
+                <form onsubmit="event.preventDefault(); alert('Formulario enviado con éxito. Sala procesará tu solicitud y enviará la confirmación a tu correo corporativo.');">
+                    
+                    <!-- Correo electrónico -->
+                    <div class="form-group">
+                        <label for="txt-email">Correo electrónico <span>*</span></label>
+                        <input type="email" id="txt-email" class="form-control" value="mario.fernandez@latam.com" required>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <!-- BP -->
+                        <div class="form-group">
+                            <label for="txt-bp">BP <span>*</span></label>
+                            <input type="text" id="txt-bp" class="form-control" value="6014982" required>
+                        </div>
+
+                        <!-- Apellidos y Nombres -->
+                        <div class="form-group">
+                            <label for="txt-names">Apellidos y Nombres <span>*</span></label>
+                            <input type="text" id="txt-names" class="form-control" value="Mario Fernandez" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <!-- Fecha de Nacimiento -->
+                        <div class="form-group">
+                            <label for="txt-birth">Fecha de Nacimiento <span>*</span></label>
+                            <input type="date" id="txt-birth" class="form-control" value="1992-07-02" required>
+                        </div>
+
+                        <!-- Pasaporte -->
+                        <div class="form-group">
+                            <label for="txt-passport">Pasaporte <span>*</span></label>
+                            <input type="text" id="txt-passport" class="form-control" placeholder="Ingresa el número de pasaporte" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <!-- Tipo de Equipo -->
+                        <div class="form-group">
+                            <label for="sel-type">Tipo de Equipo <span>*</span></label>
+                            <select id="sel-type" class="form-control" required>
+                                <option value="" disabled>Elegir...</option>
+                                <option value="laptop" selected>Laptop</option>
+                                <option value="tablet">Tablet</option>
+                            </select>
+                        </div>
+
+                        <!-- Uso -->
+                        <div class="form-group">
+                            <label for="sel-use">Uso <span>*</span></label>
+                            <select id="sel-use" class="form-control" required>
+                                <option value="" disabled selected>Elegir...</option>
+                                <option value="corporativo">Corporativo</option>
+                                <option value="personal">Personal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Marca -->
+                    <div class="form-group">
+                        <label for="txt-brand">Marca <span>*</span></label>
+                        <input type="text" id="txt-brand" class="form-control" placeholder="Ej. Lenovo, Apple, HP" required>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <!-- Modelo -->
+                        <div class="form-group">
+                            <label for="txt-model">Modelo <span>*</span> <span class="label-desc">(Ingresar sin guiones)</span></label>
+                            <input type="text" id="txt-model" class="form-control" placeholder="Ej. ThinkPad T490" required>
+                        </div>
+
+                        <!-- Serie -->
+                        <div class="form-group">
+                            <label for="txt-series">Serie <span>*</span> <span class="label-desc">(Ingresar sin guiones)</span></label>
+                            <input type="text" id="txt-series" class="form-control" placeholder="Ej. PF1K2345" required>
+                        </div>
+                    </div>
+
+                    <!-- Botones finales -->
+                    <div class="form-submit-bar">
+                        <button type="reset" class="latam-btn btn-clear">Borrar formulario</button>
+                        <button type="submit" class="latam-btn">Enviar Registro</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Gerencia de Servicio a Bordo Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

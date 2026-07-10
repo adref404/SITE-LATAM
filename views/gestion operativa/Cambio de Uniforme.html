@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Uniformes de Emergencia</title>
+    <!-- Iconos oficiales de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --btn-gold: #bfa15f;         /* Dorado premium corporativo */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO CORPORATIVO (REF: IMAGEN 1) */
+        .header-banner {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.4) 0%, rgba(27,0,74,0.1) 100%), 
+                        url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: #7cb342; /* Verde uniforme de emergencia fiel a la captura */
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1rem; opacity: 0.9; }
+
+        .intro-text { padding: 30px 40px 10px 40px; font-size: 1.05rem; line-height: 1.5; color: #444; }
+
+        /* LINEA DE TIEMPO CONECTORA */
+        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline::before {
+            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
+            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+        }
+
+        .latam-step { position: relative; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step-num {
+            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-title { padding: 20px 25px; font-size: 1.15rem; font-weight: 700; color: var(--latam-main); border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; }
+        .step-body { padding: 25px; }
+
+        /* INTERFAZ DE OPCIONES TÁCTILES */
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .grid-option-card { border: 1px solid var(--latam-border); border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; background-color: #fcfcfd; transition: all 0.2s; text-decoration: none; }
+        .grid-option-card:hover { border-color: var(--latam-main); background-color: rgba(27, 0, 74, 0.02); }
+        .grid-option-card.active { border-color: var(--latam-coral); background-color: #fff1f8; box-shadow: 0 4px 12px rgba(232, 17, 127, 0.05); }
+        
+        .dot-radio { width: 16px; height: 16px; border: 2px solid var(--latam-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .grid-option-card.active .dot-radio { border-color: var(--latam-main); background: var(--white); }
+        .grid-option-card.active .dot-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--latam-coral); }
+        .option-text { font-size: 0.9rem; font-weight: 600; color: #444; }
+        .grid-option-card.active .option-text { color: var(--latam-main); }
+
+        /* RECUADROS CONDICIONALES ACORDEÓN DESPLEGABLES (PASO 3) */
+        .conditional-accordion-wrapper { display: none; margin-top: 15px; border-top: 3px solid var(--latam-main); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); overflow: hidden; }
+        .conditional-accordion-wrapper.open { display: block; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .accordion-banner-header { background-color: var(--latam-main); color: var(--white); padding: 14px 22px; font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+        .accordion-form-inner { padding: 22px; background-color: var(--white); }
+
+        /* FORMULARIOS RENDERIZADOS */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.95rem; color: var(--latam-main); margin-bottom: 8px; }
+        .form-group label span { color: var(--latam-coral); font-weight: bold; }
+        .form-control { width: 100%; padding: 12px 16px; font-size: 0.95rem; border: 1px solid var(--latam-border); border-radius: 8px; color: var(--latam-text); background-color: #fcfcfd; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .radio-list-box { display: flex; flex-direction: column; gap: 10px; padding: 12px; background: #fafbfc; border-radius: 8px; border: 1px solid #eee; }
+        .radio-row { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: #444; cursor: pointer; }
+        .radio-row input { width: 16px; height: 16px; cursor: pointer; }
+
+        .file-drop-mock { border: 2px dashed var(--latam-border); border-radius: 8px; padding: 20px; text-align: center; background: #fafbfc; cursor: pointer; color: #555; font-size: 0.9rem; }
+        .file-drop-mock .material-icons { font-size: 2rem; color: var(--latam-main); margin-bottom: 4px; }
+
+        .form-submit-bar { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+        .latam-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--latam-main); color: var(--white); padding: 11px 26px; font-size: 0.92rem; border-radius: 6px; text-decoration: none; font-weight: 700; border: none; cursor: pointer; }
+        .latam-btn:hover { background-color: var(--latam-coral); }
+
+        .latam-footer { text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; background-color: #fafbfc; }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 130px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .form-submit-bar { flex-direction: column; }
+            .latam-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO (REF: IMAGEN 1) -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">checkroom</span>
+                    <div>
+                        <h1>Uniformes de</h1>
+                        <p>emergencia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>Gestiona de manera prioritaria el abastecimiento, reemplazo de lanyards o reporte de prendas debido a contingencias operacionales o problemas de calidad en fábrica.</p>
+        </div>
+
+        <div class="latam-timeline">
+            
+            <!-- PASO 1: VERIFICACIÓN FIJA -->
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <div class="step-title"><span class="material-icons">person</span> Identificación del Colaborador</div>
+                <div class="step-body">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label>Correo electrónico Corporativo *</label>
+                            <input type="email" class="form-control" value="mario.fernandez@latam.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre y Apellidos *</label>
+                            <input type="text" class="form-control" value="Mario Fernandez" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2: GRILLA DE TRÁMITES (REF: IMAGEN 1) -->
+            <div class="latam-step">
+                <div class="latam-step-num">2</div>
+                <div class="step-title"><span class="material-icons">touch_app</span> Selecciona el canal o requerimiento de uniformes</div>
+                <div class="step-body">
+                    <div class="options-grid">
+                        <!-- Redirección directa Externa -->
+                        <a href="https://armlt.appslatam.com/#/home" target="_blank" class="grid-option-card" style="border-left: 3px solid var(--btn-gold);">
+                            <div class="dot-radio" style="background-color: var(--btn-gold)"></div>
+                            <span class="option-text" style="color:var(--latam-main)">Plataforma Armario Latam (Click aquí)</span>
+                        </a>
+                        <!-- Sub-formulario A -->
+                        <div class="grid-option-card" data-target="flow-lanyards" onclick="toggleUniformFlow(this)">
+                            <div class="dot-radio"></div><span class="option-text">Solicitud de lanyard por daño o pérdida</span>
+                        </div>
+                        <!-- Sub-formulario B -->
+                        <div class="grid-option-card" data-target="flow-calidad" onclick="toggleUniformFlow(this)">
+                            <div class="dot-radio"></div><span class="option-text">Formulario para cambio de uniforme por problemas de calidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               PASO 3: FORMULARIOS CONDICIONALES INTEGRADOS (REF: IMAGEN 2 Y 3)
+               ========================================================================== -->
+            
+            <!-- A. SOLICITUD DE LANYARDS REGIÓN ANDINA (REF: IMAGEN 2) -->
+            <div id="flow-lanyards" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header"><span class="material-icons">badge</span> Solicitud de Lanyards Región Andina</div>
+                <div class="accordion-form-inner">
+                    <form onsubmit="event.preventDefault(); alert('Solicitud de lanyard registrada con éxito.');">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>Ingresar BP <span>*</span></label>
+                                <input type="text" class="form-control" value="6014982" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre Completo <span>*</span></label>
+                                <input type="text" class="form-control" value="Mario Fernandez" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>Motivo <span>*</span></label>
+                                <div class="radio-list-box">
+                                    <label class="radio-row"><input type="radio" name="motivo-lanyard" required> <span>Rotura</span></label>
+                                    <label class="radio-row"><input type="radio" name="motivo-lanyard"> <span>Desgaste</span></label>
+                                    <label class="radio-row"><input type="radio" name="motivo-lanyard"> <span>Pérdida</span></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Base <span>*</span></label>
+                                <div class="radio-list-box">
+                                    <label class="radio-row"><input type="radio" name="base-lanyard" required> <span>LP</span></label>
+                                    <label class="radio-row"><input type="radio" name="base-lanyard"> <span>XL</span></label>
+                                    <label class="radio-row"><input type="radio" name="base-lanyard"> <span>4C</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-submit-bar">
+                            <button type="submit" class="latam-btn">Enviar Solicitud de Lanyard</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- B. FORMULARIO DE RECLAMOS DE CALIDAD DE PRENDAS LP (REF: IMAGEN 3) -->
+            <div id="flow-calidad" class="conditional-accordion-wrapper">
+                <div class="accordion-banner-header" style="background-color: var(--latam-coral);"><span class="material-icons">gavel</span> Formulario de Reclamos de Calidad de Prendas LP</div>
+                <div class="accordion-form-inner">
+                    <form onsubmit="event.preventDefault(); alert('Reclamo de calidad registrado en el área de Logística y Suministros.');">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>BP <span>*</span></label>
+                                <input type="text" class="form-control" value="6014982" required>
+                            </div>
+                            <div class="form-group">
+                                <label>NOMBRE <span>*</span></label>
+                                <input type="text" class="form-control" value="MARIO FERNANDEZ" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción de solicitud por calidad <span>*</span></label>
+                            <div class="radio-list-box">
+                                <label class="radio-row"><input type="radio" name="desc-calidad" required> <span>Error de talla (si es una talla más no aplica cambio)</span></label>
+                                <label class="radio-row"><input type="radio" name="desc-calidad"> <span>Mala calidad (escribir en detalles fecha estimada en que recibió prenda o artículo)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Detallar cuál fue el error en la talla o el problema por la mala calidad <span>*</span></label>
+                            <input type="text" class="form-control" placeholder="Escribe tu respuesta detallada aquí..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>SUBIR FOTO DE PRENDA O ARTÍCULO CON ETIQUETA <span style="font-size:0.85rem; font-weight:normal; color:#555;">(es necesario para identificar qué proveedor es)</span> <span>*</span></label>
+                            <div class="file-drop-mock" onclick="alert('Selector de cámara o galería del One Device activado.');">
+                                <span class="material-icons">photo_camera</span>
+                                <p><strong>Agregar archivo</strong> (Formatos válidos: JPG, PNG, PDF - Máx 10 MB)</p>
+                            </div>
+                        </div>
+
+                        <div class="form-submit-bar">
+                            <button type="submit" class="latam-btn" style="background-color: var(--latam-coral);">Enviar Reporte de Calidad</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Gerencia de Servicio a Bordo & Gestión de Logística LP • Cuidamos que tus sueños lleguen a su destino</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Calidad de Suministros • SOMOS LATAM</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT LOGICA CONDICIONAL DE FORMULARIOS -->
+    <script>
+        function toggleUniformFlow(element) {
+            // Limpiar selecciones previas de la grilla
+            document.querySelectorAll('.grid-option-card').forEach(card => card.classList.remove('active'));
+            // Ocultar sub-formularios abiertos
+            document.querySelectorAll('.conditional-accordion-wrapper').forEach(wrapper => wrapper.classList.remove('open'));
+
+            // Activar botón actual
+            element.classList.add('active');
+            
+            // Desplegar el formulario correspondiente
+            const targetId = element.getAttribute('data-target');
+            const targetAccordion = document.getElementById(targetId);
+            if(targetAccordion) {
+                targetAccordion.classList.add('open');
+                targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>

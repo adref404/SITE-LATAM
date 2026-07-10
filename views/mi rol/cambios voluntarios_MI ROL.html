@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Registro Previo Cambios Voluntarios</title>
+    <!-- Iconos oficiales de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --white: #ffffff;
+            --btn-gold: #bfa15f;         /* Color dorado de los botones de referencia visual */
+            --jira-blue: #0052cc;       /* Color corporativo Atlassian Jira */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER SUPERIOR CORPORATIVO */
+        .header-banner {
+            position: relative;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.6) 0%, rgba(27,0,74,0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: var(--btn-gold);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.4rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 0.95rem; opacity: 0.9; margin-top: 2px; }
+
+        .intro-text {
+            padding: 30px 40px 10px 40px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* ==========================================================================
+           FILTRO DE ENTRADA UX: PRE-SCREENING QUESTION
+           ========================================================================== */
+        .ux-filter-section {
+            padding: 10px 40px 25px 40px;
+        }
+
+        .filter-card-box {
+            background-color: #f7f6fb;
+            border: 1px solid var(--latam-border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .filter-card-box h3 {
+            font-size: 1.2rem;
+            color: var(--latam-main);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .filter-card-box p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid var(--latam-border);
+            background-color: var(--white);
+            color: var(--latam-main);
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.btn-no {
+            border-color: var(--latam-coral);
+            color: var(--latam-coral);
+        }
+
+        .filter-btn.btn-no:hover {
+            background-color: #fff1f8;
+        }
+
+        .filter-btn.btn-yes {
+            background-color: var(--latam-main);
+            color: var(--white);
+            border-color: var(--latam-main);
+        }
+
+        .filter-btn.btn-yes:hover {
+            background-color: var(--latam-coral);
+            border-color: var(--latam-coral);
+        }
+
+        /* ==========================================================================
+           BLOQUES DE CAMINOS DINÁMICOS (OCULTOS POR DEFECTO)
+           ========================================================================== */
+        .path-route-block {
+            display: none;
+            padding: 0 40px 40px 40px;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .path-route-block.open {
+            display: block;
+        }
+
+        /* DISEÑO DE CONTENEDORES INTERNOS */
+        .instruction-panel {
+            border: 1px solid var(--latam-border);
+            border-radius: 12px;
+            padding: 25px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .panel-header-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--latam-main);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f5;
+        }
+
+        .step-list-ux {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .step-list-ux li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .step-list-ux li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            background-color: rgba(37, 211, 102, 0.1);
+            color: #2e7d32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* BOTONES PREMIUM DE ACCIÓN DIRECTA */
+        .action-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .bg-coral-latam { background-color: var(--latam-coral); }
+        .bg-coral-latam:hover { background-color: var(--latam-main); }
+
+        .bg-jira-blue { background-color: var(--jira-blue); }
+        .bg-jira-blue:hover { background-color: var(--latam-main); }
+
+        .latam-footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7c7c93;
+            border-top: 1px solid #e0e0ec;
+            padding: 25px 40px;
+            background-color: #fafbfc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- CABECERA DE LA OPCIÓN -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">lock_open</span>
+                    <div>
+                        <h1>Registro previo</h1>
+                        <p>para formulario de cambios voluntarios</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>Para gestionar una permuta voluntaria de tramos en la mesa de ayuda institucional, es un **requisito indispensable** constar en la base de datos de Solicitudes Web. Evita rechazos automáticos de tu ticket validando tu acceso a continuación.</p>
+        </div>
+
+        <!-- ==========================================================================
+           FILTRO INTERACTIVO DE ACCESO (EVITA ERRORES DE TRIPULANTES)
+           ========================================================================== -->
+        <div class="ux-filter-section">
+            <div class="filter-card-box">
+                <h3>¿Es la primera vez que vas a solicitar un cambio de vuelo?</h3>
+                <p>Si nunca te has registrado en la plataforma de Solicitudes Web o cambiaste de One Device, necesitas habilitar tu cuenta primero.</p>
+                
+                <div class="filter-btn-group">
+                    <button class="filter-btn btn-no" onclick="showPath('path-registro-web')">No estoy registrado / Es mi primer cambio</button>
+                    <button class="filter-btn btn-yes" onclick="showPath('path-jira-directo')">Sí, ya tengo cuenta activa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+           CAMINO A: REQUIERE REGISTRO (SOLICITUDES WEB)
+           ========================================================================== -->
+        <div id="path-registro-web" class="path-route-block">
+            <div class="instruction-panel">
+                <div class="panel-header-title">
+                    <span class="material-icons" style="color: var(--latam-coral);">verified_user</span>
+                    <span>Paso Obligatorio: Habilitación en Base de Datos</span>
+                </div>
+                
+                <ul class="step-list-ux">
+                    <li>Ingresa al enlace del Portal de Solicitudes Web provisto abajo.</li>
+                    <li>Inicia sesión con tus credenciales corporativas de la compañía (LAN / LATAM).</li>
+                    <li>Una vez dentro, el sistema indexará tu número de BP de forma automática y te dejará apto para el uso de formularios de cambios voluntarios.</li>
+                </ul>
+
+                <a href="https://latamperu.appslatam.com/SOLICITUDESWEB/FrmDefault.aspx?ReturnUrl=%2fSOLICITUDESWEB%2f" target="_blank" class="action-link-btn bg-coral-latam">
+                    <span class="material-icons">vpn_key</span>
+                    <span>1. Registrarse en Solicitudes Web Aquí</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+           CAMINO B: YA REGISTRADO (INGRESO DIRECTO A JIRA SERVICE DESK)
+           ========================================================================== -->
+        <div id="path-jira-directo" class="path-route-block">
+            <div class="instruction-panel">
+                <div class="panel-header-title">
+                    <span class="material-icons" style="color: var(--jira-blue);">dashboard</span>
+                    <span>Acceso Directo: Crear Ticket de Cambio Voluntario</span>
+                </div>
+                
+                <ul class="step-list-ux">
+                    <li>Asegúrate de tener a la mano los datos exactos del vuelo original y del tramo por el que deseas permutar.</li>
+                    <li>Haz clic en el botón de abajo para ir directamente a la mesa de soporte de Project Management LATAM.</li>
+                    <li>Completa las casillas requeridas por el formulario de Jira Service Desk y realiza el seguimiento de tu aprobación.</li>
+                </ul>
+
+                <a href="https://projectmanagement.appslatam.com/servicedesk/customer/portal/7/create/268" target="_blank" class="action-link-btn bg-jira-blue">
+                    <span class="material-icons">launch</span>
+                    <span>2. Ingresar Solicitud en Jira Service Desk</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Mesa de Ayuda & Soporte Técnico Operacional SAB • Cuidamos que tus sueños lleguen a su destino</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE NAVEGACIÓN DINÁMICA UX -->
+    <script>
+        function showPath(blockId) {
+            // Ocultar los bloques de caminos abiertos previamente
+            document.querySelectorAll('.path-route-block').forEach(block => {
+                block.classList.remove('open');
+            });
+
+            // Abrir de forma animada el bloque correspondiente seleccionado
+            const selectedBlock = document.getElementById(blockId);
+            if (selectedBlock) {
+                selectedBlock.classList.add('open');
+                // Realizar un desplazamiento sutil para enfocar el contenido abierto
+                selectedBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Listado Grupos PBS</title>
+    <!-- Iconos oficiales de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --white: #ffffff;
+            --btn-gold: #bfa15f;         /* Color de acento corporativo */
+            --youtube-red: #ff0000;     /* Rojo oficial YouTube */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO CORPORATIVO */
+        .header-banner {
+            position: relative;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.6) 0%, rgba(27,0,74,0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: var(--latam-main);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1rem; opacity: 0.9; }
+
+        .intro-text { padding: 30px 40px 10px 40px; font-size: 1.05rem; line-height: 1.5; color: #444; }
+
+        /* ==========================================================================
+           COMPONENTE DE ACCIONES MAESTRAS (MANUAL PDF + TALLER VIDEO YOUTUBE)
+           ========================================================================== */
+        .pbs-actions-banner {
+            margin: 15px 40px 25px 40px;
+            background: #fafafc;
+            border: 1px solid var(--latam-border);
+            border-radius: 10px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .action-card-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-download-pdf { background-color: var(--btn-gold); }
+        .btn-download-pdf:hover { background-color: var(--latam-main); }
+        
+        .btn-watch-tutorial { background-color: var(--youtube-red); }
+        .btn-watch-tutorial:hover { background-color: #cc0000; }
+
+        /* ==========================================================================
+           BUSCADOR Y TABLA REACTIVA INTERACTIVA (FILTRADO EN VIVO)
+           ========================================================================== */
+        .search-table-section { padding: 0 40px 40px 40px; }
+        
+        .search-wrapper { position: relative; margin-bottom: 20px; }
+        .search-wrapper .material-icons { position: absolute; left: 16px; top: 13px; color: #778; font-size: 1.3rem; }
+        .search-input-field { width: 100%; padding: 12px 16px 12px 48px; font-size: 0.95rem; border: 1px solid var(--latam-border); border-radius: 30px; color: var(--latam-text); background-color: #fafbfc; transition: all 0.2s; }
+        .search-input-field:focus { outline: none; border-color: var(--latam-main); background-color: var(--white); box-shadow: 0 0 0 3px rgba(27,0,74,0.06); }
+
+        .table-scroll-panel { border: 1px solid var(--latam-border); border-radius: 10px; overflow: hidden; max-height: 400px; overflow-y: auto; }
+        
+        .pbs-data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+        .pbs-data-table th { background-color: var(--latam-main); color: var(--white); padding: 12px 18px; font-weight: 700; position: sticky; top: 0; z-index: 10; }
+        .pbs-data-table td { padding: 12px 18px; border-bottom: 1px solid var(--latam-gray-bg); color: #444; }
+        .pbs-data-table tr:nth-child(even) { background-color: #fafbfc; }
+        .pbs-data-table tr:hover { background-color: #f1f0f8; }
+
+        /* Badges de Categoría */
+        .cat-badge { padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+        .badge-tj { background-color: #e8f0fe; color: #1a73e8; }
+        .badge-tc { background-color: #e6f4ea; color: #137333; }
+
+        /* Badge de Grupo */
+        .group-indicator { font-weight: 700; color: var(--latam-coral); }
+
+        .counter-info-text { font-size: 0.85rem; color: #666; text-align: right; margin-top: 8px; font-weight: 600; }
+
+        .latam-footer { text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; background-color: #fafbfc; }
+
+        @media (max-width: 768px) {
+            .header-banner { height: 120px; padding-left: 20px; }
+            .header-badge { padding: 8px 16px; }
+            .pbs-actions-banner { grid-template-columns: 1fr; padding: 15px; margin: 15px 20px; }
+            .search-table-section { padding: 20px; }
+            .action-card-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- CABECERA DE SECCIÓN -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">sort_by_alpha</span>
+                    <div>
+                        <h1>Orden de Prelación</h1>
+                        <p>Grupos Oficiales PBS 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>A continuación, consulta tu posicionamiento reglamentario asignado para el sistema de subastas preferenciales de vuelos (Preferential Bidding System)[cite: 5]. Utiliza el buscador predictivo para localizar tu registro de forma ágil.</p>
+        </div>
+
+        <!-- ==========================================================================
+           BLOQUE DE ACCIONES UNIFICADAS (DESCARGA PDF + VIDEO TALLER REQUERIDO)
+           ========================================================================== -->
+        <div class="pbs-actions-banner">
+            <!-- Botón Descargar Documento -->
+            <a href="#" class="action-card-btn btn-download-pdf" onclick="alert('Iniciando descarga del archivo: Grupos_PBS_Perú_2026.pdf'); return false;">
+                <span class="material-icons">picture_as_pdf</span>
+                <span>Descargar Grupos PBS (PDF)</span>
+            </a>
+
+            <!-- Botón Ver Taller YouTube (Enlace Requerido) -->
+            <a href="https://www.youtube.com/watch?v=HM1aVpZgpEg" target="_blank" class="action-link-btn action-card-btn btn-watch-tutorial">
+                <span class="material-icons">play_circle_filled</span>
+                <span>Ver Video Taller PBS en YouTube</span>
+            </a>
+        </div>
+
+        <!-- ==========================================================================
+           BUSCADOR INTERACTIVO Y TABLA DE DATOS FILTRABLE
+           ========================================================================== -->
+        <div class="search-table-section">
+            
+            <div class="search-wrapper">
+                <span class="material-icons">search</span>
+                <input type="text" id="pbs-search-field" class="search-input-field" placeholder="Busca por tus apellidos, nombres o categoría..." onkeyup="filterPBSTable()">
+            </div>
+
+            <div class="table-scroll-panel">
+                <table class="pbs-data-table" id="pbs-master-table">
+                    <thead>
+                        <tr>
+                            <th>Apellidos y Nombres</th>
+                            <th>Categoría</th>
+                            <th>Grupo Asignado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Grupo 1 -->
+                        <tr><td>ILLICH IBAÑEZ PAOLA KARINA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>VERNE MANNARELLI ANA VANESSA MARIA MARTA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>RONCAGLIOLO LASTRES MARITZA ELSA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>CAMPOS DE MORAES LAΝΑ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>FORT MOSQUERA ANGELITA GRACIELA IRENE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>ANAYA BARRAZA MARJORIE KARINA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>NARANJO MENDIGUREN JESSICA DEL CARMEN</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <tr><td>CABRERA MOORE GLADYS CAROLINE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
+                        <!-- Grupo 2 -->
+                        <tr><td>ABRISQUETA MORENO YVETTE LILIAM</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <tr><td>TORRES ESCURRA SAMANTHA DRINA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <tr><td>YEP LAU ELIZABETH CHANG</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <tr><td>GARCIA CAHUAS NIMER NAGUIH</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <tr><td>RIVADENEYRA GUERRERO LUIS ALEJANDRO JUNIOR</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <tr><td>MOYANO PAJARES CLAUDIA MARGARITA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
+                        <!-- Grupo 3 -->
+                        <tr><td>RODRIGUEZ MURILLO BRUNO RENZO</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
+                        <tr><td>MELÉNDEZ TENICELA NATHALIE NICOLE</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
+                        <tr><td>GARIBOTTI MEDINA MARITZA ERNESTA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
+                        <tr><td>SEDAN YACILA KAROL FIORELLA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 3</td></tr>
+                        <tr><td>VALDIVIA VASQUEZ CARLA PAMELA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 3</td></tr>
+                        <!-- Grupo 4 -->
+                        <tr><td>ZAPATA GARAYAR JAVIER RICARDO SALVADOR</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 4</td></tr>
+                        <tr><td>REYNA ALVAREZ ELIZAΒΕΤΗ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 4</td></tr>
+                        <tr><td>MARIN CORA LUIS ANGEL</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 4</td></tr>
+                        <tr><td>AREVALO GALVEZ JONNATAN JESUS</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 4</td></tr>
+                        <!-- Grupo 5 -->
+                        <tr><td>BENZAQUEN SALAZAR GABY</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 5</td></tr>
+                        <tr><td>GUEVARA DE LA HAZA ROSSALIA ANGELLA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 5</td></tr>
+                        <tr><td>DELGADO ARTEAGA SANDRA STEFANY</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 5</td></tr>
+                        <tr><td>PRECIADO ALEMAN JENIFER JAQUELINE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 5</td></tr>
+                        <!-- Grupo 6 -->
+                        <tr><td>ALFARO DIAZ ARTEMIO</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 6</td></tr>
+                        <tr><td>RIVERA SAENZ KAREN BEATRIZ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 6</td></tr>
+                        <tr><td>MELGAR RECABARREN JOSE ADRIAN</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 6</td></tr>
+                        <tr><td>MARROQUIN ORTIZ JUAN FRANCISCO</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 6</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="counter-info-text" id="pbs-match-counter">Mostrando todos los tripulantes asignados</div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Jefatura de Planificación & Roles SAB Perú • Cuidamos que tus sueños lleguen a su destino</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Transparencia • Eficiencia • Sostenibilidad • SOMOS LATAM</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE FILTRADO DINÁMICO EN TIEMPO REAL -->
+    <script>
+        function filterPBSTable() {
+            const query = document.getElementById('pbs-search-field').value.toLowerCase();
+            const rows = document.querySelectorAll('#pbs-master-table tbody tr');
+            let count = 0;
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    row.style.display = '';
+                    count++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const counterText = document.getElementById('pbs-match-counter');
+            counterText.innerText = `Resultados encontrados: ${count} tripulantes.`;
+        }
+    </script>
+</body>
+</html>

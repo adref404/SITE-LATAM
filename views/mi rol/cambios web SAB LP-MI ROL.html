@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Consideraciones Cambios Web SAB LP</title>
+    <!-- Iconos oficiales de Google Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --white: #ffffff;
+            --success-green: #2e7d32;   /* Verde para protecciones */
+            --warning-amber: #f57f17;   /* Ámbar para alertas técnicas */
+            --danger-red: #c62828;      /* Rojo para restricciones */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* BANNER ENCABEZADO CORPORATIVO */
+        .header-banner {
+            position: relative;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(27,0,74,0.6) 0%, rgba(27,0,74,0.2) 100%), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+
+        .header-badge {
+            background-color: var(--latam-main);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transform: skewX(-10deg);
+        }
+
+        .header-badge-content {
+            transform: skewX(10deg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .header-badge p { font-size: 1rem; opacity: 0.9; }
+
+        .intro-text {
+            padding: 30px 40px 10px 40px;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        /* ==========================================================================
+           FILTROS EN PESTAÑAS (NAVEGACIÓN INTERACTIVA AMIGABLE)
+           ========================================================================== */
+        .tabs-nav-container {
+            display: flex;
+            gap: 10px;
+            padding: 0 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--latam-gray-bg);
+        }
+
+        .category-tab {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .category-tab:hover { color: var(--latam-main); }
+        .category-tab.active { color: var(--latam-coral); }
+        .category-tab.active::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background-color: var(--latam-coral);
+        }
+
+        /* CONTENEDORES DE CONTENIDO */
+        .rules-content-block { display: none; padding: 0 40px 40px 40px; }
+        .rules-content-block.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           TARJETAS DE REGLAS (UX LÚDICA CON BADGES DE SEMÁFORO)
+           ========================================================================== */
+        .rule-card {
+            border: 1px solid var(--latam-border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 14px;
+            background-color: var(--white);
+            display: grid;
+            grid-template-columns: 50px 1fr 180px;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .rule-card:hover {
+            box-shadow: 0 4px 15px rgba(27, 0, 74, 0.04);
+            border-color: #bfa15f; /* Detalle dorado sutil al pasar el mouse */
+        }
+
+        .rule-icon-wrap {
+            width: 44px; height: 44px; border-radius: 50%; background-color: #f0f0f5; display: flex; align-items: center; justify-content: center;
+        }
+
+        .rule-icon-wrap .material-icons { font-size: 1.35rem; color: var(--latam-main); }
+
+        .rule-text-info h3 { font-size: 1.05rem; color: var(--latam-main); font-weight: 700; margin-bottom: 4px; }
+        .rule-text-info p { font-size: 0.9rem; color: #555; line-height: 1.4; }
+
+        /* Badges de Estado Operativo */
+        .status-badge {
+            padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-align: center; text-transform: uppercase; display: inline-block; justify-self: end;
+        }
+
+        .status-badge.restrict { background-color: #fce8e6; color: var(--danger-red); border: 1px solid #f5c2c2; }
+        .status-badge.alert { background-color: #fff8e1; color: var(--warning-amber); border: 1px solid #ffe082; }
+        .status-badge.success { background-color: #e8f5e9; color: var(--success-green); border: 1px solid #c8e6c9; }
+
+        .latam-footer { text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; background-color: #fafbfc; }
+
+        @media (max-width: 800px) {
+            .tabs-nav-container { flex-direction: column; padding: 0 20px; gap: 0; }
+            .category-tab.active::after { display: none; }
+            .rules-content-block { padding: 20px; }
+            .rule-card { grid-template-columns: 1fr; gap: 12px; justify-items: start; }
+            .status-badge { justify-self: start; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- CABECERA PRINCIPAL -->
+        <div class="header-banner">
+            <div class="header-badge">
+                <div class="header-badge-content">
+                    <span class="material-icons">gavel</span>
+                    <div>
+                        <h1>Consideraciones para</h1>
+                        <p>cambios web SAB LP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>Antes de coordinar o procesar un cambio voluntario de tramos en la plataforma, revisa estas normativas e indicaciones mandatorias[cite: 5]. El sistema web validará automáticamente que no vulneres ninguno de estos límites regulaciones de descanso y seguridad[cite: 5].</p>
+        </div>
+
+        <!-- PESTAÑAS INTERACTIVAS DE CATEGORÍAS (UX SIMPLIFICADA) -->
+        <div class="tabs-nav-container">
+            <button class="category-tab active" onclick="switchRulesTab('tab-descansos', this)">
+                <span class="material-icons">hotel</span> Tiempos y Descansos
+            </button>
+            <button class="category-tab" onclick="switchRulesTab('tab-horas', this)">
+                <span class="material-icons">history</span> Límites de Horas y Libres
+            </button>
+            <button class="category-tab" onclick="switchRulesTab('tab-operaciones', this)">
+                <span class="material-icons">flight_takeoff</span> Operación y Fechas Límite
+            </button>
+        </div>
+
+        <!-- ==========================================================================
+           BLOQUE 1: TIEMPOS Y DESCANSOS
+           ========================================================================== -->
+        <div id="tab-descansos" class="rules-content-block active">
+            
+            <!-- Regla 1 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">more_time</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Tiempo extra posterior al PDR</h3>
+                    <p>Como medida de protección frente a demoras operacionales, se añade automáticamente <strong>01:00 hora de descanso adicional</strong> por encima del mínimo requerido por ley[cite: 5].</p>
+                </div>
+                <div class="status-badge success">Protección Activa</div>
+            </div>
+
+            <!-- Regla 2 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">nights_stay</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Reserva tarde seguida de libre</h3>
+                    <p>Por límites estrictos de activación de seguridad, **se restringe** realizar permutas de turnos de Reserva Tarde (HSB2 y ASB2) si están pegados inmediatamente a un día libre[cite: 5].</p>
+                </div>
+                <div class="status-badge restrict">No Permitido</div>
+            </div>
+
+            <!-- Regla 3 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">alarm_off</span></div></div>
+                <div class="rule-text-info">
+                    <h3>ETA previo a libre (Llegadas de Noche)</h3>
+                    <p>Se restringen los cambios con hora estimada de arribo (ETA) **posterior a las 22:30 horas** si vas seguido de un día libre[cite: 5]. Esto asegura tu holgura y protege el disfrute de tu libre[cite: 5]. La única excepción es si toda tu tripulación tiene el vuelo programado igual[cite: 5].</p>
+                </div>
+                <div class="status-badge alert">Restringido</div>
+            </div>
+
+            <!-- Regla 4 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">timelapse</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Block time 8 en 24 (Tiempo de Vuelo)</h3>
+                    <p>Se considera una holgura técnica de 35 minutos en periodos de 24 horas consecutivas[cite: 5]. Esto significa que cualquier cambio aprobado debe dejarte con un **máximo de 07:25 horas de tiempo de vuelo (TV)** en ese rango[cite: 5].</p>
+                </div>
+                <div class="status-badge restrict">Límite Estricto</div>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================================
+           BLOQUE 2: LÍMITES DE HORAS Y LIBRES
+           ========================================================================== -->
+        <div id="tab-horas" class="rules-content-block">
+            
+            <!-- Regla 5 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">analytics</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Limitación mensual y trimestral de horas block</h3>
+                    <p>Cada asignación de reserva programada computa automáticamente **5 horas de vuelo** para tu acumulado[cite: 5]. Adicionalmente, el sistema aplica un margen de protección de 03 horas respecto a los topes mensuales (**100 horas**) y trimestrales (**270 horas**)[cite: 5].</p>
+                </div>
+                <div class="status-badge alert">Cómputo Técnico</div>
+            </div>
+
+            <!-- Regla 6 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">calendar_view_month</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Mínimo de Libres legales</h3>
+                    <p>Ningún tripulante debe quedar con **menos de 8 días libres al mes**[cite: 5]. Esto solo cambia si tienes más de 5 días seguidos bajo vacaciones, descanso médico, permisos de jefatura, licencias sin goce de haber o pedidos especiales[cite: 5].</p>
+                </div>
+                <div class="status-badge restrict">Mínimo Obligatorio</div>
+            </div>
+
+            <!-- Regla 7 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">assignment_turned_in</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Secuencias reglamentarias RAP</h3>
+                    <p>Las secuencias de bloques permitidas según la RAP son **4x1, 5x2 o de 6 a 10 trabajados por 4 libres**[cite: 5]. Al salir de un periodo de vacaciones, estás obligado a terminar tu secuencia con los libres correspondientes[cite: 5].</p>
+                </div>
+                <div class="status-badge success">Validado por RAP</div>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================================
+           BLOQUE 3: OPERACIÓN Y FECHAS LÍMITE
+           ========================================================================== -->
+        <div id="tab-operaciones" class="rules-content-block">
+            
+            <!-- Regla 8 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">pending_actions</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Empalme programación mes siguiente (Freeze de Roster)</h3>
+                    <p>Todo cambio web que involucre modificaciones en las secuencias de trabajo de la **última semana del mes**, solo se aceptará **hasta el día 13 del mes actual** debido al cierre de sistemas del equipo de Roster[cite: 5].</p>
+                </div>
+                <div class="status-badge restrict">Tope: Día 13 del mes</div>
+            </div>
+
+            <!-- Regla 9 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">groups</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Cambio entre HRK</h3>
+                    <p>Los tripulantes que se encuentren bajo la modalidad de **HRK mensual**, están facultados para intercambiar vuelos únicamente con un Jefe de Servicio a Bordo (JSB) o con otro compañero con su mismo HRK mensual[cite: 5].</p>
+                </div>
+                <div class="status-badge alert">Exclusivo HRK</div>
+            </div>
+
+            <!-- Regla 10 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">star_rate</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Curva de Experiencia en Vuelo</h3>
+                    <p>Por altos estándares de seguridad y balance de cabina, en un mismo vuelo **no podrá quedar asignado más de 1 tripulante nuevo** (con menos de 3 meses cumplidos en la compañía)[cite: 5].</p>
+                </div>
+                <div class="status-badge restrict">Bloqueo Automático</div>
+            </div>
+
+            <!-- Regla 11 -->
+            <div class="rule-card">
+                <div class="rule-icon-wrapper"><div class="rule-icon-wrap"><span class="material-icons">flight_land</span></div></div>
+                <div class="rule-text-info">
+                    <h3>Arribo en décimo día</h3>
+                    <p>Los tripulantes que se encuentren cumpliendo el **décimo día de su secuencia de trabajo**, deberán tener como horario de aterrizaje máximo en Lima (LIM) las **20:00 horas**[cite: 5].</p>
+                </div>
+                <div class="status-badge alert">Tope: 20:00 hrs LIM</div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Gerencia de Roster & Tripulaciones SAB • Cuidamos que tus sueños lleguen a su destino[cite: 5]</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM[cite: 5]</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE TABS INTERACTIVOS -->
+    <script>
+        function switchRulesTab(tabId, element) {
+            document.querySelectorAll('.rules-content-block').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.category-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>

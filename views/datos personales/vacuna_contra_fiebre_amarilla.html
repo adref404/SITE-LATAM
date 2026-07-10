@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Procedimiento Vacuna Fiebre Amarilla</title>
+    <!-- Iconos de Google Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --whatsapp-green: #25d366;  /* Color oficial WhatsApp */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* ENCABEZADO CORPORATIVO */
+        .latam-header {
+            border-bottom: 3px solid var(--latam-main);
+            padding: 40px 40px 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .latam-header .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .latam-header .icon-wrap {
+            background-color: rgba(27, 0, 74, 0.06);
+            color: var(--latam-main);
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .latam-header h1 {
+            font-size: 1.7rem;
+            color: var(--latam-main);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .latam-header p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .latam-logo-txt {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--latam-main);
+            letter-spacing: 1px;
+        }
+        .latam-logo-txt span { color: var(--latam-coral); }
+
+        /* DESCRIPCIÓN Y PRE-SCREENING FILTRO */
+        .description-area {
+            padding: 30px 40px 10px 40px;
+        }
+
+        .description-area p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        /* NUEVA CAJA DE REQUISITOS PREVIOS EXCLUSIVOS */
+        .pre-check-card {
+            background-color: #fff1f8;
+            border: 1px solid rgba(232, 17, 127, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .pre-check-title {
+            color: var(--latam-coral);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* RECUADRO LÚDICO PARA RECOMENDACIONES MÉDICAS */
+        .medical-grid-check {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .med-card {
+            background: var(--white);
+            border: 1px solid var(--latam-border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .med-card .material-icons {
+            font-size: 1.5rem;
+            color: #ea4335;
+        }
+
+        .med-card-info h5 {
+            font-size: 0.95rem;
+            color: var(--latam-main);
+            font-weight: 700;
+        }
+
+        .med-card-info p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* LÍNEA DE TIEMPO CONECTORA */
+        .latam-timeline {
+            position: relative;
+            padding-left: 95px;
+            padding-right: 40px;
+            margin-top: 20px;
+        }
+
+        .latam-timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 58px;
+            width: 4px;
+            height: calc(100% - 45px);
+            background: var(--step-orange);
+            z-index: 1;
+        }
+
+        /* COMPONENTE PASOS EXPANSIBLES */
+        .latam-step {
+            position: relative;
+            margin-bottom: 30px;
+            border: 1px solid var(--latam-border);
+            border-radius: 12px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .latam-step-num {
+            position: absolute;
+            left: -57px;
+            top: 15px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--step-orange);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .latam-step-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px 24px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--latam-main);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .latam-step-trigger .title-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .arrow-icon {
+            color: var(--step-orange);
+            transition: transform 0.3s ease;
+        }
+
+        .latam-step-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background-color: #fafbfe;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .latam-step-inner {
+            padding: 25px;
+            border-top: 1px solid #eaeaea;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #484848;
+        }
+
+        .latam-step.active {
+            border-color: var(--latam-main);
+            box-shadow: 0 4px 20px rgba(27, 0, 74, 0.05);
+        }
+
+        .latam-step.active .latam-step-trigger {
+            color: var(--latam-coral);
+        }
+
+        .latam-step.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* INTERFAZ TARJETA DE ACCIÓN DE WHATSAPP */
+        .provider-wa-box {
+            background: var(--white);
+            border: 1px solid #b2f0c9;
+            border-left: 4px solid var(--whatsapp-green);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(37, 211, 102, 0.05);
+        }
+
+        .provider-wa-box h4 { color: var(--latam-main); font-size: 1.05rem; margin-bottom: 4px; }
+        .provider-wa-box p { font-size: 0.9rem; color: #555; }
+
+        .latam-btn-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .latam-btn-wa:hover { background-color: #1ebd56; transform: translateY(-1px); }
+
+        /* TICKETS BLANCOS DE DATOS */
+        .required-data-container { background-color: #f6f5fb; border: 1px solid var(--latam-border); padding: 20px; border-radius: 8px; }
+        .required-data-container h4 { font-size: 0.95rem; color: var(--latam-main); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        
+        .data-list-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+        .data-card-item { background: var(--white); border: 1px solid rgba(27, 0, 74, 0.08); padding: 12px 16px; border-radius: 6px; font-size: 0.9rem; font-weight: 600; color: #444; display: flex; align-items: center; gap: 10px; }
+        .data-card-item .material-icons { color: var(--latam-coral); font-size: 1.15rem; }
+
+        /* CAJA DE CIERRE DEL PROCESO */
+        .redirect-form-box { background: #fff1f8; border: 1px dashed var(--latam-coral); border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(232, 17, 127, 0.04); }
+        .redirect-form-box h4 { color: var(--latam-main); font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .redirect-form-box p { font-size: 0.95rem; color: #555; max-width: 650px; margin: 0 auto 20px auto; }
+        
+        .btn-redirect-form { display: inline-flex; align-items: center; gap: 8px; background-color: var(--latam-main); color: var(--white); padding: 12px 30px; font-size: 0.95rem; border-radius: 6px; text-decoration: none; font-weight: 700; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(27, 0, 74, 0.15); }
+        .btn-redirect-form:hover { background-color: var(--latam-coral); transform: translateY(-1px); }
+
+        .latam-footer { margin-top: 45px; text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; }
+
+        @media (max-width: 768px) {
+            .latam-page-container { padding: 20px 0; }
+            .latam-header { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .description-area { padding: 20px; }
+            .medical-disclaimer-grid { grid-template-columns: 1fr; gap: 10px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; top: 16px; }
+            .latam-step-trigger { padding: 16px; font-size: 1.05rem; }
+            .provider-wa-box { flex-direction: column; align-items: flex-shrink; gap: 15px; }
+            .latam-btn-wa, .btn-redirect-form { width: 100%; justify-content: center; }
+            .data-list-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO -->
+        <div class="latam-header">
+            <div class="brand-title">
+                <div class="icon-wrap">
+                    <span class="material-icons">vaccine</span>
+                </div>
+                <div>
+                    <h1>Vacuna contra la Fiebre Amarilla</h1>
+                    <p>Procedimiento de inmunización corporativa y habilitación técnica de vuelos</p>
+                </div>
+            </div>
+            <div class="latam-logo-txt">LATAM<span>•</span></div>
+        </div>
+
+        <!-- REQUISITOS PREVIOS / SEMÁFORO DE RECOMENDACIONES (FILTRO ANTES DE AVANZAR) -->
+        <div class="description-area">
+            <p>Ya contamos con un procedimiento coordinado para que los Jefes de Servicio a Bordo y Tripulantes de Cabina pendientes de vacunación puedan hacerlo mediante el proveedor contratado por la empresa[cite: 4].</p>
+            
+            <div class="pre-check-card">
+                <div class="pre-check-title">
+                    <span class="material-icons">warning_amber</span>
+                    <span>¿QUÉ DEBES EVITAR? RECOMENDACIONES OPERACIONALES PREVIAS:</span>
+                </div>
+                
+                <div class="medical-disclaimer-grid">
+                    <div class="medical-card">
+                        <span class="material-icons">thermostat</span>
+                        <div>
+                            <h4>Sintomatología Febril</h4>
+                            <p><strong>No tener fiebre</strong> un día antes ni el mismo día programado para tu vacunación[cite: 4]. En caso de presentar temperatura alta, deberás reprogramar tu cita.</p>
+                        </div>
+                    </div>
+                    <div class="medical-card">
+                        <span class="material-icons">pregnant_woman</span>
+                        <div>
+                            <h4>Estado de Gestación</h4>
+                            <p><strong>No estar gestando</strong>[cite: 4]. Si te encuentras embarazada, este procedimiento queda suspendido temporalmente por resguardo médico aeronáutico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LINEA DE TIEMPO INTERACTIVA REDUCIDA A 2 PASOS -->
+        <div class="latam-timeline">
+
+            <!-- PASO 1 (CONSOLIDADO: CONTACTO + ENVIAR DATOS) -->
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">chat</span>
+                        Coordinación de Cita y Envío de Datos por WhatsApp
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Si cumples de forma conforme con las recomendaciones del filtro superior, comunícate con la gestora del proveedor médico asignado[cite: 4]:</p>
+                        
+                        <!-- Tarjeta de Contacto Directo WhatsApp -->
+                        <div class="provider-wa-box">
+                            <div>
+                                <h4>Atención del Proveedor de Salud</h4>
+                                <p><strong>Gestora de Citas:</strong> Rosa Tapia • WhatsApp: <strong>936 716 963</strong>[cite: 4]</p>
+                                <p style="font-size:0.8rem; color:#777; margin-top:2px;">⚠️ Mensaje inicial obligatorio: Indica que eres colaborador vigente de LATAM[cite: 4].</p>
+                            </div>
+                            <a href="https://wa.me/51936716963?text=Hola%20Rosa,%20buenos%20días.%20Soy%20colaborador%20LATAM%20y%20deseo%20coordinar%20mi%20cita%20para%20la%20vacuna%20de%20la%20fiebre%20amarilla." target="_blank" class="latam-btn-wa">
+                                <span class="material-icons">open_in_new</span> Enviar Mensaje
+                            </a>
+                        </div>
+
+                        <!-- Bloque Estilizado de Datos Obligatorios a Adjuntar -->
+                        <div class="required-data-container">
+                            <h4><span class="material-icons" style="font-size:16px;">content_paste</span>Copia y rellena esta plantilla en el chat[cite: 4]:</h4>
+                            <div class="data-list-grid">
+                                <div class="data-card-item"><span class="material-icons">person</span> Nombres y Apellidos[cite: 4]</div>
+                                <div class="data-card-item"><span class="material-icons">cake</span> Fecha de Nacimiento[cite: 4]</div>
+                                <div class="data-card-item"><span class="material-icons">pin</span> Edad[cite: 4]</div>
+                                <div class="data-card-item"><span class="material-icons">email</span> Email Corporativo[cite: 4]</div>
+                                <div class="data-card-item"><span class="material-icons">badge</span> Documento de Identidad[cite: 4]</div>
+                                <div class="data-card-item"><span class="material-icons">home</span> Dirección de Domicilio[cite: 4]</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO FINAL (CIERRE DE AUTOGESTIÓN) -->
+            <div class="latam-step">
+                <div class="latam-step-num">2</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">cloud_done</span>
+                        Registro e Ingreso del Carné en el SITE LP
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        
+                        <div class="redirect-form-box">
+                            <h4><span class="material-icons" style="color:var(--latam-coral)">task_alt</span>¿Ya cuentas con tu carné de vacunación oficial?</h4>
+                            <p>Una vez inoculado, el centro médico te otorgará tu cartilla internacional[cite: 4]. Es tu responsabilidad registrarla de inmediato en el sistema para actualizar tu estatus en las bases de datos globales y habilitar tu programación en rol para rutas restringidas[cite: 4].</p>
+                            
+                            <!-- Botón lúdico que conecta con el formulario unificado desarrollado en el sprint anterior -->
+                            <button class="btn-redirect-form" onclick="if(parent.switchTab) { parent.switchTab('tab-legal', parent.document.querySelector('[data-target=form-fiebre]')); } else { alert('Simulación: Abriendo sección digital de Vacuna Fiebre Amarilla dentro de la ficha de actualización de datos.'); }">
+                                <span class="material-icons">launch</span> Abrir Ficha de Actualización de Datos
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Equipo Soporte Operacional Región Andina • Cuidamos que tus sueños lleguen a su destino[cite: 4]</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM[cite: 4]</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE DESPLIEGUE -->
+    <script>
+        document.querySelectorAll('.latam-step-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                const stepElement = button.parentElement;
+                const bodyElement = button.nextElementSibling;
+
+                stepElement.classList.toggle('active');
+
+                if (stepElement.classList.contains('active')) {
+                    bodyElement.style.maxHeight = bodyElement.scrollHeight + "px";
+                } else {
+                    bodyElement.style.maxHeight = null;
+                }
+            });
+        });
+
+        // Cargar el paso interactivo número 1 abierto por defecto para guiar el flujo
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialStep = document.querySelector('.latam-step');
+            if(initialStep) {
+                initialStep.classList.add('active');
+                const body = initialStep.querySelector('.latam-step-body');
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        });
+    </script>
+</body>
+</html>

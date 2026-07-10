@@ -13,3 +13,140 @@
     font-weight: 600;
     margin-bottom: 15px;
 }
+
+/* ==========================================================================
+   TARJETAS DE CONSIDERACIONES / OPCIONES (listas informativas embebidas en
+   los pasos de las guías: Solicitud Mes Subsiguiente, Registro Médico,
+   Grupos PBS 2026, Cambios Web SAB LP)
+   ========================================================================== */
+.section-sub-title {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 30px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f5;
+}
+
+.considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.consideration-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.consideration-card.alert-card {
+    border-top-color: var(--accent-color);
+    background-color: #fff1f8;
+}
+
+.consideration-card h4 {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.consideration-card h4 .material-icons {
+    color: var(--accent-color);
+    font-size: 1.15rem;
+}
+
+.consideration-card p {
+    font-size: 0.87rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Badges de estado tipo semáforo (reglas y restricciones operativas) */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.status-badge.restrict { background-color: #fce8e6; color: #c62828; border: 1px solid #f5c2c2; }
+.status-badge.alert    { background-color: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.status-badge.success  { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+
+/* ==========================================================================
+   TABLA COMPACTA DE DATOS (Grupos PBS 2026)
+   ========================================================================== */
+.pbs-table-wrap {
+    border: 1px solid var(--gray-border);
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 380px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.pbs-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.88rem;
+}
+
+.pbs-table th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 16px;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.pbs-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+.pbs-table tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+.cat-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.cat-badge.badge-tj { background-color: #e8f0fe; color: #1a73e8; }
+.cat-badge.badge-tc { background-color: #e6f4ea; color: #137333; }
+
+.group-indicator {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .considerations-grid {
+        grid-template-columns: 1fr;
+    }
+    .pbs-table th, .pbs-table td {
+        padding: 8px 10px;
+    }
+}

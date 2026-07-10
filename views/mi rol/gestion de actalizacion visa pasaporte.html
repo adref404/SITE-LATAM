@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM - Renovación de Visa y Pasaporte</title>
+    <!-- Iconos de Google Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
+            --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+            --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
+            --latam-text: #333333;      /* Texto principal */
+            --latam-border: #ccccde;    /* Bordes sutiles */
+            --step-orange: #ff5722;     /* Conector lúdico del flujo */
+            --white: #ffffff;
+            --route-bg: #f1f0f7;       /* Fondo para rutas guiadas */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--latam-gray-bg);
+            color: var(--latam-text);
+            padding: 20px;
+        }
+
+        .latam-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(27, 0, 74, 0.05);
+            overflow: hidden;
+        }
+
+        /* ENCABEZADO CORPORATIVO */
+        .latam-header {
+            border-bottom: 3px solid var(--latam-main);
+            padding: 40px 40px 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .latam-header .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .latam-header .icon-wrap {
+            background-color: rgba(27, 0, 74, 0.06);
+            color: var(--latam-main);
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .latam-header h1 { font-size: 1.7rem; color: var(--latam-main); font-weight: 700; letter-spacing: -0.5px; }
+        .latam-header p { font-size: 0.95rem; color: #666; margin-top: 3px; }
+        .latam-logo-txt { font-size: 1.4rem; font-weight: 900; color: var(--latam-main); letter-spacing: 1px; }
+        .latam-logo-txt span { color: var(--latam-coral); }
+
+        /* REGLAS CRÍTICAS DE TIEMPO */
+        .description-area { padding: 30px 40px 10px 40px; }
+        .description-area p { font-size: 1.05rem; line-height: 1.6; color: #444; margin-bottom: 20px; }
+
+        .time-rules-card {
+            background-color: #fff1f8;
+            border: 1px solid rgba(232, 17, 127, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .time-rules-title {
+            color: var(--latam-coral);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .rule-item-box {
+            background: var(--white);
+            border: 1px solid var(--latam-border);
+            border-left: 4px solid var(--latam-main);
+            border-radius: 6px;
+            padding: 14px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .rule-item-box .material-icons { color: var(--latam-main); font-size: 1.4rem; flex-shrink: 0; }
+        .rule-item-box h4 { font-size: 0.95rem; color: var(--latam-main); font-weight: 700; margin-bottom: 2px; }
+        .rule-item-box p { font-size: 0.85rem; color: #555; margin: 0; line-height: 1.4; }
+
+        /* LÍNEA DE TIEMPO CONECTORA CRONOLÓGICA */
+        .latam-timeline {
+            position: relative;
+            padding-left: 95px;
+            padding-right: 40px;
+            margin-top: 20px;
+        }
+
+        .latam-timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 58px;
+            width: 4px;
+            height: calc(100% - 45px);
+            background: var(--step-orange);
+            z-index: 1;
+        }
+
+        /* COMPONENTE PASOS EXPANSIBLES */
+        .latam-step { position: relative; margin-bottom: 30px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step-num {
+            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .latam-step-trigger {
+            width: 100%; background: none; border: none; text-align: left; padding: 20px 24px;
+            font-size: 1.2rem; font-weight: 700; color: var(--latam-main); cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .latam-step-trigger .title-content { display: flex; align-items: center; gap: 14px; }
+        .arrow-icon { color: var(--step-orange); transition: transform 0.3s ease; }
+        
+        .latam-step-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); background-color: #fafbfe; border-radius: 0 0 12px 12px; }
+        .latam-step-inner { padding: 25px; border-top: 1px solid #eaeaea; font-size: 1rem; line-height: 1.6; color: #484848; }
+
+        .latam-step.active { border-color: var(--latam-main); box-shadow: 0 4px 20px rgba(27, 0, 74, 0.05); }
+        .latam-step.active .latam-step-trigger { color: var(--latam-coral); }
+        .latam-step.active .arrow-icon { transform: rotate(180deg); }
+
+        /* CAJA DE RUTA INTERNA */
+        .route-path-container {
+            background-color: var(--route-bg); padding: 14px 20px; border-radius: 6px;
+            display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+            font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 0.85rem;
+            color: var(--latam-main); border: 1px solid rgba(27, 0, 74, 0.05); margin-top: 12px;
+        }
+        .route-path-container .arrow-sep { color: var(--latam-coral); font-weight: normal; }
+
+        /* CONCUR / REEMBOLSOS BOX */
+        .concur-info-box {
+            border: 1px solid #b2f0c9; border-left: 4px solid #25d366; background: #f6fbf7;
+            padding: 18px; border-radius: 8px; display: flex; align-items: center; gap: 15px; margin-top: 12px;
+        }
+
+        /* CAJA DE DIRECCIONAMIENTO FINAL AL FORMULARIO GENERAL (SECCIÓN VISA) */
+        .redirect-form-box {
+            background: #fff1f8;
+            border: 1px dashed var(--latam-coral);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(232, 17, 127, 0.04);
+        }
+
+        .redirect-form-box h4 {
+            color: var(--latam-main);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .redirect-form-box p {
+            font-size: 0.95rem;
+            color: #555;
+            max-width: 650px;
+            margin: 0 auto 20px auto;
+        }
+
+        .btn-redirect-form {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--latam-main);
+            color: var(--white);
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(27, 0, 74, 0.15);
+        }
+
+        .btn-redirect-form:hover {
+            background-color: var(--latam-coral);
+            transform: translateY(-1px);
+        }
+
+        .latam-footer { margin-top: 45px; text-align: center; font-size: 0.85rem; color: #7c7c93; border-top: 1px solid #e0e0ec; padding: 25px 40px; }
+
+        @media (max-width: 768px) {
+            .latam-header { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .description-area { padding: 20px; }
+            .rules-grid { grid-template-columns: 1fr; gap: 10px; }
+            .latam-timeline { padding: 20px 15px 20px 60px; }
+            .latam-timeline::before { left: 32px; }
+            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .latam-step-trigger { padding: 16px; font-size: 1.05rem; }
+            .btn-redirect-form { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="latam-page-container">
+        
+        <!-- ENCABEZADO -->
+        <div class="latam-header">
+            <div class="brand-title">
+                <div class="icon-wrap">
+                    <span class="material-icons">import_contacts</span>
+                </div>
+                <div>
+                    <h1>Renovación de Visa y Pasaporte</h1>
+                    <p>Flujo cronológico de renovación, protección en rol y reembolso corporativo</p>
+                </div>
+            </div>
+            <div class="latam-logo-txt">LATAM<span>•</span></div>
+        </div>
+
+        <!-- REGLAS DE CONTROL TEMPORAL / FILTRO PREVENTIVO UX -->
+        <div class="description-area">
+            <p>Compartimos el procedimiento mandatorio unificado para la renovación de tu documentación técnica de vuelo alineado a nuestras guías globales[cite: 5].</p>
+            
+            <div class="time-rules-card">
+                <div class="time-rules-title">
+                    <span class="material-icons">alarm_on</span>
+                    <span>REGLAS CRÍTICAS DE ANTICIPACIÓN (LEER ANTES DE INICIAR):</span>
+                </div>
+                
+                <div class="rules-grid">
+                    <div class="rule-item-box">
+                        <span class="material-icons">schedule</span>
+                        <div>
+                            <h4>Mínimo 2 Meses de Anticipación</h4>
+                            <p>Tanto para solicitar la <strong>protección en rol</strong> como para que el documento nuevo sea considerado en la programación próxima (Ej: cita en junio se registra máximo el 30 de abril)[cite: 5].</p>
+                        </div>
+                    </div>
+                    <div class="rule-item-box">
+                        <span class="material-icons">hourglass_top</span>
+                        <div>
+                            <h4>Mínimo 4 Días Hábiles</h4>
+                            <p>La actualización del nuevo documento emitido debe ingresarse al menos <strong>4 días hábiles antes</strong> de realizar un vuelo internacional que los exija[cite: 5].</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LINEA DE TIEMPO CRONOLÓGICA PASO A PASO -->
+        <div class="latam-timeline">
+
+            <!-- PASO 1 -->
+            <div class="latam-step">
+                <div class="latam-step-num">1</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">assignment</span>
+                        Tramitar la Carta de Presentación Consular (Cartas Visa)
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Antes de agendar de manera formal tu cita ante la embajada, debes tramitar tu carta corporativa ingresando al portal siguiendo de manera exacta esta ruta[cite: 5]:</p>
+                        <div class="route-path-container">
+                            Portal <span class="arrow-sep">➔</span> Mis Aplicaciones <span class="arrow-sep">➔</span> Mis Solicitudes <span class="arrow-sep">➔</span> Certificados e Informes <span class="arrow-sep">➔</span> Cartas Visa[cite: 5]
+                        </div>
+                        <p style="margin-top: 12px; font-weight: 600; color: var(--latam-coral);">
+                            ⚠️ Criterio de Selección: Selecciona estrictamente la opción COMISIONES y coloca como motivo de viaje: VISA CREW (puedes registrar fechas y ciudades referenciales)[cite: 5].
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2 -->
+            <div class="latam-step">
+                <div class="latam-step-num">2</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">shield</span>
+                        Agendar la Cita y Activar la Protección de Rol
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>Programa tu cita consular y registra la fecha y hora con el mínimo de 2 meses de anticipación requerido[cite: 5]. Ten en cuenta los siguientes parámetros operacionales:</p>
+                        <ul style="margin-left: 20px; margin-top: 8px; display:flex; flex-direction:column; gap:6px;">
+                            <li><strong>Fechas Sugeridas:</strong> Agenda tu cita para <strong>fechas posteriores al día 5 de cada mes</strong> para proteger los empalmes y la continuidad de los vuelos[cite: 5].</li>
+                            <li><strong>Asignación de Vuelos:</strong> La protección no equivale a un día libre, sino a una asignación especial que te libere para asistir al trámite[cite: 5].</li>
+                            <li><strong>Restricción Geográfica Operativa:</strong> A partir del día 6 del mes en que vayas a quedar sin pasaporte, se te asignarán únicamente <strong>vuelos domésticos o regionales protegidos</strong> (Argentina, Brasil, Bolivia, Chile, Ecuador, Paraguay y Uruguay)[cite: 5]. Esta protección se mantendrá fija hasta que registres tus nuevos documentos[cite: 5].</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3 -->
+            <div class="latam-step">
+                <div class="latam-step-num">3</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">payments</span>
+                        Solicitar Reembolso vía SAB Concur
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        <p>El reembolso económico por los costos arancelarios de la renovación de tu Pasaporte y/o Visa Crew se realiza de forma autónoma[cite: 5]:</p>
+                        <div class="concur-info-box">
+                            <span class="material-icons" style="color:#25d366; font-size:2.2rem;">phone_android</span>
+                            <div>
+                                <h4 style="color:var(--latam-main);">Plataforma SAB Concur</h4>
+                                <p>Disponible de forma directa en tu <strong>One Device</strong>[cite: 5]. Recuerda que puedes consultar el manual detallado de la aplicación ubicado en el SITE LP[cite: 5].</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO FINAL: DIRECCIONAMIENTO DIRECTO A LA PESTAÑA DE VISA DEL FORMULARIO CENTRAL -->
+            <div class="latam-step">
+                <div class="latam-step-num">4</div>
+                <button class="latam-step-trigger">
+                    <div class="title-content">
+                        <span class="material-icons">cloud_done</span>
+                        Registro Final de Documento Emitido o Alerta de Rechazo
+                    </div>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
+                <div class="latam-step-body">
+                    <div class="latam-step-inner">
+                        
+                        <div class="redirect-form-box">
+                            <h4><span class="material-icons" style="color:var(--latam-coral)">verified_user</span>¿Ya cuentas con tu nuevo Pasaporte o VISA?</h4>
+                            <p>¡Excelente! Para regularizar tu estatus en las bases de datos y levantar de manera definitiva cualquier restricción operacional en Rol, ingresa la información oficial a través de la ficha digital unificada de actualización[cite: 5].</p>
+                            
+                            <!-- Función interactiva que redirige a la opción específica de Visa del formulario central -->
+                            <button class="btn-redirect-form" onclick="if(parent.toggleFlow) { parent.toggleFlow(parent.document.querySelector('[data-target=form-visa]')); } else { alert('Simulación UX: Redirigiendo de forma interna a la pestaña de Actualización de VISA dentro de la ficha digital central.'); }">
+                                <span class="material-icons">launch</span> Abrir Ficha de Actualización en Sección VISA
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE DETALLE -->
+        <footer class="latam-footer">
+            <p>Equipo Soporte Operacional SAB • Cuidamos que tus sueños lleguen a su destino[cite: 5]</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Sostenibilidad • Cumplimiento Reglamentario • SOMOS LATAM[cite: 5]</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE EXPANSION -->
+    <script>
+        document.querySelectorAll('.latam-step-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                const stepElement = button.parentElement;
+                const bodyElement = button.nextElementSibling;
+                stepElement.classList.toggle('active');
+                if (stepElement.classList.contains('active')) {
+                    bodyElement.style.maxHeight = bodyElement.scrollHeight + "px";
+                } else {
+                    bodyElement.style.maxHeight = null;
+                }
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialStep = document.querySelector('.latam-step');
+            if(initialStep) {
+                initialStep.classList.add('active');
+                const body = initialStep.querySelector('.latam-step-body');
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        });
+    </script>
+</body>
+</html>
