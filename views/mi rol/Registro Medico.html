@@ -119,6 +119,17 @@
         .route-path-container { background-color: var(--route-bg); padding: 14px 20px; border-radius: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 0.85rem; color: var(--latam-main); border: 1px solid rgba(27, 0, 74, 0.05); margin-top: 10px; }
         .route-path-container .arrow-sep { color: var(--latam-coral); font-weight: normal; }
 
+        /* DESPLEGABLE ANIDADO DENTRO DE UN PASO (p. ej. asistencia médica en viajes internacionales) */
+        .inline-dropdown { margin-top: 18px; border: 1px solid var(--latam-border); border-radius: 8px; overflow: hidden; }
+        .inline-dropdown-trigger { width: 100%; background: #f7f6fb; border: none; text-align: left; padding: 14px 18px; font-size: 0.95rem; font-weight: 700; color: var(--latam-main); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .inline-dropdown-trigger span:nth-child(2) { flex: 1; }
+        .inline-dropdown-trigger .material-icons:first-child { color: var(--latam-coral); }
+        .inline-dropdown-trigger .arrow-icon { transition: transform 0.3s ease; }
+        .inline-dropdown.open .inline-dropdown-trigger { color: var(--latam-coral); }
+        .inline-dropdown.open .arrow-icon { transform: rotate(180deg); }
+        .inline-dropdown-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); background-color: var(--white); }
+        .inline-dropdown-inner { padding: 18px; border-top: 1px solid #eaeaea; }
+
         /* SEGURO INTEGRADO UNIVERSAL ASSISTANCE (PASO 4) */
         .ua-container-box { background-color: #f0f4fa; border: 1px solid #b9cfe7; border-radius: 8px; padding: 20px; margin-top: 10px; }
         .ua-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #d0dae9; padding-bottom: 12px; margin-bottom: 15px; }
@@ -144,6 +155,7 @@
             .contact-channel-box { grid-template-columns: 1fr; }
             .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
             .ua-grid-info { grid-template-columns: 1fr; }
+            .inline-dropdown-trigger { padding: 12px 14px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -177,7 +189,7 @@
                 <button class="latam-step-trigger">
                     <div class="title-content">
                         <span class="material-icons">phone_forwarded</span>
-                        Paso 1: Reportar de inmediato a Movilización Diaria
+                        Paso 1: Reportar de inmediato a Movimiento Diario
                     </div>
                     <span class="material-icons arrow-icon">expand_more</span>
                 </button>
@@ -198,6 +210,49 @@
                                 <div>
                                     <h4>Vía Correo Electrónico</h4>
                                     <p><strong>movimiento.trip@lan.com</strong> (Esperar acuse)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="inline-dropdown">
+                            <button class="inline-dropdown-trigger" type="button">
+                                <span class="material-icons">flight_land</span>
+                                <span>Si necesitas asistencia médica en un viaje internacional, ver aquí</span>
+                                <span class="material-icons arrow-icon">expand_more</span>
+                            </button>
+                            <div class="inline-dropdown-body">
+                                <div class="inline-dropdown-inner">
+                                    <p>Si la emergencia de salud, malestar o accidente ocurre mientras te encuentras cumpliendo funciones asignadas por rol en el <strong>extranjero o fuera de tu país base</strong>, cuentas con la cobertura activa del seguro médico de la compañía:</p>
+
+                                    <div class="ua-container-box">
+                                        <div class="ua-header">
+                                            <span class="material-icons" style="color:var(--ua-blue); font-size:24px;">security</span>
+                                            <h4>Nuevo Proveedor Oficial: Universal Assistance</h4>
+                                        </div>
+
+                                        <div class="ua-grid-info">
+                                            <div class="ua-card-item">
+                                                <h5><span class="material-icons">phone_android</span>Activación por APP</h5>
+                                                <p>Utiliza de forma prioritaria la APP oficial de Universal Assistance desde tu <strong>One Device</strong> para la activación inmediata del servicio.</p>
+                                            </div>
+                                            <div class="ua-card-item">
+                                                <h5><span class="material-icons">wifi</span>Llamadas Gratis por Wifi</h5>
+                                                <p>Realiza llamadas por Wifi sin costo directo a través de la misma plataforma digital o de su sitio web oficial.</p>
+                                            </div>
+                                            <div class="ua-card-item">
+                                                <h5><span class="material-icons">call</span>Línea Internacional</h5>
+                                                <p>Teléfono único con cobro revertido: <strong>+54 11 2206 0706</strong> (si registras cobros, podrás solicitar reembolso posterior).</p>
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 15px; font-size: 0.88rem; color:#444;">
+                                            <strong>Flujo de Atención Extranjero:</strong> Contacta al seguro indicando tu nombre, BP, síntomas y ciudad de ubicación. La asistencia evaluará si se asiste por Telemedicina, atención médica en el lugar o derivación clínica, finalizando al decretarse tu alta médica. Puedes autogestionar tus certificados de cobertura en la sección Coberturas del sitio web.
+                                        </div>
+
+                                        <a href="https://www.universal-assistance.com" target="_blank" class="ua-btn-link">
+                                            <span class="material-icons">launch</span> Ir al Sitio de Universal Assistance
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -286,59 +341,12 @@
                 </div>
             </div>
 
-            <!-- PASO 4: SEGURO INTEGRADO DE ASISTENCIA EN VIAJES (REF: COMUNICADO ADJUNTO PDF) -->
-            <div class="latam-step">
-                <div class="latam-step-num">4</div>
-                <button class="latam-step-trigger">
-                    <div class="title-content">
-                        <span class="material-icons">flight_land</span>
-                        Paso 4: Seguro de Asistencia Médica en Viajes (Vuelos Internacionales)
-                    </div>
-                    <span class="material-icons arrow-icon">expand_more</span>
-                </button>
-                <div class="latam-step-body">
-                    <div class="latam-step-inner">
-                        <p>Si la emergencia de salud, malestar o accidente ocurre mientras te encuentras cumpliendo funciones asignadas por rol en el <strong>extranjero o fuera de tu país base</strong>, cuentas con la cobertura activa del seguro médico de la compañía[cite: 4]:</p>
-                        
-                        <div class="ua-container-box">
-                            <div class="ua-header">
-                                <span class="material-icons" style="color:var(--ua-blue); font-size:24px;">security</span>
-                                <h4>Nuevo Proveedor Oficial: Universal Assistance[cite: 4]</h4>
-                            </div>
-                            
-                            <div class="ua-grid-info">
-                                <div class="ua-card-item">
-                                    <h5><span class="material-icons">phone_android</span>Activación por APP[cite: 4]</h5>
-                                    <p>Utiliza de forma prioritaria la APP oficial de Universal Assistance desde tu <strong>One Device</strong> para la activación inmediata del servicio[cite: 4].</p>
-                                </div>
-                                <div class="ua-card-item">
-                                    <h5><span class="material-icons">wifi</span>Llamadas Gratis por Wifi[cite: 4]</h5>
-                                    <p>Realiza llamadas por Wifi sin costo directo a través de la misma plataforma digital o de su sitio web oficial[cite: 4].</p>
-                                </div>
-                                <div class="ua-card-item">
-                                    <h5><span class="material-icons">call</span>Línea Internacional[cite: 4]</h5>
-                                    <p>Teléfono único con cobro revertido: <strong>+54 11 2206 0706</strong> (si registras cobros, podrás solicitar reembolso posterior)[cite: 4].</p>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 15px; font-size: 0.88rem; color:#444;">
-                                <strong>Flujo de Atención Extranjero:</strong> Contacta al seguro indicando tu nombre, BP, síntomas y ciudad de ubicación[cite: 4]. La asistencia evaluará si se asiste por Telemedicina, atención médica en el lugar o derivación clínica, finalizando al decretarse tu alta médica[cite: 4]. Puedes autogestionar tus certificados de cobertura en la sección Coberturas del sitio web[cite: 4].
-                            </div>
-
-                            <a href="https://www.universal-assistance.com" target="_blank" class="ua-btn-link">
-                                <span class="material-icons">launch</span> Ir al Sitio de Universal Assistance[cite: 4]
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <!-- PIE DE DETALLE -->
         <footer class="latam-footer">
-            <p>Gerencia de Soporte Operacional & Roles SAB • Cuidamos que tus sueños lleguen a su destino[cite: 4]</p>
-            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM[cite: 4]</p>
+            <p>Gerencia de Soporte Operacional & Roles SAB • Cuidamos que tus sueños lleguen a su destino</p>
+            <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM</p>
         </footer>
 
     </div>
@@ -346,14 +354,31 @@
     <!-- SCRIPT DE DESPLIEGUE -->
     <script>
         document.querySelectorAll('.latam-step-trigger').forEach(button => {
+            const stepElement = button.parentElement;
+            const bodyElement = button.nextElementSibling;
+
+            // Una vez terminada la animación de apertura, se quita el límite de
+            // altura (max-height: none) para que cualquier contenido que crezca
+            // después (p. ej. un desplegable anidado) no quede recortado.
+            bodyElement.addEventListener('transitionend', (e) => {
+                if (e.propertyName === 'max-height' && stepElement.classList.contains('active')) {
+                    bodyElement.style.maxHeight = 'none';
+                }
+            });
+
             button.addEventListener('click', () => {
-                const stepElement = button.parentElement;
-                const bodyElement = button.nextElementSibling;
+                const isOpening = !stepElement.classList.contains('active');
                 stepElement.classList.toggle('active');
-                if (stepElement.classList.contains('active')) {
+
+                if (isOpening) {
                     bodyElement.style.maxHeight = bodyElement.scrollHeight + "px";
                 } else {
-                    bodyElement.style.maxHeight = null;
+                    // si estaba en "none", primero se fija su altura actual para
+                    // poder animar el cierre correctamente
+                    bodyElement.style.maxHeight = bodyElement.scrollHeight + "px";
+                    requestAnimationFrame(() => {
+                        bodyElement.style.maxHeight = null;
+                    });
                 }
             });
         });
@@ -364,8 +389,30 @@
             if(initialStep) {
                 initialStep.classList.add('active');
                 const body = initialStep.querySelector('.latam-step-body');
-                body.style.maxHeight = body.scrollHeight + "px";
+                body.style.maxHeight = 'none';
             }
+        });
+
+        // Desplegable anidado dentro de un paso (p. ej. asistencia médica en viajes)
+        document.querySelectorAll('.inline-dropdown-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                const wrapper = button.parentElement;
+                const body = button.nextElementSibling;
+                wrapper.classList.toggle('open');
+
+                if (wrapper.classList.contains('open')) {
+                    body.style.maxHeight = body.scrollHeight + "px";
+                } else {
+                    body.style.maxHeight = null;
+                }
+
+                // Respaldo por si el paso contenedor todavía no llegó a max-height:none
+                // (p. ej. si se abre el desplegable justo durante la animación del paso)
+                const parentStepBody = wrapper.closest('.latam-step-body');
+                if (parentStepBody && parentStepBody.style.maxHeight !== 'none') {
+                    parentStepBody.style.maxHeight = parentStepBody.scrollHeight + "px";
+                }
+            });
         });
     </script>
 </body>
