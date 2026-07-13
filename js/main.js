@@ -81,16 +81,19 @@ function initViewScripts(routeKey) {
             ensureCardCarousel('gestion-operativa');
             initAccordionView();
             initValesFlow();
+            initDetailIframes();
             break;
         case 'mis-datos':
             ensureCardCarousel('mis-datos');
             initDatosFormLogic();
             initAccordionView();
+            initDetailIframes();
             break;
         case 'mi-rol':
             ensureCardCarousel('mi-rol');
             initAccordionView();
             initVisaFormLogic();
+            initDetailIframes();
             break;
         case 'domicilio':
             initAccordionView();
@@ -508,7 +511,67 @@ function showGoDetail(index) {
         activeStepBody.style.maxHeight = activeStepBody.scrollHeight + 'px';
     }
 
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Igual que el paso activo, un iframe dentro de un detalle oculto no
+    // podía calcular su altura real (scrollHeight era 0): se recalcula aquí.
+    const activeIframe = panel.querySelector('.go-detail-content.active .go-detail-iframe-wrapper iframe');
+    if (activeIframe) {
+        resizeDetailIframe(activeIframe);
+    }
+
+    // 'start' asegura que siempre se desplace hasta la sección, en vez de
+    // 'nearest' que a veces no movía la página si el panel ya asomaba un poco.
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Ajusta la altura de un iframe de detalle a su contenido real, para que no
+// quede un scroll interno además del scroll general de la página.
+function resizeDetailIframe(iframe) {
+    try {
+        const doc = iframe.contentDocument;
+        if (!doc || !doc.documentElement) return;
+        iframe.style.height = doc.documentElement.scrollHeight + 'px';
+    } catch (e) {
+        // Contenido de otro origen: no se puede leer su altura, se conserva la altura por defecto.
+    }
+}
+
+// Prepara todos los iframes de detalle de la vista actual: los ajusta al
+// cargar y los vuelve a ajustar si su contenido cambia de tamaño (acordeones,
+// campos condicionales, etc. dentro del propio iframe).
+function initDetailIframes() {
+    document.querySelectorAll('.go-detail-iframe-wrapper iframe').forEach(iframe => {
+        if (iframe.dataset.autoResizeBound) return;
+        iframe.dataset.autoResizeBound = 'true';
+
+        // Si al navegar (p. ej. desde el header) el detalle ya se abre activo
+        // antes de que el iframe termine de cargar, la altura y el scroll de
+        // showGoDetail se calculan con la página todavía en blanco. Al
+        // terminar de cargar, se recalcula la altura y, si sigue activo, se
+        // vuelve a desplazar hasta la sección con la altura real ya lista.
+        function attachObserver() {
+            resizeDetailIframe(iframe);
+
+            const content = iframe.closest('.go-detail-content');
+            if (content && content.classList.contains('active')) {
+                const panel = document.getElementById('go-detail-panel');
+                if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            try {
+                const doc = iframe.contentDocument;
+                if (doc && window.ResizeObserver) {
+                    new ResizeObserver(() => resizeDetailIframe(iframe)).observe(doc.documentElement);
+                }
+            } catch (e) {
+                // Contenido de otro origen: sin observer, altura por defecto.
+            }
+        }
+
+        if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+            attachObserver();
+        }
+        iframe.addEventListener('load', attachObserver);
+    });
 }
 
 // ==========================================================================

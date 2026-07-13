@@ -36,7 +36,7 @@
                         <span><span class="material-icons">folder_shared</span> Expediente Personal</span>
                         <span><span class="material-icons">badge</span> AppSheet</span>
                     </div>
-                    <a class="go-card-btn" href="https://www.appsheet.com/Account/Login?appName=Solicitud%20De%20Credenciales%20PE&FullScope=False&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Ffc09f2b3-fd11-46ae-882b-d8ce2cb7a8d1%3Fplatform%3Ddesktop#appName=SolicitudDeCredencialesPE-501453028&vss=H4sIAAAAAAAAA6WOOw7CMBAF7_Jqn8AliAIhaEA0mMLEG8kisaPYCUSW786aj1ID5b7VjCZhtHTbR11dIU9pvjY0QSIpHKaOFKTC0rvY-0ZBKOx0-xoXltxIzhqtkJHP4mOIFCDTtwL5b4GANeSirS31xVZYtrxJfheOh5lCFmiHqC8NPbOZypm32ldDIHPknJ8ywtqt7p12ZusNS2vdBMoPSSDo2G8BAAA=&view=Bienvenida"">Ingresar</a>
+                    <a class="go-card-btn" href="https://www.appsheet.com/Account/Login?appName=Solicitud%20De%20Credenciales%20PE&FullScope=False&provider=google&returnUrl=https%3A%2F%2Fwww.appsheet.com%2Fstart%2Ffc09f2b3-fd11-46ae-882b-d8ce2cb7a8d1%3Fplatform%3Ddesktop#appName=SolicitudDeCredencialesPE-501453028&vss=H4sIAAAAAAAAA6WOOw7CMBAF7_Jqn8AliAIhaEA0mMLEG8kisaPYCUSW786aj1ID5b7VjCZhtHTbR11dIU9pvjY0QSIpHKaOFKTC0rvY-0ZBKOx0-xoXltxIzhqtkJHP4mOIFCDTtwL5b4GANeSirS31xVZYtrxJfheOh5lCFmiHqC8NPbOZypm32ldDIHPknJ8ywtqt7p12ZusNS2vdBMoPSSDo2G8BAAA=&view=Bienvenida" target="_blank">Ingresar</a>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                 <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=500&q=80" alt="Domicilio DGAC">
                 <div class="go-card-body">
                     <h3>Domicilio DGAC</h3>
-                    <p>Guía paso a paso para la actualización domiciliaria (RAP 63.085).</p>
+                    <p>Guía paso a paso para la actualización domiciliaria.</p>
                     <div class="go-card-meta">
                         <span><span class="material-icons">gavel</span> Entidades y Legal</span>
                         <span><span class="material-icons">local_airport</span> PDF</span>
@@ -127,169 +127,9 @@
         </div>
 
         <div class="go-detail-content" data-detail="3">
-
-            <div class="latam-header">
-                <div class="brand-title">
-                    <div class="icon-wrap">
-                        <span class="material-icons">beach_access</span>
-                    </div>
-                    <div>
-                        <h1>Intercambio, Cesión o Pedido Adicional de Vacaciones</h1>
-                        <p>Gestión de solicitudes relativas al periodo vacacional</p>
-                    </div>
-                </div>
-                <div class="latam-logo-txt">LATAM<span>•</span></div>
+            <div class="go-detail-iframe-wrapper">
+                <iframe src="views/datos%20personales/Intercambio%2C%20cesi%C3%B3n%20o%20pedido%20de%20vacaciones.html" title="Intercambio o Cesión de Vacaciones"></iframe>
             </div>
-
-            <div class="latam-alert">
-                <span class="material-icons">info</span>
-                <p>Completa tus datos de identificación y despliega el paso correspondiente al tipo de solicitud que necesitas realizar para conocer sus requisitos y plazos reglamentarios.</p>
-            </div>
-
-            <form id="form-vacaciones" onsubmit="event.preventDefault(); alert('Simulación: Solicitud de vacaciones registrada de forma exitosa en las bases de datos de Operación y Roles SAB.');">
-
-                <div class="latam-timeline">
-
-                    <div class="latam-step">
-                        <div class="latam-step-num">1</div>
-                        <button class="latam-step-trigger">
-                            <span class="title-content">
-                                <span class="material-icons">badge</span>
-                                Datos de Identificación
-                            </span>
-                            <span class="material-icons arrow-icon">expand_more</span>
-                        </button>
-                        <div class="latam-step-body">
-                            <div class="latam-step-inner">
-                                <div class="form-group">
-                                    <label>Correo electrónico <span>*</span></label>
-                                    <input type="email" class="form-control" value="mario.fernandez@latam.com" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label>Ingresa tu BP <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Ej. 6014982" value="6014982" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Ingresa tus apellidos y nombres <span>*</span></label>
-                                    <input type="text" class="form-control" value="Mario Fernandez" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Selecciona tu categoría <span>*</span></label>
-                                    <select class="form-control" required>
-                                        <option>JSB (Jefe de Servicio a Bordo)</option>
-                                        <option>TC (Tripulante de Cabina)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="latam-step">
-                        <div class="latam-step-num">2</div>
-                        <button class="latam-step-trigger">
-                            <span class="title-content">
-                                <span class="material-icons">add_circle</span>
-                                Solicitud de Vacaciones Adicionales
-                            </span>
-                            <span class="material-icons arrow-icon">expand_more</span>
-                        </button>
-                        <div class="latam-step-body">
-                            <div class="latam-step-inner">
-                                <div class="latam-alert" style="margin-bottom:20px;">
-                                    <span class="material-icons">alarm</span>
-                                    <p><strong>Regla de plazo y cupo:</strong> Estas solicitudes están sujetas a disponibilidad de cupos en el mes requerido. Se dará respuesta formal en el mes previo al goce de vacaciones, con un plazo mínimo de 15 días de anticipación.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label>Mes solicitado de adicionales <span>*</span></label>
-                                    <input type="month" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Cantidad de días solicitados <span>*</span></label>
-                                    <input type="number" class="form-control" min="1" max="30" placeholder="Ej. 7">
-                                </div>
-                                <div class="form-group">
-                                    <label>Sustento de la solicitud <em>(Opcional)</em></label>
-                                    <input type="text" class="form-control" placeholder="Detalle breve">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="latam-step">
-                        <div class="latam-step-num">3</div>
-                        <button class="latam-step-trigger">
-                            <span class="title-content">
-                                <span class="material-icons">swap_horiz</span>
-                                Cambio de Vacaciones con un Compañero
-                            </span>
-                            <span class="material-icons arrow-icon">expand_more</span>
-                        </button>
-                        <div class="latam-step-body">
-                            <div class="latam-step-inner">
-                                <div class="latam-alert" style="margin-bottom:20px;">
-                                    <span class="material-icons">people</span>
-                                    <p><strong>Regla de validación doble:</strong> Tanto tú como tu compañero deberán ingresar de forma individual su respectiva solicitud cruzada en este sitio. Tiempo de respuesta máximo: 10 días hábiles.<br><br><strong>Plazo de anticipación:</strong> Ingresar hasta el último día de 2 meses previos al mes deseado (Ej: si el cambio es para marzo, registrar máximo el 31 de enero). Para la primera semana del mes, registrar máximo el 31 de diciembre.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label>BP del compañero de permuta <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Ej. 6012233">
-                                </div>
-                                <div class="form-group">
-                                    <label>Nombres completos del compañero <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Sin tildes">
-                                </div>
-                                <div class="form-group">
-                                    <label>Mes original del cambio <span>*</span></label>
-                                    <input type="month" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="latam-step">
-                        <div class="latam-step-num">4</div>
-                        <button class="latam-step-trigger">
-                            <span class="title-content">
-                                <span class="material-icons">assignment_return</span>
-                                Cesión de Vacaciones
-                            </span>
-                            <span class="material-icons arrow-icon">expand_more</span>
-                        </button>
-                        <div class="latam-step-body">
-                            <div class="latam-step-inner">
-                                <div class="latam-alert" style="margin-bottom:20px;">
-                                    <span class="material-icons">gavel</span>
-                                    <p><strong>Regla de cesión legal:</strong> Al igual que en el intercambio, ambos colaboradores involucrados en el traspaso del bloque de descanso deben registrar su formulario de forma independiente, en un plazo no menor a 2 meses antes del goce.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label>BP del colaborador beneficiario <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Ej. 6015566">
-                                </div>
-                                <div class="form-group">
-                                    <label>Nombres completos del beneficiario <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Sin tildes">
-                                </div>
-                                <div class="form-group">
-                                    <label>Bloque de días a ceder <span>*</span></label>
-                                    <input type="text" class="form-control" placeholder="Ej: Del 05 al 12 de Octubre">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-submit-bar">
-                    <button type="button" class="latam-btn btn-cancel" onclick="document.getElementById('form-vacaciones').reset();">Cancelar</button>
-                    <button type="submit" class="latam-btn"><span class="material-icons">flight_takeoff</span> Enviar Solicitud</button>
-                </div>
-
-            </form>
-
-            <div class="latam-footer">
-                <p>Gerencia de Servicio a Bordo Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
-            </div>
-
         </div>
 
         <div class="go-detail-content" data-detail="4">
@@ -310,7 +150,7 @@
             <div class="latam-alert">
                 <span class="material-icons">gavel</span>
                 <p>
-                    <strong>Cumplimiento Regulatorio Obligatorio (RAP 63.085):</strong> Según la normativa, el titular de una licencia que cambia su domicilio legal
+                    <strong>Cumplimiento Regulatorio Obligatorio:</strong> Según la normativa, el titular de una licencia que cambia su domicilio legal
                     <strong>no podrá ejercer los privilegios de vuelo pasados los treinta (30) días</strong> calendario de realizado el cambio,
                     salvo que lo haya notificado por escrito formal ante la DGAC. ¡Evitemos penalidades y observaciones operacionales en auditorías!
                 </p>
@@ -530,207 +370,15 @@
         </div>
 
         <div class="go-detail-content" data-detail="5">
-
-            <div class="latam-header">
-                <div class="brand-title">
-                    <div class="icon-wrap">
-                        <span class="material-icons">vaccines</span>
-                    </div>
-                    <div>
-                        <h1>Vacuna contra la Fiebre Amarilla</h1>
-                        <p>Procedimiento de inmunización corporativa y habilitación técnica de vuelos</p>
-                    </div>
-                </div>
-                <div class="latam-logo-txt">LATAM<span>•</span></div>
+            <div class="go-detail-iframe-wrapper">
+                <iframe src="views/datos%20personales/vacuna_contra_fiebre_amarilla.html" title="Vacuna Fiebre Amarilla"></iframe>
             </div>
-
-            <div class="latam-alert">
-                <span class="material-icons">warning_amber</span>
-                <p>
-                    Ya contamos con un procedimiento coordinado para que los Jefes de Servicio a Bordo y Tripulantes de Cabina pendientes de vacunación puedan hacerlo mediante el proveedor contratado por la empresa.
-                    <br><br>
-                    <strong>¿Qué debes evitar? Recomendaciones operacionales previas:</strong><br>
-                    • <strong>Sintomatología febril:</strong> no tener fiebre un día antes ni el mismo día programado para tu vacunación. Si presentas temperatura alta, deberás reprogramar tu cita.<br>
-                    • <strong>Estado de gestación:</strong> no estar gestando. Si te encuentras embarazada, este procedimiento queda suspendido temporalmente por resguardo médico aeronáutico.
-                </p>
-            </div>
-
-            <div class="latam-timeline">
-
-                <div class="latam-step">
-                    <div class="latam-step-num">1</div>
-                    <button class="latam-step-trigger">
-                        <span class="title-content">
-                            <span class="material-icons">chat</span>
-                            Coordinación de Cita y Envío de Datos por WhatsApp
-                        </span>
-                        <span class="material-icons arrow-icon">expand_more</span>
-                    </button>
-                    <div class="latam-step-body">
-                        <div class="latam-step-inner">
-                            <p>Si cumples de forma conforme con las recomendaciones anteriores, comunícate con la gestora del proveedor médico asignado:</p>
-
-                            <div class="latam-download-card" style="border-color:#25d366; background-color:#f2fdf6;">
-                                <div>
-                                    <h4 style="color:#1a8f4a;">Atención del Proveedor de Salud</h4>
-                                    <p><strong>Gestora de Citas:</strong> Rosa Tapia • WhatsApp: <strong>936 716 963</strong></p>
-                                    <p style="font-size:0.75rem; color:#888; margin-top:4px;">⚠️ Mensaje inicial obligatorio: indica que eres colaborador vigente de LATAM.</p>
-                                </div>
-                                <a href="https://wa.me/51936716963?text=Hola%20Rosa%2C%20buenos%20d%C3%ADas.%20Soy%20colaborador%20LATAM%20y%20deseo%20coordinar%20mi%20cita%20para%20la%20vacuna%20de%20la%20fiebre%20amarilla." target="_blank" class="latam-btn" style="background:#25d366;">
-                                    <span class="material-icons">open_in_new</span> Enviar Mensaje
-                                </a>
-                            </div>
-
-                            <p style="margin-top:20px; font-weight:600; color:var(--primary-color);">Copia y rellena esta plantilla en el chat:</p>
-                            <ul class="data-tag-list">
-                                <li class="data-tag-item"><span class="material-icons">person</span> Nombres y Apellidos</li>
-                                <li class="data-tag-item"><span class="material-icons">cake</span> Fecha de Nacimiento</li>
-                                <li class="data-tag-item"><span class="material-icons">pin</span> Edad</li>
-                                <li class="data-tag-item"><span class="material-icons">email</span> Email Corporativo</li>
-                                <li class="data-tag-item"><span class="material-icons">badge</span> Documento de Identidad</li>
-                                <li class="data-tag-item"><span class="material-icons">home</span> Dirección de Domicilio</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="latam-step">
-                    <div class="latam-step-num">2</div>
-                    <button class="latam-step-trigger">
-                        <span class="title-content">
-                            <span class="material-icons">cloud_done</span>
-                            Registro e Ingreso del Carné en el SITE LP
-                        </span>
-                        <span class="material-icons arrow-icon">expand_more</span>
-                    </button>
-                    <div class="latam-step-body">
-                        <div class="latam-step-inner">
-                            <p>Una vez inoculado, el centro médico te otorgará tu cartilla internacional de vacunación. Es tu responsabilidad registrarla de inmediato en el sistema para actualizar tu estatus en las bases de datos globales y habilitar tu programación en rol para rutas restringidas.</p>
-                            <div class="go-detail-actions" style="margin-top:20px;">
-                                <button class="go-detail-btn" onclick="showGoDetail(0)">Abrir Ficha de Actualización de Datos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="latam-footer">
-                <p>Equipo Soporte Operacional Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
-                <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM</p>
-            </div>
-
         </div>
 
         <div class="go-detail-content" data-detail="6">
-
-            <div class="latam-header">
-                <div class="brand-title">
-                    <div class="icon-wrap">
-                        <span class="material-icons">laptop_mac</span>
-                    </div>
-                    <div>
-                        <h1>Registro de Equipos SUNAT</h1>
-                        <p>Inscripción de laptops y/o tablets personales ante Aduanas</p>
-                    </div>
-                </div>
-                <div class="latam-logo-txt">LATAM<span>•</span></div>
+            <div class="go-detail-iframe-wrapper">
+                <iframe src="views/datos%20personales/registro_SUNAT.html" title="Registro de Equipos SUNAT"></iframe>
             </div>
-
-            <p style="color:#444; font-size:1.02rem; line-height:1.6; margin-bottom:22px;">Completa el formulario integrado abajo para registrar tus herramientas de trabajo tecnológicas corporativas y personales. Una vez enviado, deberás esperar el correo de Sala con la confirmación oficial.</p>
-
-            <h3 class="section-sub-title"><span class="material-icons">fact_check</span> Consideraciones del trámite</h3>
-            <div class="considerations-grid">
-                <div class="consideration-card">
-                    <h4><span class="material-icons">person</span> Límite de Registro</h4>
-                    <p>Se puede registrar un solo artículo por persona de forma activa.</p>
-                </div>
-                <div class="consideration-card">
-                    <h4><span class="material-icons">published_with_changes</span> Vigencia</h4>
-                    <p>No es necesario actualizar o volver a realizar este proceso si no se cambia el artículo.</p>
-                </div>
-                <div class="consideration-card alert-card">
-                    <h4><span class="material-icons">history_toggle_off</span> Restricción por Cambio</h4>
-                    <p>En caso de que cambie el artículo, debes esperar un año para volver a registrarlo.</p>
-                </div>
-            </div>
-
-            <form id="form-sunat" onsubmit="event.preventDefault(); alert('Simulación: Formulario de Registro de Equipos SUNAT enviado con éxito. Sala procesará tu solicitud y enviará la confirmación a tu correo corporativo.');">
-
-                <div class="form-group">
-                    <label>Correo electrónico <span>*</span></label>
-                    <input type="email" class="form-control" value="mario.fernandez@latam.com" required>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>BP <span>*</span></label>
-                        <input type="text" class="form-control" value="6014982" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Apellidos y Nombres <span>*</span></label>
-                        <input type="text" class="form-control" value="Mario Fernandez" required>
-                    </div>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>Fecha de Nacimiento <span>*</span></label>
-                        <input type="date" class="form-control" value="1992-07-02" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Pasaporte <span>*</span></label>
-                        <input type="text" class="form-control" placeholder="Ingresa el número de pasaporte" required>
-                    </div>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>Tipo de Equipo <span>*</span></label>
-                        <select class="form-control" required>
-                            <option value="" disabled>Elegir...</option>
-                            <option value="laptop" selected>Laptop</option>
-                            <option value="tablet">Tablet</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Uso <span>*</span></label>
-                        <select class="form-control" required>
-                            <option value="" disabled selected>Elegir...</option>
-                            <option value="corporativo">Corporativo</option>
-                            <option value="personal">Personal</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Marca <span>*</span></label>
-                    <input type="text" class="form-control" placeholder="Ej. Lenovo, Apple, HP" required>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>Modelo <span>*</span> <em>(Ingresar sin guiones)</em></label>
-                        <input type="text" class="form-control" placeholder="Ej. ThinkPad T490" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Serie <span>*</span> <em>(Ingresar sin guiones)</em></label>
-                        <input type="text" class="form-control" placeholder="Ej. PF1K2345" required>
-                    </div>
-                </div>
-
-                <div class="form-submit-bar">
-                    <button type="button" class="latam-btn btn-cancel" onclick="document.getElementById('form-sunat').reset();">Borrar formulario</button>
-                    <button type="submit" class="latam-btn">Enviar Registro</button>
-                </div>
-
-            </form>
-
-            <div class="latam-footer">
-                <p>Gerencia de Servicio a Bordo Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
-                <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Seguridad • Ser Atento • Sostenibilidad • SOMOS LATAM</p>
-            </div>
-
         </div>
     </div>
 </div>
