@@ -1,9 +1,9 @@
 :root {
-    --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
-    --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+    --latam-main: #0F004F;      /* Azul/Morado Oscuro LATAM */
+    --latam-coral: #ED1650;     /* Coral/Magenta LATAM */
     --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
     --latam-border: #ccccde;    /* Bordes sutiles */
-    --step-orange: #ff5722;     /* Conector lúdico del flujo */
+    --step-orange: #4257E8;     /* Conector lúdico del flujo */
     --white: #ffffff;
     --briefing-color: #fff1f8; /* Fondo de alerta destacada */
 }
@@ -12,7 +12,7 @@
    INSTRUCTIVO DE VALES: EMBEBIDO EN EL PANEL DE DETALLE (data-detail="1")
    ========================================================================== */
 .vales-hero {
-    background: linear-gradient(135deg, var(--latam-main) 0%, #33116e 100%);
+    background: linear-gradient(135deg, var(--latam-main) 0%, #ED1650 100%);
     border-radius: 14px;
     padding: 32px 30px;
     margin-bottom: 30px;

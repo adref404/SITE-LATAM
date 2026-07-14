@@ -1,10 +1,10 @@
 :root {
-    --latam-main: #1b004a;      /* Azul/Morado Oscuro LATAM */
-    --latam-coral: #e8117f;     /* Coral/Magenta LATAM */
+    --latam-main: #0F004F;      /* Azul/Morado Oscuro LATAM */
+    --latam-coral: #ED1650;     /* Coral/Magenta LATAM */
     --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
     --latam-text: #333333;      /* Texto principal */
     --latam-border: #ccccde;    /* Bordes sutiles */
-    --step-orange: #ff5722;     /* Conector lúdico del flujo */
+    --step-orange: #4257E8;     /* Conector lúdico del flujo */
     --white: #ffffff;
 }
 
