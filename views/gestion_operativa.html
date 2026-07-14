@@ -15,26 +15,13 @@
         <div class="go-carousel-track">
 
             <div class="go-card">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80" alt="Vales Alimentación">
-                <div class="go-card-body">
-                    <h3>Vales Alimentación</h3>
-                    <p>Genera y consulta tus vales digitales de alimentación desde la app corporativa.</p>
-                    <div class="go-card-meta">
-                        <span><span class="material-icons">restaurant</span> Viáticos y Alimentación</span>
-                        <span><span class="material-icons">apps</span> AppSheet</span>
-                    </div>
-                    <button class="go-card-btn" onclick="showGoDetail(0)">Ingresar</button>
-                </div>
-            </div>
-
-            <div class="go-card">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Instructivo de Vales">
                 <div class="go-card-body">
                     <h3>Instructivo de Vales</h3>
                     <p>Guía completa de uso y canje de vales en la red de restaurantes autorizados.</p>
                     <div class="go-card-meta">
                         <span><span class="material-icons">restaurant</span> Viáticos y Alimentación</span>
-                        <span><span class="material-icons">picture_as_pdf</span> PDF</span>
+                        <span><span class="material-icons">picture_as_pdf</span> Regístrate, Genera y Canjea</span>
                     </div>
                     <button class="go-card-btn" onclick="showGoDetail(1)">Ingresar</button>
                 </div>
@@ -50,19 +37,6 @@
                         <span><span class="material-icons">monetization_on</span> Formulario</span>
                     </div>
                     <button class="go-card-btn" onclick="showGoDetail(2)">Ingresar</button>
-                </div>
-            </div>
-
-            <div class="go-card">
-                <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=500&q=80" alt="Plataforma Viáticos">
-                <div class="go-card-body">
-                    <h3>Plataforma Viáticos</h3>
-                    <p>Manual de acceso y uso de la plataforma oficial de rendición de viáticos.</p>
-                    <div class="go-card-meta">
-                        <span><span class="material-icons">restaurant</span> Viáticos y Alimentación</span>
-                        <span><span class="material-icons">receipt_long</span> PDF</span>
-                    </div>
-                    <button class="go-card-btn" onclick="showGoDetail(3)">Ingresar</button>
                 </div>
             </div>
 
@@ -92,19 +66,6 @@
                 </div>
             </div>
 
-            <!-- <div class="go-card">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80" alt="Solicitud de Lanyard">
-                <div class="go-card-body">
-                    <h3>Solicitud de Lanyard FORM</h3>
-                    <p>Solicita la reposición de tu porta credencial oficial en caso de pérdida o deterioro.</p>
-                    <div class="go-card-meta">
-                        <span><span class="material-icons">checkroom</span> Presentación Personal</span>
-                        <span><span class="material-icons">bookmark_border</span> Formulario</span>
-                    </div>
-                    <button class="go-card-btn" onclick="showGoDetail(6)">Ingresar</button>
-                </div>
-            </div> -->
-
         </div>
     </div>
 
@@ -128,25 +89,11 @@
         <div class="go-detail-content" data-detail="1">
 
             <div class="vales-hero">
-                <span class="vales-hero-badge">Actualizado</span>
                 <h1 class="vales-hero-title">Instructivo: App Vales de Alimentación</h1>
-                <p class="vales-hero-text">Sigue la guía interactiva para descargar, generar y canjear tus vales de alimentación diarios, paso a paso.</p>
-
-                <div class="vales-role-grid">
-                    <div class="vales-role-card">
-                        <div class="vales-role-icon"><span class="material-icons">flight_takeoff</span></div>
-                        <h3>Tripulación de Cabina</h3>
-                        <p>Accede de forma directa a la app de vales precargada en tu <strong>One Device</strong> corporativo.</p>
-                    </div>
-                    <div class="vales-role-card">
-                        <div class="vales-role-icon"><span class="material-icons">engineering</span></div>
-                        <h3>Tripulación de Mando</h3>
-                        <p>Descarga la app escaneando el código QR oficial desde tu celular personal.</p>
-                        <div class="app-qr-row">
-                            <img src="img/instructivo_vales/codigo QR de la app.png" alt="Código QR de descarga de la app" class="app-qr-thumb">
-                            <button type="button" class="vales-qr-btn" data-step-jump="1"><span class="material-icons" style="font-size:14px">qr_code_2</span> Ver QR de Descarga</button>
-                        </div>
-                    </div>
+                <p class="vales-hero-text">Sigue la guía para descargar, generar y canjear tus vales de alimentación diarios, paso a paso.</p>
+                <div class="app-qr-row">
+                    <img src="img/instructivo_vales/codigo QR de la app.png" alt="Código QR de descarga de la app" class="app-qr-thumb">
+                    <button type="button" class="vales-qr-btn" data-step-jump="1"><span class="material-icons" style="font-size:14px">qr_code_2</span> Ver QR de Descarga</button>
                 </div>
             </div>
 
@@ -158,7 +105,6 @@
             </div>
 
             <h2 class="section-sub-title"><span class="material-icons">explore</span> Guía de Uso</h2>
-            <p class="vales-flow-hint">Haz clic en los pasos de la izquierda o navega con las flechas del celular para ver el proceso.</p>
 
             <div class="vales-flow" id="vales-flow">
 
@@ -194,6 +140,21 @@
                             <h4><span class="material-icons">qr_code_2</span> Presenta y Canjea</h4>
                             <p>Muestra el código QR generado en caja para que sea escaneado por el restaurante. También tienes la opción de dictar el código alfanumérico en pantalla.</p>
                         </div>
+                    </div>
+
+                    <div class="vflow-mobile-nav">
+                        <button type="button" class="vflow-arrow vflow-prev" aria-label="Paso anterior">
+                            <span class="material-icons">chevron_left</span>
+                        </button>
+                        <div class="vflow-dots">
+                            <span class="vflow-dot active" data-step="1"></span>
+                            <span class="vflow-dot" data-step="2"></span>
+                            <span class="vflow-dot" data-step="3"></span>
+                            <span class="vflow-dot" data-step="4"></span>
+                        </div>
+                        <button type="button" class="vflow-arrow vflow-next" aria-label="Paso siguiente">
+                            <span class="material-icons">chevron_right</span>
+                        </button>
                     </div>
 
                 </div>
@@ -234,62 +195,42 @@
 
             </div>
 
-            <h2 class="section-sub-title"><span class="material-icons">info</span> Consideraciones de Uso</h2>
-            <div class="considerations-grid">
-                <div class="consideration-card">
-                    <h4><span class="material-icons" style="color:#4285f4">folder</span> Historial de Pendientes</h4>
-                    <p>En la sección <strong>"Vales generados"</strong> podrás encontrar todos los vales que emitiste pero que aún no han sido canjeados en restaurantes.</p>
-                </div>
-                <div class="consideration-card alert-card">
-                    <h4><span class="material-icons" style="color:var(--latam-coral)">history_toggle_off</span> Vencimiento Diario</h4>
-                    <p>Una vez generado el vale, este puede ser usado <strong>una sola vez y hasta finalizar el día</strong>. Pasado este lapso, el vale vencerá automáticamente.</p>
-                </div>
-                <div class="consideration-card">
-                    <h4><span class="material-icons" style="color:#34a853">task_alt</span> Control de Consumo</h4>
-                    <p>En la sección <strong>"Vales usados"</strong> podrás validar el detalle histórico del vale que canjeaste y la información desglosada de lo consumido.</p>
-                </div>
-                <div class="consideration-card">
-                    <h4><span class="material-icons" style="color:#fbbc05">wifi</span> Conexión Recomendada</h4>
-                    <p>Busca contar con una <strong>conexión a internet estable</strong> en tu dispositivo móvil al momento de generar el QR para un rendimiento óptimo.</p>
+            <h2 class="section-sub-title go-collapsible-trigger" onclick="toggleGoCollapse(this)">
+                <span class="material-icons">info</span> Consideraciones de Uso
+                <span class="material-icons go-collapsible-arrow">expand_more</span>
+            </h2>
+            <div class="go-collapsible-body">
+                <div class="considerations-grid">
+                    <div class="consideration-card">
+                        <h4><span class="material-icons" style="color:#4285f4">folder</span> Historial de Pendientes</h4>
+                        <p>En la sección <strong>"Vales generados"</strong> podrás encontrar todos los vales que emitiste pero que aún no han sido canjeados en restaurantes.</p>
+                    </div>
+                    <div class="consideration-card alert-card">
+                        <h4><span class="material-icons" style="color:var(--latam-coral)">history_toggle_off</span> Vencimiento Diario</h4>
+                        <p>Una vez generado el vale, este puede ser usado <strong>una sola vez y hasta finalizar el día</strong>. Pasado este lapso, el vale vencerá automáticamente.</p>
+                    </div>
+                    <div class="consideration-card">
+                        <h4><span class="material-icons" style="color:#34a853">task_alt</span> Control de Consumo</h4>
+                        <p>En la sección <strong>"Vales usados"</strong> podrás validar el detalle histórico del vale que canjeaste y la información desglosada de lo consumido.</p>
+                    </div>
+                    <div class="consideration-card">
+                        <h4><span class="material-icons" style="color:#fbbc05">wifi</span> Conexión Recomendada</h4>
+                        <p>Busca contar con una <strong>conexión a internet estable</strong> en tu dispositivo móvil al momento de generar el QR para un rendimiento óptimo.</p>
+                    </div>
                 </div>
             </div>
 
-            <h2 class="section-sub-title"><span class="material-icons">storefront</span> Red de Restaurantes Autorizados</h2>
-            <p style="font-size: 0.95rem; color:#555; margin-bottom: 20px;">Puedes utilizar tus vales activos generados en los siguientes locales autorizados:</p>
-
-            <div class="restaurants-grid">
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#f59e0b">B</span><h5>La Bonbonniere</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#facc15; color:#1e293b">TORI</span><h5>Tori Pollería</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#111827">KO</span><h5>KO Asian</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#2563eb">BB</span><h5>Burgerboy</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#dc2626">WOK</span><h5>Wok to Gate</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#15803d">NAT</span><h5>Natoo Healthy</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#64748b">LR</span><h5>Los Reyes</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#7dd3fc; color:#1e293b">PAN</span><h5>PansalAire</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#a8a29e; color:#1e293b">BAG</span><h5>La Baguette</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#3b2314">PK</span><h5>Puku Puku</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#27272a">MKT</span><h5>Travel Market</h5></div>
-                <div class="restaurant-card"><span class="restaurant-badge" style="background:#b91c1c">FRI</span><h5>TGI Fridays</h5></div>
-            </div>
-
-            <div class="latam-footer">
-                <p>Gerencia de Servicio a Bordo Región Andina • Cuidamos que tus sueños lleguen a su destino</p>
-                <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">Sostenibilidad • Operación Conforme • SOMOS LATAM</p>
-            </div>
+            <h2 class="section-sub-title go-clickable-title" onclick="openImagePopup('img/instructivo_vales/restaurantes_autorizados.png', 'Mapa de restaurantes autorizados para canje de vales')">
+                <span class="material-icons">storefront</span> Red de Restaurantes Autorizados
+                <span class="material-icons go-clickable-hint-icon">zoom_in</span>
+            </h2>
+            <p style="font-size: 0.95rem; color:#555; margin-bottom: 20px;">Puedes utilizar tus vales activos generados en los siguientes locales autorizados. <strong>Toca el título para ver el mapa completo.</strong></p>
 
         </div>
 
         <div class="go-detail-content" data-detail="2">
             <div class="go-detail-iframe-wrapper">
                 <iframe src="views/gestion%20operativa/Consultas%20Vi%C3%A1ticos%20y%20Horas%20de%20Vuelo.html" title="Consultas Viáticos y Horas de Vuelo"></iframe>
-            </div>
-        </div>
-
-        <div class="go-detail-content" data-detail="3">
-            <h3><span class="material-icons">receipt_long</span> Plataforma Viáticos</h3>
-            <p>Consulta el manual de acceso y uso de la plataforma oficial de rendición de viáticos para tu jornada operativa.</p>
-            <div class="go-detail-actions">
-                <button class="go-detail-btn" onclick="alert('Simulación: Descargando Documento de Plataforma de Viáticos...');">Descargar PDF</button>
             </div>
         </div>
 
@@ -306,13 +247,12 @@
                 <iframe src="views/gestion%20operativa/Cambio%20de%20Uniforme.html" title="Cambio de Uniforme"></iframe>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- <div class="go-detail-content" data-detail="6">
-            <h3><span class="material-icons">bookmark_border</span> Solicitud de Lanyard</h3>
-            <p>Solicita la reposición de tu porta credencial oficial en caso de pérdida o deterioro.</p>
-            <div class="go-detail-actions">
-                <button class="go-detail-btn" onclick="alert('Simulación: Abriendo Formulario de Solicitud de Lanyard...');">Abrir Formulario</button>
-            </div>
-        </div> -->
+<div class="image-popup-overlay" id="image-popup-overlay" onclick="if(event.target === this) closeImagePopup()">
+    <div class="image-popup">
+        <button type="button" class="image-popup-close" onclick="closeImagePopup()" aria-label="Cerrar">&times;</button>
+        <img id="image-popup-img" src="" alt="">
     </div>
 </div>

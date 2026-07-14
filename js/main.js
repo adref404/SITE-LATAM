@@ -237,6 +237,7 @@ document.addEventListener('keydown', (e) => {
         closeBannerModal();
         closeHelpModal();
         closeMobileMenu();
+        closeImagePopup();
     }
 });
 
@@ -300,8 +301,10 @@ function initValesFlow() {
     const steps = Array.from(flow.querySelectorAll('.vflow-step'));
     const dots = Array.from(flow.querySelectorAll('.vflow-dot'));
     const img = document.getElementById('vflow-img');
-    const prevBtn = flow.querySelector('.vflow-prev');
-    const nextBtn = flow.querySelector('.vflow-next');
+    // Puede haber más de un par de flechas (junto al teléfono y, en móvil,
+    // debajo de la tarjeta del paso activo), así que se enlazan todas.
+    const prevBtns = Array.from(flow.querySelectorAll('.vflow-prev'));
+    const nextBtns = Array.from(flow.querySelectorAll('.vflow-next'));
     if (steps.length === 0 || !img) return;
 
     let activeIndex = steps.findIndex(s => s.classList.contains('active'));
@@ -311,7 +314,12 @@ function initValesFlow() {
         activeIndex = (index + steps.length) % steps.length;
 
         steps.forEach((step, i) => step.classList.toggle('active', i === activeIndex));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+        // Puede haber más de un grupo de dots (junto al teléfono y en la nav
+        // móvil), así que se comparan por su propio data-step, no por posición.
+        dots.forEach(dot => {
+            const dotStep = Number(dot.getAttribute('data-step')) - 1;
+            dot.classList.toggle('active', dotStep === activeIndex);
+        });
 
         const target = steps[activeIndex];
         img.src = target.getAttribute('data-img');
@@ -319,9 +327,12 @@ function initValesFlow() {
     }
 
     steps.forEach((step, i) => step.addEventListener('click', () => setActive(i)));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => setActive(i)));
-    if (prevBtn) prevBtn.addEventListener('click', () => setActive(activeIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => setActive(activeIndex + 1));
+    dots.forEach(dot => {
+        const dotStep = Number(dot.getAttribute('data-step')) - 1;
+        dot.addEventListener('click', () => setActive(dotStep));
+    });
+    prevBtns.forEach(btn => btn.addEventListener('click', () => setActive(activeIndex - 1)));
+    nextBtns.forEach(btn => btn.addEventListener('click', () => setActive(activeIndex + 1)));
 
     document.querySelectorAll('[data-step-jump]').forEach(button => {
         button.addEventListener('click', () => {
@@ -332,6 +343,36 @@ function initValesFlow() {
     });
 
     setActive(activeIndex);
+}
+
+// Título desplegable genérico (p. ej. "Consideraciones de Uso" del instructivo de vales)
+function toggleGoCollapse(header) {
+    const body = header.nextElementSibling;
+    if (!body) return;
+
+    header.classList.toggle('open');
+
+    if (header.classList.contains('open')) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+        body.style.maxHeight = null;
+    }
+}
+
+// Popup de imagen (p. ej. mapa de restaurantes autorizados)
+function openImagePopup(src, alt) {
+    const overlay = document.getElementById('image-popup-overlay');
+    const img = document.getElementById('image-popup-img');
+    if (!overlay || !img) return;
+
+    img.src = src;
+    img.alt = alt || '';
+    overlay.classList.add('active');
+}
+
+function closeImagePopup() {
+    const overlay = document.getElementById('image-popup-overlay');
+    if (overlay) overlay.classList.remove('active');
 }
 
 // ==========================================================================

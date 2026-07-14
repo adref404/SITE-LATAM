@@ -289,10 +289,9 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-.vales-phone-col .vflow-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/* Look compartido del botón de flecha (junto al teléfono y en la navegación
+   móvil de la tarjeta de pasos) */
+.vflow-arrow {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -307,9 +306,16 @@
     transition: background-color 0.2s, color 0.2s;
 }
 
-.vales-phone-col .vflow-arrow:hover {
+.vflow-arrow:hover {
     background: var(--latam-coral);
     color: var(--white);
+}
+
+/* Junto al teléfono flotan sobre los bordes; en la navegación móvil van en línea */
+.vales-phone-col .vflow-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .vales-phone-col .vflow-prev { left: -6px; }
@@ -332,6 +338,16 @@
 .vflow-dot.active {
     background: var(--latam-coral);
     transform: scale(1.2);
+}
+
+/* Navegación propia de la tarjeta de pasos en móvil (oculta en escritorio,
+   ver el bloque "un paso por vez" más abajo) */
+.vflow-mobile-nav {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 8px;
 }
 
 /* QR DE DESCARGA DE LA APP (Tripulación de Mando) */
@@ -372,6 +388,100 @@
     gap: 10px;
     border-bottom: 2px solid var(--latam-main);
     padding-bottom: 8px;
+}
+
+/* "Consideraciones de Uso": título desplegable */
+.go-collapsible-trigger {
+    cursor: pointer;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.go-collapsible-arrow {
+    color: var(--latam-coral);
+    transition: transform 0.3s ease;
+}
+
+.go-collapsible-trigger.open .go-collapsible-arrow {
+    transform: rotate(180deg);
+}
+
+.go-collapsible-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.go-collapsible-body .considerations-grid {
+    padding-top: 2px;
+}
+
+/* "Red de Restaurantes Autorizados": título clicable que abre el popup */
+.go-clickable-title {
+    cursor: pointer;
+    justify-content: space-between;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.go-clickable-title:hover {
+    color: var(--latam-coral);
+}
+
+.go-clickable-hint-icon {
+    color: var(--latam-coral);
+}
+
+/* POPUP DE IMAGEN (mapa de restaurantes autorizados, etc.) */
+.image-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 2500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.image-popup-overlay.active {
+    display: flex;
+}
+
+.image-popup {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.image-popup img {
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.image-popup-close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--white);
+    color: var(--latam-main);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.image-popup-close:hover {
+    background: var(--latam-coral);
+    color: var(--white);
 }
 
 .considerations-grid {
@@ -524,6 +634,35 @@
         order: -1;
         margin-bottom: 10px;
     }
-    .vflow-step { padding: 14px 16px; }
+
+    /* Un paso por vez, como una tarjeta (estilo carrusel), en vez de la
+       lista completa de 4 pasos apilados */
+    .vales-steps-col {
+        gap: 0;
+    }
+    .vflow-step {
+        display: none;
+        padding: 20px 18px;
+    }
+    .vflow-step.active {
+        display: flex;
+        cursor: default;
+    }
+
+    /* Las flechas y puntos junto al teléfono quedan reemplazados por los
+       propios de la tarjeta de pasos, para no duplicar controles */
+    .vales-phone-col .vflow-arrow,
+    .vales-phone-col .vflow-dots {
+        display: none;
+    }
+    .vflow-mobile-nav {
+        display: flex;
+    }
+
     .app-qr-thumb:hover { transform: scale(2); }
+
+    .image-popup-close {
+        top: -14px;
+        right: 0;
+    }
 }
