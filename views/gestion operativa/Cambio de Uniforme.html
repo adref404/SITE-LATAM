@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root {
-            --latam-main: #0F004F;      /* Azul/Morado Oscuro LATAM */
+            --latam-main: #1B0088;      /* Azul/Morado Oscuro LATAM */
             --latam-coral: #ED1650;     /* Coral/Magenta LATAM */
             --latam-gray-bg: #f3f4f7;   /* Fondo gris claro corporativo */
             --latam-text: #333333;      /* Texto principal */
@@ -110,7 +110,7 @@
         .grid-option-card.active .option-text { color: var(--latam-main); }
 
         /* RECUADROS CONDICIONALES ACORDEÓN DESPLEGABLES (PASO 3) */
-        .conditional-accordion-wrapper { display: none; margin-top: 15px; border-top: 3px solid var(--latam-main); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); overflow: hidden; }
+        .conditional-accordion-wrapper { display: none; position: relative; z-index: 1; background: var(--white); margin-top: 15px; border-top: 3px solid var(--latam-main); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); overflow: hidden; }
         .conditional-accordion-wrapper.open { display: block; animation: slideDown 0.3s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
