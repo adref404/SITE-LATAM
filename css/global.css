@@ -1230,22 +1230,22 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
 
 .latam-timeline {
     position: relative;
-    padding-left: 55px;
 }
 
 .latam-timeline::before {
     content: '';
     position: absolute;
     top: 20px;
-    left: 22px;
-    width: 4px;
-    height: calc(100% - 45px);
+    left: 36px;
+    width: 2px;
+    height: calc(100% - 60px);
     background: #4257E8;
-    z-index: 1;
+    z-index: 0;
 }
 
 .latam-step {
     position: relative;
+    z-index: 1;
     margin-bottom: 28px;
     border: 1px solid var(--gray-border);
     border-radius: 10px;
@@ -1260,20 +1260,19 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
 
 .latam-step-num {
     position: absolute;
-    left: -55px;
-    top: 14px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    left: 20px;
+    top: 18px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
     background: #4257E8;
     color: var(--white);
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
-    box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .latam-step-trigger {
@@ -1281,7 +1280,7 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
     background: none;
     border: none;
     text-align: left;
-    padding: 20px 24px;
+    padding: 18px 24px 18px 70px;
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--primary-color);
@@ -1289,6 +1288,7 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 70px;
 }
 
 .latam-step-trigger .title-content {
@@ -1341,22 +1341,20 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
 }
 
 @media (max-width: 768px) {
-    .latam-timeline {
-        padding-left: 45px;
-    }
     .latam-timeline::before {
-        left: 17px;
+        left: 31px;
     }
     .latam-step-num {
-        left: -45px;
-        width: 32px;
-        height: 32px;
-        font-size: 0.95rem;
+        left: 16px;
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
         top: 16px;
     }
     .latam-step-trigger {
-        padding: 16px;
+        padding: 16px 16px 16px 60px;
         font-size: 1rem;
+        min-height: 62px;
     }
     .latam-header {
         flex-wrap: wrap;

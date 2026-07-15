@@ -72,7 +72,7 @@
         .latam-logo-txt span { color: var(--latam-coral); }
 
         /* REGLAS CRÍTICAS DE TIEMPO */
-        .description-area { padding: 30px 40px 10px 40px; }
+        .description-area { padding: 30px 20px 10px 20px; }
         .description-area p { font-size: 1.05rem; line-height: 1.6; color: #444; margin-bottom: 20px; }
 
         .time-rules-card {
@@ -116,8 +116,7 @@
         /* LÍNEA DE TIEMPO CONECTORA CRONOLÓGICA */
         .latam-timeline {
             position: relative;
-            padding-left: 95px;
-            padding-right: 40px;
+            padding: 0 40px;
             margin-top: 20px;
         }
 
@@ -125,25 +124,25 @@
             content: '';
             position: absolute;
             top: 20px;
-            left: 58px;
-            width: 4px;
-            height: calc(100% - 45px);
+            left: 75px;
+            width: 2px;
+            height: calc(100% - 62px);
             background: var(--step-orange);
-            z-index: 1;
+            z-index: 0;
         }
 
         /* COMPONENTE PASOS EXPANSIBLES */
-        .latam-step { position: relative; margin-bottom: 30px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step { position: relative; z-index: 1; margin-bottom: 30px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
         .latam-step-num {
-            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
-            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
-            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+            position: absolute; left: 20px; top: 18px; width: 34px; height: 34px; border-radius: 8px;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
         }
 
         .latam-step-trigger {
-            width: 100%; background: none; border: none; text-align: left; padding: 20px 24px;
+            width: 100%; background: none; border: none; text-align: left; padding: 18px 24px 18px 70px;
             font-size: 1.2rem; font-weight: 700; color: var(--latam-main); cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; justify-content: space-between; align-items: center; min-height: 70px;
         }
 
         .latam-step-trigger .title-content { display: flex; align-items: center; gap: 14px; }
@@ -226,10 +225,10 @@
             .latam-header { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
             .description-area { padding: 20px; }
             .rules-grid { grid-template-columns: 1fr; gap: 10px; }
-            .latam-timeline { padding: 20px 15px 20px 60px; }
-            .latam-timeline::before { left: 32px; }
-            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
-            .latam-step-trigger { padding: 16px; font-size: 1.05rem; }
+            .latam-timeline { padding: 0 15px; }
+            .latam-timeline::before { left: 45px; }
+            .latam-step-num { left: 16px; width: 30px; height: 30px; font-size: 0.9rem; top: 16px; }
+            .latam-step-trigger { padding: 16px 16px 16px 60px; font-size: 1.05rem; min-height: 62px; }
             .btn-redirect-form { width: 100%; justify-content: center; }
         }
     </style>
@@ -289,7 +288,6 @@
                 <div class="latam-step-num">1</div>
                 <button class="latam-step-trigger">
                     <div class="title-content">
-                        <span class="material-icons">assignment</span>
                         Tramitar la Carta de Presentación Consular (Cartas Visa)
                     </div>
                     <span class="material-icons arrow-icon">expand_more</span>
@@ -312,7 +310,6 @@
                 <div class="latam-step-num">2</div>
                 <button class="latam-step-trigger">
                     <div class="title-content">
-                        <span class="material-icons">shield</span>
                         Agendar la Cita y Activar la Protección de Rol
                     </div>
                     <span class="material-icons arrow-icon">expand_more</span>
@@ -334,7 +331,6 @@
                 <div class="latam-step-num">3</div>
                 <button class="latam-step-trigger">
                     <div class="title-content">
-                        <span class="material-icons">payments</span>
                         Solicitar Reembolso vía SAB Concur
                     </div>
                     <span class="material-icons arrow-icon">expand_more</span>
@@ -358,7 +354,6 @@
                 <div class="latam-step-num">4</div>
                 <button class="latam-step-trigger">
                     <div class="title-content">
-                        <span class="material-icons">cloud_done</span>
                         Registro Final de Documento Emitido o Alerta de Rechazo
                     </div>
                     <span class="material-icons arrow-icon">expand_more</span>

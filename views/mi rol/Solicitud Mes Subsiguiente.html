@@ -70,7 +70,7 @@
         .header-badge p { font-size: 1.1rem; opacity: 0.9; }
 
         /* DESCRIPCIÓN Y CUADRO DE PLAZO MÁXIMO IMPRORROGABLE */
-        .description-area { padding: 30px 40px 10px 40px; }
+        .description-area { padding: 30px 20px 10px 20px; }
         .description-area p { font-size: 1rem; line-height: 1.6; color: #444; }
 
         .deadline-rule-card {
@@ -108,21 +108,30 @@
         .empalme-alert .material-icons { color: #f57f17; font-size: 1.4rem; flex-shrink: 0; }
 
         /* LÍNEA DE TIEMPO CONECTORA */
-        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline { position: relative; padding: 20px 40px 40px 40px; }
         .latam-timeline::before {
-            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
-            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+            content: ''; position: absolute; top: 40px; left: 75px; width: 2px;
+            height: calc(100% - 117px); background: var(--step-orange); z-index: 0;
         }
 
-        .latam-step { position: relative; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step { position: relative; z-index: 1; margin-bottom: 25px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
         .latam-step-num {
-            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
-            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
-            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+            position: absolute; left: 20px; top: 18px; width: 34px; height: 34px; border-radius: 8px;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
         }
 
-        .step-title { padding: 20px 25px; font-size: 1.15rem; font-weight: 700; color: var(--latam-main); border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; }
-        .step-body { padding: 25px; }
+        .step-title {
+            width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+            padding: 20px 25px 20px 70px; font-size: 1.15rem; font-weight: 700; color: var(--latam-main);
+            border-bottom: 1px solid #f0f0f5; display: flex; justify-content: space-between; align-items: center;
+            gap: 10px; min-height: 34px;
+        }
+        .step-title .arrow-icon { color: var(--step-orange); transition: transform 0.3s ease; flex-shrink: 0; }
+        .latam-step.active .step-title { color: var(--latam-coral); }
+        .latam-step.active .step-title .arrow-icon { transform: rotate(180deg); }
+        .step-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .step-body-inner { padding: 25px; }
 
         /* GRUPO DE FORMULARIOS */
         .form-group { margin-bottom: 18px; }
@@ -177,9 +186,10 @@
         @media (max-width: 768px) {
             .header-banner { height: 140px; padding-left: 20px; }
             .header-badge { padding: 8px 16px; }
-            .latam-timeline { padding: 20px 15px 20px 60px; }
-            .latam-timeline::before { left: 32px; }
-            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .latam-timeline { padding: 20px 15px; }
+            .latam-timeline::before { left: 45px; }
+            .latam-step-num { left: 16px; width: 30px; height: 30px; font-size: 0.9rem; top: 16px; }
+            .step-title { padding: 16px 16px 16px 60px; font-size: 1.05rem; }
             .options-grid { grid-template-columns: 1fr; }
             .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
             .action-bar { padding: 20px; }
@@ -230,8 +240,12 @@
             <!-- PASO 1: AUTENTICACIÓN Y VALIDACIÓN DE PERIODO -->
             <div class="latam-step">
                 <div class="latam-step-num">1</div>
-                <div class="step-title"><span class="material-icons">account_box</span> Identificación del Tripulante</div>
+                <button type="button" class="step-title" onclick="toggleInfoStep(this)">
+                    <span>Identificación del Tripulante</span>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
                 <div class="step-body">
+                    <div class="step-body-inner">
                     <div class="form-grid-2">
                         <div class="form-group">
                             <label>Ingresa tu BP *</label>
@@ -262,14 +276,19 @@
                             </p>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
             <!-- PASO 2: GRILLA INTEGRAL DE TODAS LAS OPCIONES REALES -->
             <div class="latam-step" id="step-categories-container" style="opacity:0.5; pointer-events:none;">
                 <div class="latam-step-num">2</div>
-                <div class="step-title"><span class="material-icons">touch_app</span> Selecciona la novedad o excepción que deseas reportar</div>
+                <button type="button" class="step-title" onclick="toggleInfoStep(this)">
+                    <span>Selecciona la novedad o excepción que deseas reportar</span>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
                 <div class="step-body">
+                    <div class="step-body-inner">
                     <div class="options-grid">
                         <div class="grid-option-card" data-target="flow-afectacion" onclick="triggerSubForm(this)">
                             <div class="dot-radio"></div><span class="option-text">Libre compensado por afectación (> 06:00 hrs)</span>
@@ -286,6 +305,7 @@
                         <div class="grid-option-card" data-target="flow-permisos-master" onclick="triggerSubForm(this)" style="border-left: 3px solid var(--latam-coral)">
                             <div class="dot-radio"></div><span class="option-text" style="color:var(--latam-main); font-weight:700;">Solicitud de Permisos Especiales</span>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -398,6 +418,25 @@
 
     <!-- CONTROL INTERACTIVO CONDICIONAL -->
     <script>
+        function toggleInfoStep(button) {
+            const stepElement = button.parentElement;
+            const bodyElement = button.nextElementSibling;
+
+            stepElement.classList.toggle('active');
+
+            if (stepElement.classList.contains('active')) {
+                bodyElement.style.maxHeight = bodyElement.scrollHeight + 'px';
+            } else {
+                bodyElement.style.maxHeight = null;
+            }
+        }
+
+        document.querySelectorAll('.latam-step').forEach(step => {
+            step.classList.add('active');
+            const body = step.querySelector('.step-body');
+            if (body) body.style.maxHeight = body.scrollHeight + 'px';
+        });
+
         function evaluateDeadline() {
             const status = document.getElementById('target-month-select').value;
             const rejectionCard = document.getElementById('live-rejection-card');

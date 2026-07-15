@@ -144,10 +144,9 @@
 }
 
 .faq-toggle {
-    font-size: 1.5rem;
-    font-weight: bold;
     color: var(--accent-color);
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 .faq-answer {
@@ -164,7 +163,7 @@
 }
 
 .faq-item.active .faq-toggle {
-    transform: rotate(45deg);
+    transform: rotate(180deg);
 }
 
 /* ==========================================================================

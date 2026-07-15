@@ -69,7 +69,7 @@
         .header-badge h1 { font-size: 1.5rem; font-weight: 700; line-height: 1; }
         .header-badge p { font-size: 1rem; opacity: 0.9; }
 
-        .intro-text { padding: 30px 40px 10px 40px; font-size: 1.05rem; line-height: 1.5; color: #444; }
+        .intro-text { padding: 30px 20px 10px 20px; font-size: 1.05rem; line-height: 1.5; color: #444; }
 
         /* ==========================================================================
            COMPONENTE DE ACCIONES MAESTRAS (MANUAL PDF + TALLER VIDEO YOUTUBE)
@@ -185,69 +185,6 @@
             </a>
         </div>
 
-        <!-- ==========================================================================
-           BUSCADOR INTERACTIVO Y TABLA DE DATOS FILTRABLE
-           ========================================================================== -->
-        <div class="search-table-section">
-            
-            <div class="search-wrapper">
-                <span class="material-icons">search</span>
-                <input type="text" id="pbs-search-field" class="search-input-field" placeholder="Busca por tus apellidos, nombres o categoría..." onkeyup="filterPBSTable()">
-            </div>
-
-            <div class="table-scroll-panel">
-                <table class="pbs-data-table" id="pbs-master-table">
-                    <thead>
-                        <tr>
-                            <th>Apellidos y Nombres</th>
-                            <th>Categoría</th>
-                            <th>Grupo Asignado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Grupo 1 -->
-                        <tr><td>ILLICH IBAÑEZ PAOLA KARINA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>VERNE MANNARELLI ANA VANESSA MARIA MARTA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>RONCAGLIOLO LASTRES MARITZA ELSA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>CAMPOS DE MORAES LAΝΑ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>FORT MOSQUERA ANGELITA GRACIELA IRENE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>ANAYA BARRAZA MARJORIE KARINA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>NARANJO MENDIGUREN JESSICA DEL CARMEN</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <tr><td>CABRERA MOORE GLADYS CAROLINE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 1</td></tr>
-                        <!-- Grupo 2 -->
-                        <tr><td>ABRISQUETA MORENO YVETTE LILIAM</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <tr><td>TORRES ESCURRA SAMANTHA DRINA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <tr><td>YEP LAU ELIZABETH CHANG</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <tr><td>GARCIA CAHUAS NIMER NAGUIH</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <tr><td>RIVADENEYRA GUERRERO LUIS ALEJANDRO JUNIOR</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <tr><td>MOYANO PAJARES CLAUDIA MARGARITA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 2</td></tr>
-                        <!-- Grupo 3 -->
-                        <tr><td>RODRIGUEZ MURILLO BRUNO RENZO</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
-                        <tr><td>MELÉNDEZ TENICELA NATHALIE NICOLE</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
-                        <tr><td>GARIBOTTI MEDINA MARITZA ERNESTA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 3</td></tr>
-                        <tr><td>SEDAN YACILA KAROL FIORELLA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 3</td></tr>
-                        <tr><td>VALDIVIA VASQUEZ CARLA PAMELA</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 3</td></tr>
-                        <!-- Grupo 4 -->
-                        <tr><td>ZAPATA GARAYAR JAVIER RICARDO SALVADOR</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 4</td></tr>
-                        <tr><td>REYNA ALVAREZ ELIZAΒΕΤΗ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 4</td></tr>
-                        <tr><td>MARIN CORA LUIS ANGEL</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 4</td></tr>
-                        <tr><td>AREVALO GALVEZ JONNATAN JESUS</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 4</td></tr>
-                        <!-- Grupo 5 -->
-                        <tr><td>BENZAQUEN SALAZAR GABY</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 5</td></tr>
-                        <tr><td>GUEVARA DE LA HAZA ROSSALIA ANGELLA</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 5</td></tr>
-                        <tr><td>DELGADO ARTEAGA SANDRA STEFANY</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 5</td></tr>
-                        <tr><td>PRECIADO ALEMAN JENIFER JAQUELINE</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 5</td></tr>
-                        <!-- Grupo 6 -->
-                        <tr><td>ALFARO DIAZ ARTEMIO</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 6</td></tr>
-                        <tr><td>RIVERA SAENZ KAREN BEATRIZ</td><td><span class="cat-badge badge-tj">TJ</span></td><td class="group-indicator">Grupo 6</td></tr>
-                        <tr><td>MELGAR RECABARREN JOSE ADRIAN</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 6</td></tr>
-                        <tr><td>MARROQUIN ORTIZ JUAN FRANCISCO</td><td><span class="cat-badge badge-tc">TC</span></td><td class="group-indicator">Grupo 6</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="counter-info-text" id="pbs-match-counter">Mostrando todos los tripulantes asignados</div>
-
-        </div>
 
     </div>
 

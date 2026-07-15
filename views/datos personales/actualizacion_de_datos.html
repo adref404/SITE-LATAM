@@ -79,7 +79,7 @@
 
         /* DESCRIPCIÓN DEL FORMULARIO */
         .description-area {
-            padding: 30px 40px 10px 40px;
+            padding: 30px 20px 10px 20px;
         }
 
         .description-area p {
@@ -103,21 +103,30 @@
         }
 
         /* LÍNEA DE TIEMPO CONECTORA */
-        .latam-timeline { position: relative; padding: 20px 40px 40px 95px; }
+        .latam-timeline { position: relative; padding: 20px 40px 40px 40px; }
         .latam-timeline::before {
-            content: ''; position: absolute; top: 40px; left: 58px; width: 4px;
-            height: calc(100% - 70px); background: var(--step-orange); z-index: 1;
+            content: ''; position: absolute; top: 40px; left: 75px; width: 2px;
+            height: calc(100% - 122px); background: var(--step-orange); z-index: 0;
         }
 
-        .latam-step { position: relative; margin-bottom: 30px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
+        .latam-step { position: relative; z-index: 1; margin-bottom: 30px; border: 1px solid var(--latam-border); border-radius: 12px; background: var(--white); }
         .latam-step-num {
-            position: absolute; left: -57px; top: 15px; width: 38px; height: 38px; border-radius: 50%;
-            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1.05rem;
-            display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 0 0 6px var(--white), 0 4px 10px rgba(0,0,0,0.1);
+            position: absolute; left: 20px; top: 18px; width: 34px; height: 34px; border-radius: 8px;
+            background: var(--step-orange); color: var(--white); font-weight: 700; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
         }
 
-        .step-title { padding: 22px 25px; font-size: 1.2rem; font-weight: 700; color: var(--latam-main); border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; }
-        .step-body { padding: 25px; }
+        .step-title {
+            width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+            padding: 22px 25px 22px 70px; font-size: 1.2rem; font-weight: 700; color: var(--latam-main);
+            border-bottom: 1px solid #f0f0f5; display: flex; justify-content: space-between; align-items: center;
+            gap: 10px; min-height: 34px;
+        }
+        .step-title .arrow-icon { color: var(--step-orange); transition: transform 0.3s ease; flex-shrink: 0; }
+        .latam-step.active .step-title { color: var(--latam-coral); }
+        .latam-step.active .step-title .arrow-icon { transform: rotate(180deg); }
+        .step-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .step-body-inner { padding: 25px; }
 
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-weight: 600; font-size: 0.95rem; color: var(--latam-main); margin-bottom: 8px; }
@@ -224,9 +233,10 @@
         @media (max-width: 768px) {
             .header-banner { height: 140px; padding-left: 20px; }
             .header-badge { padding: 8px 16px; }
-            .latam-timeline { padding: 20px 15px 20px 60px; }
-            .latam-timeline::before { left: 32px; }
-            .latam-step-num { left: -43px; width: 32px; height: 32px; font-size: 0.95rem; }
+            .latam-timeline { padding: 20px 15px; }
+            .latam-timeline::before { left: 45px; }
+            .latam-step-num { left: 16px; width: 30px; height: 30px; font-size: 0.9rem; top: 16px; }
+            .step-title { padding: 16px 16px 16px 60px; font-size: 1.05rem; }
             .options-grid { grid-template-columns: 1fr; }
             .action-bar { padding: 20px; }
             .btn-submit { width: 100%; justify-content: center; }
@@ -263,8 +273,12 @@
             <!-- PASO 1 -->
             <div class="latam-step">
                 <div class="latam-step-num">1</div>
-                <div class="step-title"><span class="material-icons">account_box</span> Identificación del Tripulante</div>
+                <button type="button" class="step-title" onclick="toggleInfoStep(this)">
+                    <span>Identificación del Tripulante</span>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
                 <div class="step-body">
+                    <div class="step-body-inner">
                     <div class="form-group">
                         <label for="form-bp">Ingresa tu BP *</label>
                         <input type="text" id="form-bp" class="form-control" placeholder="Ej. 6014982" value="6014982">
@@ -273,14 +287,19 @@
                         <label for="form-name">Ingresa tus nombres y apellidos completos * <span>(No colocar tildes)</span></label>
                         <input type="text" id="form-name" class="form-control" placeholder="Ej. Mario Fernandez" value="Mario Fernandez">
                     </div>
+                    </div>
                 </div>
             </div>
 
             <!-- PASO 2 -->
             <div class="latam-step">
                 <div class="latam-step-num">2</div>
-                <div class="step-title"><span class="material-icons">touch_app</span> Selección de Trámite a Realizar</div>
+                <button type="button" class="step-title" onclick="toggleInfoStep(this)">
+                    <span>Selección de Trámite a Realizar</span>
+                    <span class="material-icons arrow-icon">expand_more</span>
+                </button>
                 <div class="step-body">
+                    <div class="step-body-inner">
                     <div class="options-grid">
                         <div class="grid-option-card" data-target="form-emergencia" onclick="toggleFlow(this)">
                             <div class="dot-radio"></div><span class="option-text">Actualización Contacto Emergencia</span>
@@ -309,6 +328,7 @@
                         <div class="grid-option-card" data-target="form-rechazo" onclick="toggleFlow(this)" style="border-left:3px solid var(--latam-coral);">
                             <div class="dot-radio"></div><span class="option-text" style="color:var(--latam-coral); font-weight:700;">Notificación de Visa Rechazada</span>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -353,7 +373,7 @@
                 <div class="accordion-banner-header"><span class="material-icons">badge</span> Actualización DNI</div>
                 <div class="step-inner-content">
                     <p style="font-size:0.88rem; color:#666; margin-bottom:15px;">Es obligatorio adjuntar ambas caras del DNI de forma nítida.</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Documento_Nacional_de_Identidad_%28Per%C3%BA%29_-_Anverso_y_reverso.png/640px-Documento_Nacional_de_Identidad_%28Per%C3%BA%29_-_Anverso_y_reverso.png" class="img-doc-reference" alt="Referencia DNI">
+                    <img src="/./img/actualizacionDatos/Referencia DNI.png" class="img-doc-reference" alt="Referencia DNI">
                     <div class="form-group"><label>Fecha de vencimiento DNI *</label><input type="date" class="form-control"></div>
                     <div class="form-group">
                         <label>Ingresa una foto de tu DNI *</label>
@@ -476,6 +496,25 @@
 
     <!-- SCRIPT DE DESPLIEGUES AUTOMÁTICOS -->
     <script>
+        function toggleInfoStep(button) {
+            const stepElement = button.parentElement;
+            const bodyElement = button.nextElementSibling;
+
+            stepElement.classList.toggle('active');
+
+            if (stepElement.classList.contains('active')) {
+                bodyElement.style.maxHeight = bodyElement.scrollHeight + 'px';
+            } else {
+                bodyElement.style.maxHeight = null;
+            }
+        }
+
+        document.querySelectorAll('.latam-step').forEach(step => {
+            step.classList.add('active');
+            const body = step.querySelector('.step-body');
+            if (body) body.style.maxHeight = body.scrollHeight + 'px';
+        });
+
         function toggleFlow(cardElement) {
             const targetId = cardElement.getAttribute('data-target');
 
