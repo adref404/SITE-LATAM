@@ -41,13 +41,15 @@ header {
     width: 100%;
     z-index: 1000;
     border-bottom: 1px solid transparent;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
 }
 
 header.scrolled {
-    background-color: var(--white);
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--gray-border);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 24px rgba(15, 0, 79, 0.06);
 }
 
 /* #app compensa el espacio que antes ocupaba el header (ahora es fixed) */
@@ -77,8 +79,13 @@ body.is-home #app {
 }
 
 body.is-home header:not(.scrolled) .logo,
-body.is-home header:not(.scrolled) .nav-link,
-body.is-home header:not(.scrolled) .mobile-menu-toggle {
+body.is-home header:not(.scrolled) .nav-link {
+    color: var(--white);
+}
+
+/* .mobile-menu-toggle es hermano de <header> en el DOM (no hijo), así que
+   necesita el combinador de hermano general en vez de un descendiente */
+body.is-home header:not(.scrolled) ~ .mobile-menu-toggle {
     color: var(--white);
 }
 
@@ -95,10 +102,10 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
 .logo {
     color: var(--primary-color);
     font-weight: 900;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    letter-spacing: 0.1px;
     text-decoration: none;
     cursor: pointer;
-    letter-spacing: -0.3px;
     transition: transform 0.2s ease, color 0.3s ease;
     display: inline-block;
 }
@@ -432,192 +439,6 @@ body.is-home header:not(.scrolled) .mobile-menu-toggle {
     .container {
         margin: 25px auto;
         padding: 0 15px;
-    }
-}
-
-/* ==========================================================================
-   CARRUSEL DE BANNER (componente compartido: Inicio y Gestión Operativa)
-   ========================================================================== */
-.carousel-banner {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-    background-color: #000;
-}
-
-.carousel-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 1.2s ease-in-out;
-}
-
-.carousel-slide.active {
-    opacity: 1;
-    z-index: 2;
-}
-
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.65);
-}
-
-.carousel-caption {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    background: rgba(27, 0, 74, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 20px 25px;
-    border-radius: 8px;
-    color: var(--white);
-    text-align: right;
-    max-width: 450px;
-    z-index: 3;
-    border-right: 4px solid var(--accent-color);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.carousel-caption:hover {
-    background: rgba(27, 0, 74, 0.9);
-}
-
-.carousel-caption h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    line-height: 1.3;
-}
-
-.carousel-caption p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.carousel-caption .caption-hint {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent-color);
-    margin-top: 8px;
-}
-
-.carousel-dots {
-    position: absolute;
-    bottom: 25px;
-    left: 40px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 8px 16px;
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: all 0.4s ease;
-}
-
-.dot.active {
-    background-color: var(--white);
-    width: 24px;
-    border-radius: 6px;
-}
-
-@media (max-width: 768px) {
-    .carousel-caption {
-        bottom: 100px;
-        right: 15px;
-        left: 15px;
-        max-width: calc(100% - 30px);
-        padding: 12px;
-    }
-    .carousel-dots {
-        margin-top: auto;
-        bottom: 15px;
-        left: 60px;
-        transform: translateX(-50%);
-    }
-}
-
-/* Contenedor principal alineado al centro */
-.icono-mouse-scroll {
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px; /* Espacio entre el mouse y el texto */
-    color: rgba(255, 255, 255, 0.7); /* Blanco con opacidad similar a tu proyecto */
-    pointer-events: none;
-}
-
-/* El cuerpo físico del mouse */
-.mouse-body {
-    width: 24px;
-    height: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 12px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-/* La ruedita interna que se desplaza */
-.mouse-wheel {
-    width: 4px;
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 2px;
-    position: absolute;
-    top: 6px;
-    /* Aplicamos la animación de scroll */
-    animation: scrollAnimation 1.6s infinite ease-in-out;
-}
-
-/* Texto inferior de guía */
-.scroll-text {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Efecto de animación: la rueda baja, se desvanece y vuelve a empezar */
-@keyframes scrollAnimation {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(14px);
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
     }
 }
 

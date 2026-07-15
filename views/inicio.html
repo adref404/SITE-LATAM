@@ -1,45 +1,65 @@
-<section class="carousel-banner">
+<div class="hero-cards-wrap">
 
-    <div class="carousel-slide active">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="Avión en vuelo">
-        <div class="carousel-caption" onclick="openBannerModal(0)">
-            <h2>Ampliación del Piloto: Sanguchito de Pollo</h2>
-            <p>Implementación confirmada en el servicio de las rutas internacionales de Punta Cana (PUJ) y Cancún (CUN).</p>
-            <span class="caption-hint">Ver detalle</span>
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-lockup">
+                <span class="material-icons hero-plane-icon">flight</span>
+                <h1>SAB</h1>
+            </div>
+            <span class="hero-bar">Servicio a Bordo</span>
+            <p class="hero-sub">LATAM Airlines Perú</p>
+            <p class="hero-tagline">Tus datos, tu rol y la gestión operativa del día a día, en un solo lugar.</p>
         </div>
-    </div>
 
-    <div class="carousel-slide">
-        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80" alt="Tripulación en Briefing">
-        <div class="carousel-caption" onclick="openBannerModal(1)">
-            <h2>Reembolso Multas Elecciones 2026</h2>
-            <p>Revisa los plazos y carga tus comprobantes oficiales de exoneración en el portal de Datos Personales.</p>
-            <span class="caption-hint">Ver detalle</span>
+        <div class="promo-float carousel-banner">
+            <div class="carousel-slide active" onclick="openBannerModal(0)">
+                <span class="promo-dot"></span>
+                <p><strong>Ampliación del Piloto: Sanguchito de Pollo.</strong> Implementación confirmada en las rutas internacionales de Punta Cana (PUJ) y Cancún (CUN).</p>
+                <span class="caption-hint">Ver detalle</span>
+            </div>
+            <div class="carousel-slide" onclick="openBannerModal(1)">
+                <span class="promo-dot"></span>
+                <p><strong>Reembolso Multas Elecciones 2026.</strong> Revisa los plazos y carga tus comprobantes oficiales de exoneración en el portal de Datos Personales.</p>
+                <span class="caption-hint">Ver detalle</span>
+            </div>
+            <div class="carousel-slide" onclick="openBannerModal(2)">
+                <span class="promo-dot"></span>
+                <p><strong>Autogestión: Contacto a Movilización.</strong> Fomentamos el uso directo de Google Chat desde tus dispositivos móviles para coordinar contingencias operativas.</p>
+                <span class="caption-hint">Ver detalle</span>
+            </div>
         </div>
-    </div>
-
-    <div class="carousel-slide">
-        <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1200&q=80" alt="Tripulantes en Aeropuerto">
-        <div class="carousel-caption" onclick="openBannerModal(2)">
-            <h2>Autogestión: Contacto a Movilización</h2>
-            <p>Fomentamos el uso directo de Google Chat desde tus dispositivos móviles para coordinar contingencias operativas.</p>
-            <span class="caption-hint">Ver detalle</span>
+        <div class="carousel-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
         </div>
-    </div>
+    </section>
 
-    <div class="carousel-dots">
-        <div class="dot active" onclick="goToSlide(0)"></div>
-        <div class="dot" onclick="goToSlide(1)"></div>
-        <div class="dot" onclick="goToSlide(2)"></div>
-    </div>
-
-    <div class="icono-mouse-scroll">
-        <div class="mouse-body">
-            <div class="mouse-wheel"></div>
+    <section class="cards-section">
+        <div class="cards-grid">
+            <article class="option-card" data-route="mis-datos" style="background-image:url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80');">
+                <span class="icon-badge"><span class="material-icons">badge</span></span>
+                <span class="go-arrow"><span class="material-icons">arrow_outward</span></span>
+                <h3>Datos Personales</h3>
+            </article>
+            <article class="option-card" data-route="mi-rol" style="background-image:url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=600&q=80');">
+                <span class="icon-badge"><span class="material-icons">calendar_today</span></span>
+                <span class="go-arrow"><span class="material-icons">arrow_outward</span></span>
+                <h3>Mi Rol</h3>
+            </article>
+            <article class="option-card" data-route="gestion-operativa" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80');">
+                <span class="icon-badge"><span class="material-icons">construction</span></span>
+                <span class="go-arrow"><span class="material-icons">arrow_outward</span></span>
+                <h3>Gestión Operativa</h3>
+            </article>
         </div>
-        <span class="scroll-text">Desliza hacia abajo</span>
-    </div>
-</section>
+
+        <div class="scroll-cue" id="scrollCue" onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'})">
+            <span class="ring"><span class="material-icons">expand_more</span></span>
+            Desliza hacia abajo
+        </div>
+    </section>
+</div>
 
 <div class="banner-modal-overlay" id="banner-modal-overlay" onclick="if(event.target === this) closeBannerModal()">
     <div class="banner-modal">
@@ -128,38 +148,7 @@
 
 <div class="container">
 
-    <section class="main-grid">
-        <article class="visual-card" data-route="mis-datos">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Datos Personales">
-            <div class="card-badge">
-                <div class="badge-icon-container">
-                    <span class="material-icons">badge</span>
-                </div>
-                <h2>Datos Personales</h2>
-            </div>
-        </article>
-        <article class="visual-card" data-route="mi-rol">
-            <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=600&q=80" alt="Mi Rol">
-            <div class="card-badge">
-                <div class="badge-icon-container">
-                    <span class="material-icons">calendar_today</span>
-                </div>
-                <h2>Mi Rol</h2>
-            </div>
-        </article>
-        <article class="visual-card" data-route="gestion-operativa">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Gestión Operativa">
-            <div class="card-badge">
-                <div class="badge-icon-container">
-                    <span class="material-icons">construction</span>
-                </div>
-                <h2>Gestión Operativa</h2>
-            </div>
-        </article>
-    </section>
-
-
-    <section class="faq-section">
+    <section class="faq-section" id="faq-section">
         <h2 class="section-title"><span class="material-icons">help_outline</span> Preguntas Frecuentes</h2>
         <div class="faq-container">
             <div class="faq-item">
@@ -196,25 +185,25 @@
         <h2 class="section-title"><span class="material-icons">support_agent</span> Centro de Ayuda y Reportes</h2>
         <div class="help-grid">
             <div class="help-box">
-                <span class="material-icons">assignment_late</span>
+                <span class="icon-circle"><span class="material-icons">assignment_late</span></span>
                 <h3>Reportes Diario</h3>
                 <p>Formulario de movimiento diario y Zero Claims.</p>
                 <button class="btn-help" onclick="openHelpModal('reportes')">Reportar</button>
             </div>
             <div class="help-box">
-                <span class="material-icons">school</span>
+                <span class="icon-circle"><span class="material-icons">school</span></span>
                 <h3>Cursos y Licencias</h3>
                 <p>Soporte sobre entrenamientos, simuladores y vigencia. Será dirigido a OSSA</p>
                 <a class="btn-help" href="https://www.appsheet.com/start/3522a874-2c91-4844-bd27-b76938550f60?platform=desktop#appName=PreviewOSSAV2-594103936&vss=H4sIAAAAAAAAA6WOMQ7CMBAE_7K1X-AWUSAUGhANpjDxRbJI7Ch2ApHlj9HyMS4BRB1R3pxmdxMGS7d91OUV8pR-15ZGSCSFw9iSglRYeRc7XysIhZ1u3rAg93woZOSz-MqRAmRa4Mo_egWsIRdtZambgiaNAz4SvyeFwSwgCzR91Jea5p0s5Mys8mUfyBx5xNLysHHre6udKbzhvErXgfIL8ni8pFYBAAA=&view=Men%C3%BA" target="_blank">Ir a Soporte</a>
             </div>
             <div class="help-box">
-                <span class="material-icons">event_busy</span>
+                <span class="icon-circle"><span class="material-icons">event_busy</span></span>
                 <h3>Absentismos</h3>
                 <p>Carga aquí tus descansos médicos y licencias.</p>
                 <button class="btn-help" onclick="openHelpModal('absentismos')">Registrar</button>
             </div>
             <div class="help-box">
-                <span class="material-icons">restaurant</span>
+                <span class="icon-circle"><span class="material-icons">restaurant</span></span>
                 <h3>Menú DOM</h3>
                 <p>Ver el menú de comidas LP.</p>
                 <a class="btn-help" href="https://drive.google.com/file/d/1mVBRLaGphXi7r8TyKiPpUMkOs9MArmbq/view" target="_blank">Ver Menú</a>

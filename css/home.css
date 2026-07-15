@@ -1,4 +1,328 @@
 /* ==========================================================================
+   HERO + CARDS (primera vista de Inicio)
+   ========================================================================== */
+.hero-cards-wrap {
+    min-height: calc(100vh - 70px);
+    min-height: calc(100dvh - 70px);
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-banner {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+        linear-gradient(160deg, rgba(27,0,74,0.94) 0%, rgba(27,0,136,0.88) 55%, rgba(66,87,232,0.55) 100%),
+        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1600&q=70') center 62%/cover;
+    padding: 40px clamp(20px, 5vw, 60px) 76px;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.10) 0%, transparent 40%),
+        radial-gradient(circle at 92% 82%, rgba(237,22,80,0.18) 0%, transparent 45%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    max-width: 640px;
+}
+
+.hero-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.hero-plane-icon {
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    color: var(--accent-color);
+    transform: rotate(45deg);
+}
+
+.hero-lockup h1 {
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.hero-bar {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 0.82rem;
+    padding: 9px 22px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+.hero-content p.hero-sub {
+    font-weight: 700;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #cfd0ff;
+}
+
+.hero-content p.hero-tagline {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.72);
+    max-width: 420px;
+    line-height: 1.5;
+}
+
+/* Franja flotante de novedades: puente entre el hero y las tarjetas */
+.promo-float {
+    position: relative;
+    z-index: 3;
+    margin-top: 24px;
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(15,0,79,0.16);
+    max-width: 520px;
+    width: 100%;
+    min-height: 92px;
+    border-left: 4px solid var(--accent-color);
+    overflow: hidden;
+}
+
+.promo-float .carousel-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 22px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    cursor: pointer;
+}
+
+.promo-float .carousel-slide.active {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.promo-float .promo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 5px rgba(237,22,80,0.14);
+}
+
+.promo-float p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-dark);
+    flex: 1 1 auto;
+}
+
+.promo-float p strong {
+    color: var(--primary-color);
+}
+
+.promo-float .caption-hint {
+    flex-shrink: 0;
+    font-weight: 800;
+    font-size: 0.78rem;
+    color: var(--accent-color);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.carousel-dots {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.dot.active {
+    background-color: var(--white);
+    width: 20px;
+    border-radius: 5px;
+}
+
+/* ============ TARJETAS DE ACCESO (Datos, Rol, Gestión) ============ */
+.cards-section {
+    flex: 0 0 auto;
+    padding: 34px clamp(20px, 5vw, 60px) 30px;
+    background: var(--bg-light);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.option-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(15,0,79,0.08);
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    isolation: isolate;
+    transition: transform 0.3s ease;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+}
+
+.option-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(200deg, rgba(15,0,79,0.55) 0%, rgba(15,0,79,0.92) 100%);
+    transition: background 0.4s ease;
+}
+
+.option-card:hover::before {
+    background: linear-gradient(200deg, rgba(66,87,232,0.55) 0%, rgba(15,0,79,0.94) 100%);
+}
+
+.option-card .icon-badge {
+    position: relative;
+    z-index: 1;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    backdrop-filter: blur(4px);
+}
+
+.option-card .icon-badge .material-icons {
+    color: var(--white);
+    font-size: 1.4rem;
+}
+
+.option-card h3 {
+    position: relative;
+    z-index: 1;
+    font-size: 1.15rem;
+    font-weight: 900;
+}
+
+.option-card .go-arrow {
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease, background 0.35s ease;
+}
+
+.option-card:hover .go-arrow {
+    background: var(--accent-color);
+    transform: translate(3px, -3px);
+}
+
+.option-card .go-arrow .material-icons {
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: 10px auto 0;
+    width: fit-content;
+    color: #666680;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.scroll-cue .ring {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gray-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: scrollCueBob 2.2s ease-in-out infinite;
+}
+
+.scroll-cue .ring .material-icons {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+@keyframes scrollCueBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+@media (min-width: 860px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==========================================================================
    VIDEO DESTACADO
    ========================================================================== */
 .video-embed-wrapper {
@@ -20,99 +344,19 @@
 }
 
 /* ==========================================================================
-   3 CAJITAS VISUALES
-   ========================================================================== */
-.main-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-bottom: 60px;
-}
-
-.visual-card {
-    position: relative;
-    height: 300px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.visual-card:hover {
-    transform: translateY(-5px);
-}
-
-.visual-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.visual-card:hover img {
-    transform: scale(1.05);
-}
-
-.visual-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(27, 0, 74, 0.95) 0%, rgba(27, 0, 74, 0.15) 60%);
-    z-index: 1;
-}
-
-.card-badge {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 25px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.badge-icon-container {
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    width: 45px;
-    height: 45px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5px;
-}
-
-.badge-icon-container .material-icons {
-    color: var(--white);
-    font-size: 1.6rem;
-}
-
-.card-badge h2 {
-    color: var(--white);
-    font-size: 1.4rem;
-    font-weight: 600;
-}
-
-/* ==========================================================================
    PREGUNTAS FRECUENTES
    ========================================================================== */
 .faq-section {
     background-color: var(--white);
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    padding: 30px 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15,0,79,0.08);
     margin-bottom: 60px;
 }
 
 .section-title {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 900;
     color: var(--primary-color);
     margin-bottom: 25px;
     display: flex;
@@ -173,7 +417,7 @@
     background-color: #fff1f8;
     border: 1px solid rgba(232, 17, 127, 0.15);
     padding: 40px;
-    border-radius: 12px;
+    border-radius: 18px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
@@ -186,34 +430,50 @@
 
 .help-box {
     background-color: var(--white);
-    padding: 25px;
-    border-radius: 8px;
-    text-align: center;
+    padding: 24px 20px;
+    border-radius: 14px;
+    text-align: left;
     border: 1px solid var(--gray-border);
-    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .help-box:hover {
+    transform: translateY(-5px);
     border-color: var(--accent-color);
-    box-shadow: 0 5px 15px rgba(232, 17, 127, 0.08);
+    box-shadow: 0 16px 30px rgba(232, 17, 127, 0.1);
 }
 
-.help-box .material-icons {
-    font-size: 2.5rem;
+.help-box .icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #fff1f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.help-box .icon-circle .material-icons {
+    font-size: 1.4rem;
     color: var(--primary-color);
-    margin-bottom: 12px;
 }
 
 .help-box h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+    font-size: 1.05rem;
+    font-weight: 900;
     color: var(--primary-color);
 }
 
 .help-box p {
     font-size: 0.85rem;
     color: #666;
-    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1;
 }
 
 .btn-help {
@@ -348,15 +608,6 @@
     .video-embed-wrapper {
         border-radius: 8px;
     }
-    .visual-card {
-        height: 220px;
-    }
-    .card-badge {
-        padding: 18px;
-    }
-    .card-badge h2 {
-        font-size: 1.15rem;
-    }
     .faq-section {
         padding: 22px;
     }
@@ -374,11 +625,23 @@
         padding: 18px;
         border-radius: 10px;
     }
-    .visual-card {
-        height: 190px;
-    }
     .faq-question {
         font-size: 0.95rem;
+    }
+    .hero-banner {
+        padding-bottom: 64px;
+    }
+    .promo-float {
+        min-height: 108px;
+    }
+    .promo-float .carousel-slide {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 14px 16px;
+    }
+    .promo-float .caption-hint {
+        align-self: flex-end;
     }
 }
 
